@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Turbo &mdash; Turbo Doc 0.1 documentation</title>
+  <title>How to add a new API &mdash; Turbo Doc 0.1 documentation</title>
   
 
   
@@ -32,9 +32,9 @@
   
 
   
-    <link rel="top" title="Turbo Doc 0.1 documentation" href="#"/>
-        <link rel="next" title="Create a service on the fly" href="create.html"/>
-        <link rel="prev" title="Documentation Table of Contents" href="contents.html"/> 
+    <link rel="top" title="Turbo Doc 0.1 documentation" href="index.html"/>
+        <link rel="next" title="Use a shared struct" href="shared.html"/>
+        <link rel="prev" title="Rules and Conventions" href="rules.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -81,7 +81,7 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">Home</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Home</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="contents.html">Table of Contents</a></li>
@@ -92,7 +92,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="rules.html">Rules and Conventions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="add.html">How to add a new API</a><ul class="simple">
+<li class="toctree-l1 current"><a class="current reference internal" href="">How to add a new API</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="shared.html">Use a shared struct</a><ul class="simple">
@@ -155,13 +155,13 @@
     
       <li><a href="contents.html">Docs</a> &raquo;</li>
         
-      <li>Turbo</li>
+      <li>How to add a new API</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/index.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/add.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -174,20 +174,59 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="turbo">
-<span id="index"></span><h1>Turbo<a class="headerlink" href="#turbo" title="Permalink to this headline">¶</a></h1>
-<p>A lightweight microservice framework.</p>
-<div class="section" id="features">
-<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Turbo generates a reverse-proxy server which translates a HTTP request into a grpc/Thrift request.</li>
-<li>Support gRPC and <a class="reference internal" href="thrift.html#thrift"><span>Thrift</span></a>.</li>
-<li><a class="reference internal" href="interceptor.html#interceptor"><span>Interceptor</span></a>.</li>
-<li><a class="reference internal" href="preprocessor.html#preprocessor"><span>PreProcessor</span></a> and <a class="reference internal" href="postprocessor.html#postprocessor"><span>PostProcessor</span></a>: customizable URL-RPC mapping process.</li>
-<li><a class="reference internal" href="hijacker.html#hijacker"><span>Hijacker</span></a>: Take over requests, do anything you want!</li>
-<li><a class="reference internal" href="convertor.html#convertor"><span>MessageFieldConvertor</span></a>: Tell Turbo how to set a struct field.</li>
-<li>Modify and reload <a class="reference internal" href="config.html#config"><span>configuration</span></a> file at runtime! Without restarting service.</li>
-</ul>
+  <div class="section" id="how-to-add-a-new-api">
+<span id="add"></span><h1>How to add a new API<a class="headerlink" href="#how-to-add-a-new-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="define-new-grpc-api">
+<h2>1, Define new gRPC API<a class="headerlink" href="#define-new-grpc-api" title="Permalink to this headline">¶</a></h2>
+<p>Modify &#8220;yourservice.proto&#8221;, add new method &#8220;eatApple&#8221;:</p>
+<div class="highlight-diff"><div class="highlight"><pre><span class="gi">+message EatAppleRequest {</span>
+<span class="gi">+    string num = 1;</span>
+<span class="gi">+}</span>
+<span class="gi">+</span>
+<span class="gi">+message EatAppleResponse {</span>
+<span class="gi">+    string message = 1;</span>
+<span class="gi">+}</span>
+
+ service YourService {
+     rpc sayHello (SayHelloRequest) returns (SayHelloResponse) {}
+<span class="gi">+    rpc eatApple (EatAppleRequest) returns (EatAppleResponse) {}</span>
+ }
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-new-url-grpc-mapping">
+<h2>2, Add new url-grpc mapping<a class="headerlink" href="#add-new-url-grpc-mapping" title="Permalink to this headline">¶</a></h2>
+<p>Modify &#8220;service.yaml&#8221;:</p>
+<div class="highlight-diff"><div class="highlight"><pre>urlmapping:
+   - GET /hello SayHello
+<span class="gi">+  - GET /eat_apple/{num:[0-9]+} EatApple</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="generate-new-codes">
+<h2>3, Generate new codes<a class="headerlink" href="#generate-new-codes" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>$ turbo generate package/path/to/yourservice -r grpc -I $GOPATH/src/package/path/to/yourservice
+</pre></div>
+</div>
+</div>
+<div class="section" id="implement-new-grpc-method">
+<h2>4, Implement new gRPC method<a class="headerlink" href="#implement-new-grpc-method" title="Permalink to this headline">¶</a></h2>
+<p>Edit &#8220;grpcservice/impl/yourserviceimpl.go&#8221;:</p>
+<div class="highlight-diff"><div class="highlight"><pre><span class="gi">+func (s *YourService) EatApple(ctx context.Context, req *proto.EatAppleRequest) (*proto.EatAppleResponse, error) {</span>
+<span class="gi">+      return &amp;proto.EatAppleResponse{Message: &quot;Good taste! Apple num=&quot; + strconv.FormatInt(int64(req.Num), 10)}, nil</span>
+<span class="gi">+}</span>
+</pre></div>
+</div>
+<p>Now, restart both HTTP and gRPC server, then test:</p>
+<div class="highlight-python"><div class="highlight"><pre># start grpc service
+$ go run grpcservice/yourservice.go
+# start http server
+$ go run grpcapi/yourserviceapi.go
+# test
+$ curl &quot;http://localhost:8081/eat_apple/5&quot;
+message:&quot;Good taste! Apple num=5&quot;
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -201,10 +240,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="create.html" class="btn btn-neutral float-right" title="Create a service on the fly" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="shared.html" class="btn btn-neutral float-right" title="Use a shared struct" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="contents.html" class="btn btn-neutral" title="Documentation Table of Contents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="rules.html" class="btn btn-neutral" title="Rules and Conventions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Turbo &mdash; Turbo Doc 0.1 documentation</title>
+  <title>Preprocessor &mdash; Turbo Doc 0.1 documentation</title>
   
 
   
@@ -32,9 +32,10 @@
   
 
   
-    <link rel="top" title="Turbo Doc 0.1 documentation" href="#"/>
-        <link rel="next" title="Create a service on the fly" href="create.html"/>
-        <link rel="prev" title="Documentation Table of Contents" href="contents.html"/> 
+    <link rel="top" title="Turbo Doc 0.1 documentation" href="index.html"/>
+        <link rel="up" title="Turbo components" href="components.html"/>
+        <link rel="next" title="Postprocessor" href="postprocessor.html"/>
+        <link rel="prev" title="Interceptor" href="interceptor.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -81,7 +82,7 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">Home</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Home</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="contents.html">Table of Contents</a></li>
@@ -98,9 +99,9 @@
 <li class="toctree-l1"><a class="reference internal" href="shared.html">Use a shared struct</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="components.html">Components</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="components.html">Components</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="interceptor.html">Interceptor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preprocessor.html">Preprocessor</a><ul class="simple">
+<li class="toctree-l2 current"><a class="current reference internal" href="">Preprocessor</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="postprocessor.html">Postprocessor</a></li>
@@ -155,13 +156,15 @@
     
       <li><a href="contents.html">Docs</a> &raquo;</li>
         
-      <li>Turbo</li>
+          <li><a href="components.html">Turbo components</a> &raquo;</li>
+        
+      <li>Preprocessor</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/index.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/preprocessor.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -174,20 +177,41 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="turbo">
-<span id="index"></span><h1>Turbo<a class="headerlink" href="#turbo" title="Permalink to this headline">¶</a></h1>
-<p>A lightweight microservice framework.</p>
-<div class="section" id="features">
-<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Turbo generates a reverse-proxy server which translates a HTTP request into a grpc/Thrift request.</li>
-<li>Support gRPC and <a class="reference internal" href="thrift.html#thrift"><span>Thrift</span></a>.</li>
-<li><a class="reference internal" href="interceptor.html#interceptor"><span>Interceptor</span></a>.</li>
-<li><a class="reference internal" href="preprocessor.html#preprocessor"><span>PreProcessor</span></a> and <a class="reference internal" href="postprocessor.html#postprocessor"><span>PostProcessor</span></a>: customizable URL-RPC mapping process.</li>
-<li><a class="reference internal" href="hijacker.html#hijacker"><span>Hijacker</span></a>: Take over requests, do anything you want!</li>
-<li><a class="reference internal" href="convertor.html#convertor"><span>MessageFieldConvertor</span></a>: Tell Turbo how to set a struct field.</li>
-<li>Modify and reload <a class="reference internal" href="config.html#config"><span>configuration</span></a> file at runtime! Without restarting service.</li>
-</ul>
+  <div class="section" id="preprocessor">
+<span id="id1"></span><h1>Preprocessor<a class="headerlink" href="#preprocessor" title="Permalink to this headline">¶</a></h1>
+<p>What if I want to do something particularly for some API?</p>
+<p>Preprocessor/Hijacker comes to help!</p>
+<p>If both Preprocessors and hijackers are assigned to an URL, only the last hijacker assigned is active.</p>
+<div class="section" id="id2">
+<h2>Preprocessor<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>Preprocessors are executed just after all Before() functions from interceptors, and before sending requests to gRPC server.</p>
+<p>Preprocessors can be used to do something particularly for an API. For example, parameter value validations, setting default values, parsing values, logging, etc.</p>
+<p>Let&#8217;s check the value of &#8216;num&#8217; with a preprocessor:</p>
+<div class="highlight-diff"><div class="highlight"><pre>func InitComponents() {
+<span class="gi">+      turbo.SetPreprocessor(&quot;/eat_apple/{num:[0-9]+}&quot;, preEatApple)</span>
+}
+
+<span class="gi">+func preEatApple(resp http.ResponseWriter, req *http.Request) error {</span>
+<span class="gi">+      num,err := strconv.Atoi(req.Form[&quot;num&quot;][0])</span>
+<span class="gi">+      if err!=nil {</span>
+<span class="gi">+              resp.Write([]byte(&quot;&#39;num&#39; is not numberic&quot;))</span>
+<span class="gi">+              return errors.New(&quot;invalid num&quot;)</span>
+<span class="gi">+      }</span>
+<span class="gi">+      if num &gt; 5 {</span>
+<span class="gi">+              resp.Write([]byte(&quot;Too many apples!&quot;))</span>
+<span class="gi">+              return errors.New(&quot;Too many apples&quot;)</span>
+<span class="gi">+      }</span>
+<span class="gi">+      return nil</span>
+<span class="gi">+}</span>
+</pre></div>
+</div>
+<p>As usual, restart HTTP server, and test:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ curl -w &quot;\n&quot; &quot;http://localhost:8081/eat_apple/5&quot;
+message:&quot;Good taste! Apple num=5&quot;
+$ curl -w &quot;\n&quot; &quot;http://localhost:8081/eat_apple/6&quot;
+Too many apples!
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -201,10 +225,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="create.html" class="btn btn-neutral float-right" title="Create a service on the fly" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="postprocessor.html" class="btn btn-neutral float-right" title="Postprocessor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="contents.html" class="btn btn-neutral" title="Documentation Table of Contents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="interceptor.html" class="btn btn-neutral" title="Interceptor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

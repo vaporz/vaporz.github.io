@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Turbo &mdash; Turbo Doc 0.1 documentation</title>
+  <title>Use a shared struct &mdash; Turbo Doc 0.1 documentation</title>
   
 
   
@@ -32,9 +32,9 @@
   
 
   
-    <link rel="top" title="Turbo Doc 0.1 documentation" href="#"/>
-        <link rel="next" title="Create a service on the fly" href="create.html"/>
-        <link rel="prev" title="Documentation Table of Contents" href="contents.html"/> 
+    <link rel="top" title="Turbo Doc 0.1 documentation" href="index.html"/>
+        <link rel="next" title="Turbo components" href="components.html"/>
+        <link rel="prev" title="How to add a new API" href="add.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -81,7 +81,7 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">Home</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Home</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="contents.html">Table of Contents</a></li>
@@ -95,7 +95,7 @@
 <li class="toctree-l1"><a class="reference internal" href="add.html">How to add a new API</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="shared.html">Use a shared struct</a><ul class="simple">
+<li class="toctree-l1 current"><a class="current reference internal" href="">Use a shared struct</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="components.html">Components</a><ul>
@@ -155,13 +155,13 @@
     
       <li><a href="contents.html">Docs</a> &raquo;</li>
         
-      <li>Turbo</li>
+      <li>Use a shared struct</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/index.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/shared.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -174,20 +174,65 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="turbo">
-<span id="index"></span><h1>Turbo<a class="headerlink" href="#turbo" title="Permalink to this headline">¶</a></h1>
-<p>A lightweight microservice framework.</p>
-<div class="section" id="features">
-<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Turbo generates a reverse-proxy server which translates a HTTP request into a grpc/Thrift request.</li>
-<li>Support gRPC and <a class="reference internal" href="thrift.html#thrift"><span>Thrift</span></a>.</li>
-<li><a class="reference internal" href="interceptor.html#interceptor"><span>Interceptor</span></a>.</li>
-<li><a class="reference internal" href="preprocessor.html#preprocessor"><span>PreProcessor</span></a> and <a class="reference internal" href="postprocessor.html#postprocessor"><span>PostProcessor</span></a>: customizable URL-RPC mapping process.</li>
-<li><a class="reference internal" href="hijacker.html#hijacker"><span>Hijacker</span></a>: Take over requests, do anything you want!</li>
-<li><a class="reference internal" href="convertor.html#convertor"><span>MessageFieldConvertor</span></a>: Tell Turbo how to set a struct field.</li>
-<li>Modify and reload <a class="reference internal" href="config.html#config"><span>configuration</span></a> file at runtime! Without restarting service.</li>
-</ul>
+  <div class="section" id="use-a-shared-struct">
+<span id="shared"></span><h1>Use a shared struct<a class="headerlink" href="#use-a-shared-struct" title="Permalink to this headline">¶</a></h1>
+<p>Sometimes we want to add some info to all requests from frontend server to backend server.
+So we define a new message in a file like &#8220;shared.proto&#8221; in a separate path.
+Then we add this new message to other message as a struct field.</p>
+<p>Let me show you how to do this in grpc with Turbo.</p>
+<div class="section" id="create-shared-proto-and-define-a-new-message">
+<h2>1, Create &#8220;shared.proto&#8221; and define a new message<a class="headerlink" href="#create-shared-proto-and-define-a-new-message" title="Permalink to this headline">¶</a></h2>
+<p>Create folder &#8220;common&#8221;(or any other name):</p>
+<div class="highlight-python"><div class="highlight"><pre>$ mkdir -p $GOPATH/src/package/path/to/common
+</pre></div>
+</div>
+<p>Create file &#8220;shared.proto&#8221; in folder &#8220;common&#8221;:</p>
+<div class="highlight-proto"><div class="highlight"><pre><span class="na">syntax</span> <span class="o">=</span> <span class="s">&quot;proto3&quot;</span><span class="p">;</span>
+<span class="kn">package</span> <span class="nn">proto</span><span class="p">;</span>
+
+<span class="kd">message</span> <span class="nc">CommonValues</span> <span class="p">{</span>
+    <span class="kt">int64</span> <span class="na">someId</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-new-field-to-a-request-message">
+<h2>2, Add new field to a request message<a class="headerlink" href="#add-new-field-to-a-request-message" title="Permalink to this headline">¶</a></h2>
+<p>Edit &#8220;yourservice.proto&#8221;:</p>
+<div class="highlight-diff"><div class="highlight"><pre>syntax = &quot;proto3&quot;;
+package proto;
+<span class="gi">+</span>
+<span class="gi">+import &quot;shared.proto&quot;;</span>
+
+message SayHelloRequest {
+    string yourName = 1;
+<span class="gi">+    CommonValues values = 2;</span>
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="generate-codes">
+<h2>3, Generate codes<a class="headerlink" href="#generate-codes" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>$ turbo generate package/path/to/yourservice -r grpc -I $GOPATH/src/package/path/to/yourservice
+ -I $GOPATH/src/package/path/to/common
+</pre></div>
+</div>
+<p>Done!</p>
+<p>Before test, edit youserviceimpl.go to return &#8220;someId&#8221;:</p>
+<div class="highlight-diff"><div class="highlight"><pre>func (s *YourService) SayHello(ctx context.Context, req *proto.SayHelloRequest) (*proto.SayHelloResponse, error) {
+<span class="gi">+      someId := strconv.FormatInt(req.Values.SomeId, 10)</span>
+<span class="gd">-      return &amp;proto.SayHelloResponse{Message: &quot;[grpc server]Hello, &quot; + req.YourName}, nil</span>
+<span class="gi">+      return &amp;proto.SayHelloResponse{Message: &quot;[grpc server]Hello, &quot; + req.YourName + &quot;, someId=&quot; + someId}, nil</span>
+}
+</pre></div>
+</div>
+<p>Restart grpc server and test:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ curl -w &quot;\n&quot; -X GET &quot;http://localhost:8081/hello?your_name=Alice&amp;some_id=12345&quot;
+{&quot;message&quot;:&quot;[grpc server]Hello, Alice, someId=12345&quot;}
+</pre></div>
+</div>
+<p>Turbo is smart, query string param &#8220;some_id&#8221; is mapped into SayHelloRequest.CommonValues.SomeId automatically.</p>
+<p>Besides query string, You can also map &#8220;SomeId&#8221; from URL route params, or context.Context which is set from interceptors.</p>
 </div>
 </div>
 
@@ -201,10 +246,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="create.html" class="btn btn-neutral float-right" title="Create a service on the fly" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="components.html" class="btn btn-neutral float-right" title="Turbo components" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="contents.html" class="btn btn-neutral" title="Documentation Table of Contents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="add.html" class="btn btn-neutral" title="How to add a new API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

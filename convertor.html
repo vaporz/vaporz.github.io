@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Turbo &mdash; Turbo Doc 0.1 documentation</title>
+  <title>Message Field Convertor &mdash; Turbo Doc 0.1 documentation</title>
   
 
   
@@ -32,9 +32,10 @@
   
 
   
-    <link rel="top" title="Turbo Doc 0.1 documentation" href="#"/>
-        <link rel="next" title="Create a service on the fly" href="create.html"/>
-        <link rel="prev" title="Documentation Table of Contents" href="contents.html"/> 
+    <link rel="top" title="Turbo Doc 0.1 documentation" href="index.html"/>
+        <link rel="up" title="Turbo components" href="components.html"/>
+        <link rel="next" title="ErrorHandler" href="errorhandler.html"/>
+        <link rel="prev" title="Hijacker" href="hijacker.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -81,7 +82,7 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">Home</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Home</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="contents.html">Table of Contents</a></li>
@@ -98,14 +99,14 @@
 <li class="toctree-l1"><a class="reference internal" href="shared.html">Use a shared struct</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="components.html">Components</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="components.html">Components</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="interceptor.html">Interceptor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="preprocessor.html">Preprocessor</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="postprocessor.html">Postprocessor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hijacker.html">Hijacker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="convertor.html">Message Field Convertor</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Message Field Convertor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="errorhandler.html">ErrorHandler</a></li>
 </ul>
 </li>
@@ -155,13 +156,15 @@
     
       <li><a href="contents.html">Docs</a> &raquo;</li>
         
-      <li>Turbo</li>
+          <li><a href="components.html">Turbo components</a> &raquo;</li>
+        
+      <li>Message Field Convertor</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/index.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/convertor.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -174,20 +177,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="turbo">
-<span id="index"></span><h1>Turbo<a class="headerlink" href="#turbo" title="Permalink to this headline">¶</a></h1>
-<p>A lightweight microservice framework.</p>
-<div class="section" id="features">
-<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Turbo generates a reverse-proxy server which translates a HTTP request into a grpc/Thrift request.</li>
-<li>Support gRPC and <a class="reference internal" href="thrift.html#thrift"><span>Thrift</span></a>.</li>
-<li><a class="reference internal" href="interceptor.html#interceptor"><span>Interceptor</span></a>.</li>
-<li><a class="reference internal" href="preprocessor.html#preprocessor"><span>PreProcessor</span></a> and <a class="reference internal" href="postprocessor.html#postprocessor"><span>PostProcessor</span></a>: customizable URL-RPC mapping process.</li>
-<li><a class="reference internal" href="hijacker.html#hijacker"><span>Hijacker</span></a>: Take over requests, do anything you want!</li>
-<li><a class="reference internal" href="convertor.html#convertor"><span>MessageFieldConvertor</span></a>: Tell Turbo how to set a struct field.</li>
-<li>Modify and reload <a class="reference internal" href="config.html#config"><span>configuration</span></a> file at runtime! Without restarting service.</li>
-</ul>
+  <div class="section" id="message-field-convertor">
+<span id="convertor"></span><h1>Message Field Convertor<a class="headerlink" href="#message-field-convertor" title="Permalink to this headline">¶</a></h1>
+<p>Turbo automatically finds from URL route, query string and context.Context, and sets value into a request by struct field name.</p>
+<p>Turbo also gives you a chance to manually construct a struct.</p>
+<p>Edit &#8220;yourservice/grpcapi/component/components.go&#8221;:</p>
+<div class="highlight-diff"><div class="highlight"><pre>func InitComponents() {
+<span class="gi">+      turbo.RegisterMessageFieldConvertor(new(proto.CommonValues), convertCommonValues)</span>
+}
+
+<span class="gi">+func convertCommonValues(req *http.Request) reflect.Value {</span>
+<span class="gi">+      result := &amp;proto.CommonValues{}</span>
+<span class="gi">+      result.SomeId = 123456789</span>
+<span class="gi">+      return reflect.ValueOf(result)</span>
+<span class="gi">+}</span>
+</pre></div>
+</div>
+<p>OK, func &#8220;convertCommonValues&#8221; is registered on type &#8220;proto.CommonValues&#8221; and &#8220;SomeId&#8221; is changed into &#8220;123456789&#8221;.</p>
+<p>Restart and test:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ curl -w &quot;\n&quot; -X GET &quot;http://localhost:8081/hello?your_name=Alice&amp;some_id=123&quot;
+{&quot;message&quot;:&quot;[grpc server]Hello, Alice, someId=123456789&quot;}
+</pre></div>
 </div>
 </div>
 
@@ -201,10 +211,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="create.html" class="btn btn-neutral float-right" title="Create a service on the fly" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="errorhandler.html" class="btn btn-neutral float-right" title="ErrorHandler" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="contents.html" class="btn btn-neutral" title="Documentation Table of Contents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="hijacker.html" class="btn btn-neutral" title="Hijacker" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
