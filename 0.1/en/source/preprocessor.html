@@ -145,6 +145,11 @@
             
   <div class="section" id="preprocessor">
 <span id="id1"></span><h1>Preprocessor<a class="headerlink" href="#preprocessor" title="Permalink to this headline">¶</a></h1>
+<p>What if I want to do something particularly for some API?</p>
+<p>Preprocessor/Hijacker comes to help!</p>
+<p>If both Preprocessors and hijackers are assigned to an URL, only the last hijacker assigned is active.</p>
+<div class="section" id="id2">
+<h2>Preprocessor<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>Preprocessors are executed just after all Before() functions from interceptors, and before sending requests to gRPC server.</p>
 <p>Preprocessors can be used to do something particularly for an API. For example, parameter value validations, setting default values, parsing values, logging, etc.</p>
 <p>Let&#8217;s check the value of &#8216;num&#8217; with a preprocessor:</p>
@@ -172,6 +177,7 @@ message:&quot;Good taste! Apple num=5&quot;
 $ curl -w &quot;\n&quot; &quot;http://localhost:8081/eat_apple/6&quot;
 Too many apples!
 </pre></div>
+</div>
 </div>
 </div>
 

@@ -145,9 +145,9 @@
             
   <div class="section" id="shared">
 <span id="idl"></span><h1>如何使用公共IDL文件<a class="headerlink" href="#shared" title="Permalink to this headline">¶</a></h1>
-<p>有时，我们希望把一些所有请求都会用到的数据包含在发送给service的request中。</p>
-<p>于是，我们会项目外的另一个地方新建一个公共的文件，比如&#8221;shared.proto&#8221;，然后定义一个新的Message。</p>
-<p>然后，再把这个新Message添加到其他request对象中。</p>
+<p>有时，我们希望把一些所有请求都会用到的数据包含在发送给service的request中。
+于是，我们会项目外的另一个地方新建一个公共的文件，比如&#8221;shared.proto&#8221;，然后定义一个新的Message。
+然后，再把这个新Message添加到其他request对象中。</p>
 <p>下面的例子介绍了如何在Turbo中这么做。</p>
 <div class="section" id="shared-proto-message">
 <h2>1, 新建 &#8220;shared.proto&#8221;，并且定义一个新Message<a class="headerlink" href="#shared-proto-message" title="Permalink to this headline">¶</a></h2>

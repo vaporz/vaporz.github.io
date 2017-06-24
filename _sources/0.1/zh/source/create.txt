@@ -6,8 +6,7 @@
 0, 开始之前
 -----------
 
-显然，你得先安装 `Golang <https://golang.org>`_ and `Protocol buffers(v3) <https://developers.google.com/protocol-buffers/>`_
-
+显然，你得先安装 :ref:`Golang <https://golang.org>` and :ref:`Protocol buffers(v3) <https://developers.google.com/protocol-buffers/>`
 然后下载Turbo代码：
 
 .. code-block:: shell
@@ -16,7 +15,7 @@
 
 至于依赖管理，有两种方式：
 
-(推荐) 安装 `glide <https://github.com/Masterminds/glide>`_ ::
+(推荐) 安装 :ref:`glide <https://github.com/Masterminds/glide>` ::
 
     cd github.com/vaporz/turbo/turbo
     glide install

@@ -8,4 +8,4 @@ Documentation Table of Contents
     :titlesonly:
     :maxdepth: 5
 
-    Welcome <index>
+    Welcome <self>
