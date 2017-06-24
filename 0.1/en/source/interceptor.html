@@ -1,0 +1,299 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Interceptor &mdash; Turbo Doc 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Turbo Doc 0.1 documentation" href="../../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../contents.html" class="icon icon-home"> Turbo Doc
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contents.html">Welcome</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../contents.html">Turbo Doc</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../contents.html">Docs</a> &raquo;</li>
+        
+      <li>Interceptor</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/0.1/en/source/interceptor.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="interceptor">
+<span id="id1"></span><h1>Interceptor<a class="headerlink" href="#interceptor" title="Permalink to this headline">¶</a></h1>
+<p>Interceptors provide hook functions which run before or after a request.</p>
+<p>Interceptors can be assigned to</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>All URLs</li>
+<li>An URL path (which means a group of URLs)</li>
+<li>One URL</li>
+<li>One URL on HTTP methods</li>
+</ol>
+</div></blockquote>
+<p>The more precise it is, the higher priority it has.</p>
+<p>If interceptor A is assigned to URL &#8216;/abc&#8217; on HTTP method &#8220;GET&#8221;, and interceptor B is assigned to all URLs, then A is executed when &#8220;GET /abc&#8221;, and B is executed when &#8220;POST /abc&#8221;.</p>
+<p>Now, let&#8217;s create an interceptor for URL &#8220;/hello&#8221; to log some info before and after a request.</p>
+<p>Edit &#8220;yourservice/interceptor/log.go&#8221;:</p>
+<div class="highlight-go"><div class="highlight"><pre><span class="kn">package</span> <span class="nx">interceptor</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+       <span class="s">&quot;github.com/vaporz/turbo&quot;</span>
+       <span class="s">&quot;fmt&quot;</span>
+       <span class="s">&quot;net/http&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">type</span> <span class="nx">LogInterceptor</span> <span class="kd">struct</span> <span class="p">{</span>
+       <span class="c1">// optional, BaseInterceptor allows you to create an interceptor which implements</span>
+       <span class="c1">// Before() or After() only, or none of them.</span>
+       <span class="c1">// If you were to implement both, you can remove this line.</span>
+       <span class="nx">turbo</span><span class="p">.</span><span class="nx">BaseInterceptor</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="nx">LogInterceptor</span><span class="p">)</span> <span class="nx">Before</span><span class="p">(</span><span class="nx">resp</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">req</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+       <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;[Before] Request URL:&quot;</span><span class="o">+</span><span class="nx">req</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">Path</span><span class="p">)</span>
+       <span class="k">return</span> <span class="nx">req</span><span class="p">,</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="nx">LogInterceptor</span><span class="p">)</span> <span class="nx">After</span><span class="p">(</span><span class="nx">resp</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">req</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+       <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;[After] Request URL:&quot;</span><span class="o">+</span><span class="nx">req</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">Path</span><span class="p">)</span>
+       <span class="k">return</span> <span class="nx">req</span><span class="p">,</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then assign this interceptor to URL &#8220;/hello&#8221;.</p>
+<p>Edit &#8220;yourservice/grpcapi/component/components.go&#8221;:</p>
+<div class="highlight-diff"><div class="highlight"><pre>package component
+
+import (
+       &quot;github.com/vaporz/turbo-example/yourservice/gen/proto&quot;
+       &quot;google.golang.org/grpc&quot;
+<span class="gi">+      i &quot;github.com/vaporz/turbo-example/yourservice/interceptor&quot;</span>
+)
+
+func GrpcClient(conn *grpc.ClientConn) interface{} {
+       return proto.NewTestServiceClient(conn)
+}
+
+func InitComponents() {
+<span class="gi">+      turbo.Intercept([]string{&quot;GET&quot;}, &quot;/hello&quot;, i.LogInterceptor{})</span>
+}
+</pre></div>
+</div>
+<p>Lastly, restart HTTP server and test:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ curl -w &quot;\n&quot; -X GET &quot;http://localhost:8081/hello?your_name=Alice&quot;
+{&quot;message&quot;:&quot;[grpc server]Hello, Alice&quot;}
+</pre></div>
+</div>
+<p>Check the server&#8217;s console:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ go run yourservice/yourserviceapi.go
+[Before] Request URL:/hello
+[After] Request URL:/hello
+</pre></div>
+</div>
+<p>We usually do something like validations in an interceptor, when the validation fails, the request halts, and returns an error message.</p>
+<p>To do this, you can simply return an error:</p>
+<div class="highlight-diff"><div class="highlight"><pre>func (l LogInterceptor) Before(resp http.ResponseWriter, req *http.Request) (*http.Request, error) {
+       fmt.Println(&quot;[Before] Request URL:&quot;+req.URL.Path)
+<span class="gi">+      resp.Write([]byte(&quot;Encounter an error from LogInterceptor!\n&quot;))</span>
+<span class="gd">-      return req, nil</span>
+<span class="gi">+      return req, errors.New(&quot;error!&quot;)</span>
+}
+</pre></div>
+</div>
+<p>Test:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ curl -w &quot;\n&quot; &quot;http://localhost:8081/hello&quot;
+Encounter an error from LogInterceptor!
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, xiaozhang.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

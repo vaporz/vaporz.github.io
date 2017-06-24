@@ -1,7 +1,0 @@
-.. _aaa:
-
-Aaa Bbb
-=======
-
-.. toctree::
-
