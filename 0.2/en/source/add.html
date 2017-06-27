@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Turbo &mdash; Turbo Doc 0.1 documentation</title>
+  <title>How to add a new API &mdash; Turbo Doc 0.1 documentation</title>
   
 
   
@@ -124,13 +124,13 @@
     
       <li><a href="../../../contents.html">Docs</a> &raquo;</li>
         
-      <li>Turbo</li>
+      <li>How to add a new API</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../_sources/0.1/zh/source/index.txt" rel="nofollow"> View page source</a>
+            <a href="../../../_sources/0.2/en/source/add.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -143,20 +143,59 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="turbo">
-<span id="index"></span><h1>Turbo<a class="headerlink" href="#turbo" title="Permalink to this headline">¶</a></h1>
-<p>一个很&#8221;轻&#8221;的微服务框架。</p>
-<div class="section" id="id1">
-<h2>主要功能<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Turbo能生成一个反向代理服务器，把HTTP请求转换为 grpc 或者 Thrift 格式的请求.</li>
-<li>支持 gRPC 和 <a class="reference internal" href="../../../0.2/zh/source/thrift.html#thrift"><span>Thrift</span></a>.</li>
-<li><a class="reference internal" href="../../../0.2/zh/source/interceptor.html#interceptor"><span>拦截器（Interceptor）</span></a>.</li>
-<li><a class="reference internal" href="../../../0.2/zh/source/preprocessor.html#preprocessor"><span>预处理器（PreProcessor）</span></a> 和 <a class="reference internal" href="../../../0.2/zh/source/postprocessor.html#postprocessor"><span>后处理器（PostProcessor）</span></a>: 可定制的URL-RPC映射过程.</li>
-<li><a class="reference internal" href="../../../0.2/zh/source/hijacker.html#hijacker"><span>劫持器（Hijacker）</span></a>: 接管整个request处理过程，你想干什么都行！</li>
-<li><a class="reference internal" href="../../../0.2/zh/source/convertor.html#convertor"><span>Message字段转换器（MessageFieldConvertor）</span></a>: 告诉 Turbo 怎么给struct里的参数赋值。</li>
-<li>不需要重启服务，在运行时修改和重新载入 <a class="reference internal" href="../../../0.2/zh/source/config.html#config"><span>配置文件</span></a> ！</li>
-</ul>
+  <div class="section" id="how-to-add-a-new-api">
+<span id="add"></span><h1>How to add a new API<a class="headerlink" href="#how-to-add-a-new-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="define-new-grpc-api">
+<h2>1, Define new gRPC API<a class="headerlink" href="#define-new-grpc-api" title="Permalink to this headline">¶</a></h2>
+<p>Modify &#8220;yourservice.proto&#8221;, add new method &#8220;eatApple&#8221;:</p>
+<div class="highlight-diff"><div class="highlight"><pre><span class="gi">+message EatAppleRequest {</span>
+<span class="gi">+    string num = 1;</span>
+<span class="gi">+}</span>
+<span class="gi">+</span>
+<span class="gi">+message EatAppleResponse {</span>
+<span class="gi">+    string message = 1;</span>
+<span class="gi">+}</span>
+
+ service YourService {
+     rpc sayHello (SayHelloRequest) returns (SayHelloResponse) {}
+<span class="gi">+    rpc eatApple (EatAppleRequest) returns (EatAppleResponse) {}</span>
+ }
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-new-url-grpc-mapping">
+<h2>2, Add new url-grpc mapping<a class="headerlink" href="#add-new-url-grpc-mapping" title="Permalink to this headline">¶</a></h2>
+<p>Modify &#8220;service.yaml&#8221;:</p>
+<div class="highlight-diff"><div class="highlight"><pre>urlmapping:
+   - GET /hello SayHello
+<span class="gi">+  - GET /eat_apple/{num:[0-9]+} EatApple</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="generate-new-codes">
+<h2>3, Generate new codes<a class="headerlink" href="#generate-new-codes" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>$ turbo generate package/path/to/yourservice -r grpc -I $GOPATH/src/package/path/to/yourservice
+</pre></div>
+</div>
+</div>
+<div class="section" id="implement-new-grpc-method">
+<h2>4, Implement new gRPC method<a class="headerlink" href="#implement-new-grpc-method" title="Permalink to this headline">¶</a></h2>
+<p>Edit &#8220;grpcservice/impl/yourserviceimpl.go&#8221;:</p>
+<div class="highlight-diff"><div class="highlight"><pre><span class="gi">+func (s *YourService) EatApple(ctx context.Context, req *proto.EatAppleRequest) (*proto.EatAppleResponse, error) {</span>
+<span class="gi">+      return &amp;proto.EatAppleResponse{Message: &quot;Good taste! Apple num=&quot; + strconv.FormatInt(int64(req.Num), 10)}, nil</span>
+<span class="gi">+}</span>
+</pre></div>
+</div>
+<p>Now, restart both HTTP and gRPC server, then test:</p>
+<div class="highlight-python"><div class="highlight"><pre># start grpc service
+$ go run grpcservice/yourservice.go
+# start http server
+$ go run grpcapi/yourserviceapi.go
+# test
+$ curl &quot;http://localhost:8081/eat_apple/5&quot;
+message:&quot;Good taste! Apple num=5&quot;
+</pre></div>
+</div>
 </div>
 </div>
 

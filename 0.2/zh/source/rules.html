@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Turbo &mdash; Turbo Doc 0.1 documentation</title>
+  <title>规则和约定 &mdash; Turbo Doc 0.1 documentation</title>
   
 
   
@@ -124,13 +124,13 @@
     
       <li><a href="../../../contents.html">Docs</a> &raquo;</li>
         
-      <li>Turbo</li>
+      <li>规则和约定</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../_sources/0.1/zh/source/index.txt" rel="nofollow"> View page source</a>
+            <a href="../../../_sources/0.2/zh/source/rules.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -143,21 +143,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="turbo">
-<span id="index"></span><h1>Turbo<a class="headerlink" href="#turbo" title="Permalink to this headline">¶</a></h1>
-<p>一个很&#8221;轻&#8221;的微服务框架。</p>
-<div class="section" id="id1">
-<h2>主要功能<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="rules">
+<span id="id1"></span><h1>规则和约定<a class="headerlink" href="#rules" title="Permalink to this headline">¶</a></h1>
+<p>使用Turbo时，有一些约定需要注意。</p>
 <ul class="simple">
-<li>Turbo能生成一个反向代理服务器，把HTTP请求转换为 grpc 或者 Thrift 格式的请求.</li>
-<li>支持 gRPC 和 <a class="reference internal" href="../../../0.2/zh/source/thrift.html#thrift"><span>Thrift</span></a>.</li>
-<li><a class="reference internal" href="../../../0.2/zh/source/interceptor.html#interceptor"><span>拦截器（Interceptor）</span></a>.</li>
-<li><a class="reference internal" href="../../../0.2/zh/source/preprocessor.html#preprocessor"><span>预处理器（PreProcessor）</span></a> 和 <a class="reference internal" href="../../../0.2/zh/source/postprocessor.html#postprocessor"><span>后处理器（PostProcessor）</span></a>: 可定制的URL-RPC映射过程.</li>
-<li><a class="reference internal" href="../../../0.2/zh/source/hijacker.html#hijacker"><span>劫持器（Hijacker）</span></a>: 接管整个request处理过程，你想干什么都行！</li>
-<li><a class="reference internal" href="../../../0.2/zh/source/convertor.html#convertor"><span>Message字段转换器（MessageFieldConvertor）</span></a>: 告诉 Turbo 怎么给struct里的参数赋值。</li>
-<li>不需要重启服务，在运行时修改和重新载入 <a class="reference internal" href="../../../0.2/zh/source/config.html#config"><span>配置文件</span></a> ！</li>
+<li>定义grpc服务的接口时，如果方法名是&#8221;methodName&#8221;，那么request和response对象的名字 <strong>必须</strong> 是 &#8220;MethodNameRequest&#8221; 和 &#8220;MethodNameResponse&#8221;。</li>
+<li>定义thrift服务的接口时，如果方法名是&#8221;methodName&#8221;，那么response对象的名字 <strong>必须</strong> 是 &#8220;MethodNameResponse&#8221;。</li>
+<li>如果$GOPATH中设置了多个path，Turbo会用其中的第一个path作为GOPATH。</li>
+<li>处理request参数时，URL路径中的参数的优先级更高，高于queryString，body或者context.Context中的参数值。</li>
 </ul>
-</div>
+<blockquote>
+<div>比如，对于请求&#8221;GET /book/1234?id=5678&#8221;，&#8221;1234&#8221;和&#8221;5678&#8221;都是参数&#8221;id&#8221;的值，但&#8221;1234&#8221;会被选中。</div></blockquote>
+<ul class="simple">
+<li>对相同名字的参数，key全部为小写的参数的优先级，高于包含大写字母的参数，</li>
+</ul>
+<blockquote>
+<div>比如，对于请求&#8221;GET /book?id=1234&amp;ID=5678&#8221;, &#8220;1234&#8221;会被选中。</div></blockquote>
+<ul class="simple">
+<li>在Turbo中，参数的名字是大小写不敏感的，实际上，在内部，Turbo会先把所有参数的名字都转换为小写格式，然后再继续使用。</li>
+</ul>
+<blockquote>
+<div>比如，对于请求&#8221;GET /book?ID=1234&#8221;，queryString实际等价于&#8221;?id=1234&#8221;。</div></blockquote>
 </div>
 
 

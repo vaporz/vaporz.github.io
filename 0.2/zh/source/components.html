@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Turbo &mdash; Turbo Doc 0.1 documentation</title>
+  <title>Turbo组件 &mdash; Turbo Doc 0.1 documentation</title>
   
 
   
@@ -124,13 +124,13 @@
     
       <li><a href="../../../contents.html">Docs</a> &raquo;</li>
         
-      <li>Turbo</li>
+      <li>Turbo组件</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../_sources/0.1/zh/source/index.txt" rel="nofollow"> View page source</a>
+            <a href="../../../_sources/0.2/zh/source/components.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -144,18 +144,15 @@
            <div itemprop="articleBody">
             
   <div class="section" id="turbo">
-<span id="index"></span><h1>Turbo<a class="headerlink" href="#turbo" title="Permalink to this headline">¶</a></h1>
-<p>一个很&#8221;轻&#8221;的微服务框架。</p>
-<div class="section" id="id1">
-<h2>主要功能<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Turbo能生成一个反向代理服务器，把HTTP请求转换为 grpc 或者 Thrift 格式的请求.</li>
-<li>支持 gRPC 和 <a class="reference internal" href="../../../0.2/zh/source/thrift.html#thrift"><span>Thrift</span></a>.</li>
-<li><a class="reference internal" href="../../../0.2/zh/source/interceptor.html#interceptor"><span>拦截器（Interceptor）</span></a>.</li>
-<li><a class="reference internal" href="../../../0.2/zh/source/preprocessor.html#preprocessor"><span>预处理器（PreProcessor）</span></a> 和 <a class="reference internal" href="../../../0.2/zh/source/postprocessor.html#postprocessor"><span>后处理器（PostProcessor）</span></a>: 可定制的URL-RPC映射过程.</li>
-<li><a class="reference internal" href="../../../0.2/zh/source/hijacker.html#hijacker"><span>劫持器（Hijacker）</span></a>: 接管整个request处理过程，你想干什么都行！</li>
-<li><a class="reference internal" href="../../../0.2/zh/source/convertor.html#convertor"><span>Message字段转换器（MessageFieldConvertor）</span></a>: 告诉 Turbo 怎么给struct里的参数赋值。</li>
-<li>不需要重启服务，在运行时修改和重新载入 <a class="reference internal" href="../../../0.2/zh/source/config.html#config"><span>配置文件</span></a> ！</li>
+<span id="components"></span><h1>Turbo组件<a class="headerlink" href="#turbo" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="interceptor.html">Interceptor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessor.html">Preprocessor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="postprocessor.html">Postprocessor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hijacker.html">Hijacker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="convertor.html">Message类型转换器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errorhandler.html">ErrorHandler</a></li>
 </ul>
 </div>
 </div>

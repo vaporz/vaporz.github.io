@@ -1,0 +1,282 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Preprocessor &mdash; Turbo Doc 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Turbo Doc 0.1 documentation" href="index.html"/>
+        <link rel="up" title="Turbo组件" href="components.html"/>
+        <link rel="next" title="Postprocessor" href="postprocessor.html"/>
+        <link rel="prev" title="Interceptor" href="interceptor.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="contents.html" class="icon icon-home"> Turbo Doc
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">首页</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contents.html">内容列表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create.html">快速创建一个服务</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="command.html">命令行工具</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rules.html">规则和约定</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add.html">如何添加新API</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="shared.html">如何使用公共IDL文件</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="components.html">Turbo提供的组件</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="interceptor.html">Interceptor</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Preprocessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postprocessor.html">Postprocessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hijacker.html">Hijacker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="convertor.html">Message类型转换器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errorhandler.html">ErrorHandler</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="thrift.html">支持Thrift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">配置文件说明</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">Turbo Doc</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+          <li><a href="components.html">Turbo组件</a> &raquo;</li>
+        
+      <li>Preprocessor</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/preprocessor.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="preprocessor">
+<span id="id1"></span><h1>Preprocessor<a class="headerlink" href="#preprocessor" title="Permalink to this headline">¶</a></h1>
+<p>所有拦截器的Before()方法执行之后，向后端service发送请求之前，会执行Preprocessor。</p>
+<p>Preprocessor可以用来执行一些某个API特有的逻辑，比如，参数校验，设置默认值，做类型转换，记录log等等。</p>
+<p>下面的例子中，对参数&#8217;num&#8217;的值做了一些校验:</p>
+<div class="highlight-diff"><div class="highlight"><pre>func InitComponents() {
+<span class="gi">+      turbo.SetPreprocessor(&quot;/eat_apple/{num:[0-9]+}&quot;, preEatApple)</span>
+}
+
+<span class="gi">+func preEatApple(resp http.ResponseWriter, req *http.Request) error {</span>
+<span class="gi">+      num,err := strconv.Atoi(req.Form[&quot;num&quot;][0])</span>
+<span class="gi">+      if err!=nil {</span>
+<span class="gi">+              resp.Write([]byte(&quot;&#39;num&#39; is not numberic&quot;))</span>
+<span class="gi">+              return errors.New(&quot;invalid num&quot;)</span>
+<span class="gi">+      }</span>
+<span class="gi">+      if num &gt; 5 {</span>
+<span class="gi">+              resp.Write([]byte(&quot;Too many apples!&quot;))</span>
+<span class="gi">+              return errors.New(&quot;Too many apples&quot;)</span>
+<span class="gi">+      }</span>
+<span class="gi">+      return nil</span>
+<span class="gi">+}</span>
+</pre></div>
+</div>
+<p>重启服务并测试:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ curl -w &quot;\n&quot; &quot;http://localhost:8081/eat_apple/5&quot;
+message:&quot;Good taste! Apple num=5&quot;
+$ curl -w &quot;\n&quot; &quot;http://localhost:8081/eat_apple/6&quot;
+Too many apples!
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="postprocessor.html" class="btn btn-neutral float-right" title="Postprocessor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="interceptor.html" class="btn btn-neutral" title="Interceptor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, xiaozhang.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
