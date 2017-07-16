@@ -156,8 +156,8 @@
 <p>Preprocessors are executed just after all Before() functions from interceptors, and before sending requests to gRPC server.</p>
 <p>Preprocessors can be used to do something particularly for an API. For example, parameter value validations, setting default values, parsing values, logging, etc.</p>
 <p>Let’s check the value of ‘num’ with a preprocessor:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>func InitComponents() {
-<span class="gi">+      turbo.SetPreprocessor(&quot;/eat_apple/{num:[0-9]+}&quot;, preEatApple)</span>
+<div class="highlight-diff"><div class="highlight"><pre><span></span>func RegisterComponents(s *turbo.GrpcServer) {
+<span class="gi">+       s.RegisterComponent(&quot;preEatApple&quot;, preEatApple)</span>
 }
 
 <span class="gi">+func preEatApple(resp http.ResponseWriter, req *http.Request) error {</span>
@@ -172,6 +172,11 @@
 <span class="gi">+      }</span>
 <span class="gi">+      return nil</span>
 <span class="gi">+}</span>
+</pre></div>
+</div>
+<p>Edit “yourservice/service.yaml”:</p>
+<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gi">+preprocessor:</span>
+<span class="gi">+  - GET /eat_apple/{num:[0-9]+} preEatApple</span>
 </pre></div>
 </div>
 <p>As usual, restart HTTP server, and test:</p>
@@ -197,7 +202,7 @@ Too many apples!
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, xiaozhang.
+        &copy; Copyright 2017, Xiao Zhang.
 
     </p>
   </div>

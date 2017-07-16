@@ -169,6 +169,11 @@
 <span class="gi">+}</span>
 </pre></div>
 </div>
+<p>编辑 “yourservice/service.yaml”:</p>
+<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gi">+preprocessor:</span>
+<span class="gi">+  - GET /eat_apple/{num:[0-9]+} preEatApple</span>
+</pre></div>
+</div>
 <p>重启服务并测试:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; &quot;http://localhost:8081/eat_apple/5&quot;
 message:&quot;Good taste! Apple num=5&quot;
@@ -191,7 +196,7 @@ Too many apples!
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, xiaozhang.
+        &copy; Copyright 2017, Xiao Zhang.
 
     </p>
   </div>

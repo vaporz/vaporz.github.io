@@ -202,9 +202,14 @@ func GrpcClient(conn *grpc.ClientConn) interface{} {
        return proto.NewTestServiceClient(conn)
 }
 
-func InitComponents() {
-<span class="gi">+      turbo.Intercept([]string{&quot;GET&quot;}, &quot;/hello&quot;, i.LogInterceptor{})</span>
+func RegisterComponents(s *turbo.GrpcServer) {
+<span class="gi">+       s.RegisterComponent(&quot;LogInterceptor&quot;, i.LogInterceptor{})</span>
 }
+</pre></div>
+</div>
+<p>Edit “yourservice/service.yaml”:</p>
+<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gi">+interceptor:</span>
+<span class="gi">+  - GET /hello LogInterceptor</span>
 </pre></div>
 </div>
 <p>Lastly, restart HTTP server and test:</p>
@@ -248,7 +253,7 @@ Encounter an error from LogInterceptor!
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, xiaozhang.
+        &copy; Copyright 2017, Xiao Zhang.
 
     </p>
   </div>

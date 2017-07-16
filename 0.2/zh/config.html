@@ -221,6 +221,27 @@
 <span class="l l-Scalar l-Scalar-Plain">urlmapping</span><span class="p p-Indicator">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET,POST /hello SayHello</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /eat_apple/{num:[0-9]+} EatApple</span>
+
+<span class="c1"># 通过方法 turbo.Server.RegisterComponent(&quot;name&quot;, component) 来注册一个组件。</span>
+<span class="c1"># 习惯上，&quot;name&quot; 是被注册的组件struct的名字 (比如 &quot;LogInterceptor&quot;)。</span>
+
+<span class="c1"># 注册拦截器</span>
+<span class="l l-Scalar l-Scalar-Plain">interceptor</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET,POST /hello TestInterceptor,LogInterceptor</span>
+<span class="c1"># 注册预处理器</span>
+<span class="l l-Scalar l-Scalar-Plain">preprocessor</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /hello registeredPreProcessor</span>
+<span class="c1"># 注册后处理器</span>
+<span class="l l-Scalar l-Scalar-Plain">postprocessor</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /hello registeredPostProcessor</span>
+<span class="c1"># 注册Hijacker</span>
+<span class="l l-Scalar l-Scalar-Plain">hijacker</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /hello registeredHijacker</span>
+<span class="c1"># 注册Message转换器</span>
+<span class="l l-Scalar l-Scalar-Plain">convertor</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">CommonValues registeredConvertor</span>
+<span class="c1"># 注册 Error Handler</span>
+<span class="l l-Scalar l-Scalar-Plain">errorhandler</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">registeredErrorHandler</span>
 </pre></div>
 </div>
 </div>
@@ -245,7 +266,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, xiaozhang.
+        &copy; Copyright 2017, Xiao Zhang.
 
     </p>
   </div>
