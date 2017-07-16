@@ -173,8 +173,8 @@
 <p>所有拦截器的Before()方法执行之后，向后端service发送请求之前，会执行Preprocessor。</p>
 <p>Preprocessor可以用来执行一些某个API特有的逻辑，比如，参数校验，设置默认值，做类型转换，记录log等等。</p>
 <p>下面的例子中，对参数’num’的值做了一些校验:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>func InitComponents() {
-<span class="gi">+      turbo.SetPreprocessor(&quot;/eat_apple/{num:[0-9]+}&quot;, preEatApple)</span>
+<div class="highlight-diff"><div class="highlight"><pre><span></span>func RegisterComponents(s *turbo.GrpcServer) {
+<span class="gi">+       s.RegisterComponent(&quot;preEatApple&quot;, preEatApple)</span>
 }
 
 <span class="gi">+func preEatApple(resp http.ResponseWriter, req *http.Request) error {</span>
