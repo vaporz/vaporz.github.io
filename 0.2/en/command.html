@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Command line tools &mdash; Turbo  documentation</title>
+  <title>Command line tools &mdash; Turbo Doc 0.1 documentation</title>
   
 
   
@@ -26,19 +26,21 @@
 
   
   
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   
 
   
 
   
         <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="Turbo  documentation" href="../../index.html"/> 
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Turbo Doc 0.1 documentation" href="index.html"/>
+        <link rel="next" title="Rules and Conventions" href="rules.html"/>
+        <link rel="prev" title="Create a service on the fly" href="create.html"/> 
 
   
-  <script src="../../_static/js/modernizr.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -54,7 +56,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> Turbo
+            <a href="contents.html" class="icon icon-home"> Turbo Doc
           
 
           
@@ -64,7 +66,7 @@
 
           
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -81,15 +83,27 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Command line tools</a><ul>
-<li><a class="reference internal" href="#turbo-create-package-path-servicename-r-grpc-thrift">turbo create package_path ServiceName -r (grpc|thrift)</a></li>
-<li><a class="reference internal" href="#turbo-generate-package-path-r-grpc-thrift-i-absolute-path-to-proto-thrift-files-i">turbo generate package_path -r (grpc/thrift) -I (absolute_path_to_proto/thrift_files) -I …</a></li>
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contents.html">Table of Contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create.html">Create a service on the fly</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Command line tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rules.html">Rules and Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add.html">How to add a new API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shared.html">Use a shared struct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="components.html">Components</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="interceptor.html">Interceptor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessor.html">Preprocessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postprocessor.html">Postprocessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hijacker.html">Hijacker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="convertor.html">Message Field Convertor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errorhandler.html">ErrorHandler</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="thrift.html">Thrift support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configs in service.yaml</a></li>
 </ul>
-</div>
+
             
           
         </div>
@@ -102,7 +116,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">Turbo</a>
+          <a href="contents.html">Turbo Doc</a>
         
       </nav>
 
@@ -130,7 +144,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="contents.html">Docs</a> &raquo;</li>
         
       <li>Command line tools</li>
     
@@ -138,7 +152,7 @@
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../_sources/0.2/en/command.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/command.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -202,12 +216,21 @@ Example:</p>
           </div>
           <footer>
   
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="rules.html" class="btn btn-neutral float-right" title="Rules and Conventions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="create.html" class="btn btn-neutral" title="Create a service on the fly" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, Xiao Zhang.
+        &copy; Copyright 2017, xiaozhang.
 
     </p>
   </div>
@@ -228,8 +251,8 @@ Example:</p>
 
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../',
-            VERSION:'',
+            URL_ROOT:'./',
+            VERSION:'0.1',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
@@ -237,15 +260,15 @@ Example:</p>
             SOURCELINK_SUFFIX: '.txt'
         };
     </script>
-      <script type="text/javascript" src="../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
 
   
 
   
   
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+    <script type="text/javascript" src="_static/js/theme.js"></script>
   
 
   

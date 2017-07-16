@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Preprocessor &mdash; Turbo  documentation</title>
+  <title>Preprocessor &mdash; Turbo Doc 0.1 documentation</title>
   
 
   
@@ -26,19 +26,22 @@
 
   
   
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   
 
   
 
   
         <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="Turbo  documentation" href="../../index.html"/> 
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Turbo Doc 0.1 documentation" href="index.html"/>
+        <link rel="up" title="Turbo组件" href="components.html"/>
+        <link rel="next" title="Postprocessor" href="postprocessor.html"/>
+        <link rel="prev" title="Interceptor" href="interceptor.html"/> 
 
   
-  <script src="../../_static/js/modernizr.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -54,7 +57,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> Turbo
+            <a href="contents.html" class="icon icon-home"> Turbo Doc
           
 
           
@@ -64,7 +67,7 @@
 
           
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -81,11 +84,27 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Preprocessor</a></li>
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">首页</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contents.html">内容列表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create.html">快速创建一个服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command.html">命令行工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rules.html">规则和约定</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add.html">如何添加新API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shared.html">如何使用公共IDL文件</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="components.html">Turbo提供的组件</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="interceptor.html">Interceptor</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Preprocessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postprocessor.html">Postprocessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hijacker.html">Hijacker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="convertor.html">Message类型转换器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errorhandler.html">ErrorHandler</a></li>
 </ul>
-</div>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="thrift.html">支持Thrift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">配置文件说明</a></li>
+</ul>
+
             
           
         </div>
@@ -98,7 +117,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">Turbo</a>
+          <a href="contents.html">Turbo Doc</a>
         
       </nav>
 
@@ -126,7 +145,9 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+          <li><a href="components.html">Turbo组件</a> &raquo;</li>
         
       <li>Preprocessor</li>
     
@@ -134,7 +155,7 @@
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../_sources/0.2/zh/preprocessor.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/preprocessor.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -187,12 +208,21 @@ Too many apples!
           </div>
           <footer>
   
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="postprocessor.html" class="btn btn-neutral float-right" title="Postprocessor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="interceptor.html" class="btn btn-neutral" title="Interceptor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, Xiao Zhang.
+        &copy; Copyright 2017, xiaozhang.
 
     </p>
   </div>
@@ -213,8 +243,8 @@ Too many apples!
 
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../',
-            VERSION:'',
+            URL_ROOT:'./',
+            VERSION:'0.1',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
@@ -222,15 +252,15 @@ Too many apples!
             SOURCELINK_SUFFIX: '.txt'
         };
     </script>
-      <script type="text/javascript" src="../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
 
   
 
   
   
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+    <script type="text/javascript" src="_static/js/theme.js"></script>
   
 
   
