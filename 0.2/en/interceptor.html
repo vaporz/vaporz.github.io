@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Interceptor &mdash; Turbo Doc 0.1 documentation</title>
+  <title>Interceptor &mdash; Turbo  documentation</title>
   
 
   
@@ -26,19 +26,19 @@
 
   
   
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   
 
   
 
   
-    <link rel="top" title="Turbo Doc 0.1 documentation" href="index.html"/>
-        <link rel="up" title="Turbo components" href="components.html"/>
-        <link rel="next" title="Preprocessor" href="preprocessor.html"/>
-        <link rel="prev" title="Turbo components" href="components.html"/> 
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Turbo  documentation" href="../../index.html"/> 
 
   
-  <script src="_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -54,7 +54,7 @@
           
 
           
-            <a href="contents.html" class="icon icon-home"> Turbo Doc
+            <a href="../../index.html" class="icon icon-home"> Turbo
           
 
           
@@ -64,7 +64,7 @@
 
           
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -81,39 +81,11 @@
               
             
             
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="index.html">Home</a><ul class="simple">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Interceptor</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="contents.html">Table of Contents</a></li>
-<li class="toctree-l1"><a class="reference internal" href="create.html">Create a service on the fly</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="command.html">Command line tools</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="rules.html">Rules and Conventions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="add.html">How to add a new API</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="shared.html">Use a shared struct</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1 current"><a class="reference internal" href="components.html">Components</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="">Interceptor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preprocessor.html">Preprocessor</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="postprocessor.html">Postprocessor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hijacker.html">Hijacker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="convertor.html">Message Field Convertor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="errorhandler.html">ErrorHandler</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="thrift.html">Thrift support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="config.html">Configs in service.yaml</a></li>
-</ul>
-
+</div>
             
           
         </div>
@@ -126,7 +98,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="contents.html">Turbo Doc</a>
+          <a href="../../index.html">Turbo</a>
         
       </nav>
 
@@ -154,9 +126,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="contents.html">Docs</a> &raquo;</li>
-        
-          <li><a href="components.html">Turbo components</a> &raquo;</li>
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
         
       <li>Interceptor</li>
     
@@ -164,7 +134,7 @@
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/interceptor.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/0.2/en/interceptor.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -190,10 +160,10 @@
 </ol>
 </div></blockquote>
 <p>The more precise it is, the higher priority it has.</p>
-<p>If interceptor A is assigned to URL &#8216;/abc&#8217; on HTTP method &#8220;GET&#8221;, and interceptor B is assigned to all URLs, then A is executed when &#8220;GET /abc&#8221;, and B is executed when &#8220;POST /abc&#8221;.</p>
-<p>Now, let&#8217;s create an interceptor for URL &#8220;/hello&#8221; to log some info before and after a request.</p>
-<p>Edit &#8220;yourservice/interceptor/log.go&#8221;:</p>
-<div class="highlight-go"><div class="highlight"><pre><span class="kn">package</span> <span class="nx">interceptor</span>
+<p>If interceptor A is assigned to URL ‘/abc’ on HTTP method “GET”, and interceptor B is assigned to all URLs, then A is executed when “GET /abc”, and B is executed when “POST /abc”.</p>
+<p>Now, let’s create an interceptor for URL “/hello” to log some info before and after a request.</p>
+<p>Edit “yourservice/interceptor/log.go”:</p>
+<div class="highlight-go"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">interceptor</span>
 
 <span class="kn">import</span> <span class="p">(</span>
        <span class="s">&quot;github.com/vaporz/turbo&quot;</span>
@@ -219,9 +189,9 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Then assign this interceptor to URL &#8220;/hello&#8221;.</p>
-<p>Edit &#8220;yourservice/grpcapi/component/components.go&#8221;:</p>
-<div class="highlight-diff"><div class="highlight"><pre>package component
+<p>Then assign this interceptor to URL “/hello”.</p>
+<p>Edit “yourservice/grpcapi/component/components.go”:</p>
+<div class="highlight-diff"><div class="highlight"><pre><span></span>package component
 
 import (
        &quot;github.com/vaporz/turbo-example/yourservice/gen/proto&quot;
@@ -239,19 +209,19 @@ func InitComponents() {
 </pre></div>
 </div>
 <p>Lastly, restart HTTP server and test:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ curl -w &quot;\n&quot; -X GET &quot;http://localhost:8081/hello?your_name=Alice&quot;
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; -X GET &quot;http://localhost:8081/hello?your_name=Alice&quot;
 {&quot;message&quot;:&quot;[grpc server]Hello, Alice&quot;}
 </pre></div>
 </div>
-<p>Check the server&#8217;s console:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ go run yourservice/yourserviceapi.go
+<p>Check the server’s console:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ go run yourservice/yourserviceapi.go
 [Before] Request URL:/hello
 [After] Request URL:/hello
 </pre></div>
 </div>
 <p>We usually do something like validations in an interceptor, when the validation fails, the request halts, and returns an error message.</p>
 <p>To do this, you can simply return an error:</p>
-<div class="highlight-diff"><div class="highlight"><pre>func (l LogInterceptor) Before(resp http.ResponseWriter, req *http.Request) (*http.Request, error) {
+<div class="highlight-diff"><div class="highlight"><pre><span></span>func (l LogInterceptor) Before(resp http.ResponseWriter, req *http.Request) (*http.Request, error) {
        fmt.Println(&quot;[Before] Request URL:&quot;+req.URL.Path)
 <span class="gi">+      resp.Write([]byte(&quot;Encounter an error from LogInterceptor!\n&quot;))</span>
 <span class="gd">-      return req, nil</span>
@@ -260,7 +230,7 @@ func InitComponents() {
 </pre></div>
 </div>
 <p>Test:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ curl -w &quot;\n&quot; &quot;http://localhost:8081/hello&quot;
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; &quot;http://localhost:8081/hello&quot;
 Encounter an error from LogInterceptor!
 </pre></div>
 </div>
@@ -274,21 +244,12 @@ Encounter an error from LogInterceptor!
           </div>
           <footer>
   
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="preprocessor.html" class="btn btn-neutral float-right" title="Preprocessor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="components.html" class="btn btn-neutral" title="Turbo components" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, xiaozhang.
+        &copy; Copyright 2017, Xiao Zhang.
 
     </p>
   </div>
@@ -309,23 +270,24 @@ Encounter an error from LogInterceptor!
 
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'0.1',
+            URL_ROOT:'../../',
+            VERSION:'',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: ''
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
 
   
 
   
   
-    <script type="text/javascript" src="_static/js/theme.js"></script>
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
   
 
   

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Rules and Conventions &mdash; Turbo Doc 0.1 documentation</title>
+  <title>Rules and Conventions &mdash; Turbo  documentation</title>
   
 
   
@@ -26,18 +26,19 @@
 
   
   
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   
 
   
 
   
-    <link rel="top" title="Turbo Doc 0.1 documentation" href="index.html"/>
-        <link rel="next" title="How to add a new API" href="add.html"/>
-        <link rel="prev" title="Command line tools" href="command.html"/> 
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Turbo  documentation" href="../../index.html"/> 
 
   
-  <script src="_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -53,7 +54,7 @@
           
 
           
-            <a href="contents.html" class="icon icon-home"> Turbo Doc
+            <a href="../../index.html" class="icon icon-home"> Turbo
           
 
           
@@ -63,7 +64,7 @@
 
           
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -80,39 +81,11 @@
               
             
             
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="index.html">Home</a><ul class="simple">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Rules and Conventions</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="contents.html">Table of Contents</a></li>
-<li class="toctree-l1"><a class="reference internal" href="create.html">Create a service on the fly</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="command.html">Command line tools</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Rules and Conventions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="add.html">How to add a new API</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="shared.html">Use a shared struct</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="components.html">Components</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="interceptor.html">Interceptor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preprocessor.html">Preprocessor</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="postprocessor.html">Postprocessor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hijacker.html">Hijacker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="convertor.html">Message Field Convertor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="errorhandler.html">ErrorHandler</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="thrift.html">Thrift support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="config.html">Configs in service.yaml</a></li>
-</ul>
-
+</div>
             
           
         </div>
@@ -125,7 +98,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="contents.html">Turbo Doc</a>
+          <a href="../../index.html">Turbo</a>
         
       </nav>
 
@@ -153,7 +126,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="contents.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
         
       <li>Rules and Conventions</li>
     
@@ -161,7 +134,7 @@
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/rules.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/0.1/en/rules.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -178,23 +151,23 @@
 <span id="rules"></span><h1>Rules and Conventions<a class="headerlink" href="#rules-and-conventions" title="Permalink to this headline">¶</a></h1>
 <p>There are some rules when you use turbo.</p>
 <ul class="simple">
-<li>When defining a gRPC service, if the name of a gRPC method is &#8220;methodName&#8221;, then the name of request message and response message <strong>MUST</strong> be &#8220;MethodNameRequest&#8221; and &#8220;MethodNameResponse&#8221;.</li>
-<li>When defining a thrift service, the response message&#8217;s name <strong>MUST</strong> be &#8220;MethodNameResponse&#8221;.</li>
-<li>If multiple paths are assigned to $GOPATH(divided by &#8216;:&#8217;), then the first path is used by turbo as GOPATH.</li>
+<li>When defining a gRPC service, if the name of a gRPC method is “methodName”, then the name of request message and response message <strong>MUST</strong> be “MethodNameRequest” and “MethodNameResponse”.</li>
+<li>When defining a thrift service, the response message’s name <strong>MUST</strong> be “MethodNameResponse”.</li>
+<li>If multiple paths are assigned to $GOPATH(divided by ‘:’), then the first path is used by turbo as GOPATH.</li>
 <li>When parsing request parameters, values from URL path has a higher priority than those from query string, body or context.Context.</li>
 </ul>
 <blockquote>
-<div>e.g. In a request like &#8220;GET /book/1234?id=5678&#8221;, both &#8220;1234&#8221; and &#8220;5678&#8221; are values to &#8220;id&#8221;, but &#8220;1234&#8221; is picked as value to key &#8220;id&#8221;.</div></blockquote>
+<div>e.g. In a request like “GET /book/1234?id=5678”, both “1234” and “5678” are values to “id”, but “1234” is picked as value to key “id”.</div></blockquote>
 <ul class="simple">
 <li>The value of a key with all lower case characters has a higher priority to the value of a key with upper case characters.</li>
 </ul>
 <blockquote>
-<div>e.g. In a request like &#8220;GET /book?id=1234&amp;ID=5678&#8221;, &#8220;1234&#8221; is used for key &#8220;id&#8221;.</div></blockquote>
+<div>e.g. In a request like “GET /book?id=1234&amp;ID=5678”, “1234” is used for key “id”.</div></blockquote>
 <ul class="simple">
-<li>A parameter&#8217;s key is case-insensitive to turbo, in fact, internally turbo will cast keys to lower case characters before further use.</li>
+<li>A parameter’s key is case-insensitive to turbo, in fact, internally turbo will cast keys to lower case characters before further use.</li>
 </ul>
 <blockquote>
-<div>e.g. In a request like &#8220;GET /book?ID=1234&#8221;, turbo will see this query string as &#8220;id=1234&#8221;.</div></blockquote>
+<div>e.g. In a request like “GET /book?ID=1234”, turbo will see this query string as “id=1234”.</div></blockquote>
 </div>
 
 
@@ -205,21 +178,12 @@
           </div>
           <footer>
   
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="add.html" class="btn btn-neutral float-right" title="How to add a new API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="command.html" class="btn btn-neutral" title="Command line tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, xiaozhang.
+        &copy; Copyright 2017, Xiao Zhang.
 
     </p>
   </div>
@@ -240,23 +204,24 @@
 
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'0.1',
+            URL_ROOT:'../../',
+            VERSION:'',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: ''
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
 
   
 
   
   
-    <script type="text/javascript" src="_static/js/theme.js"></script>
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
   
 
   

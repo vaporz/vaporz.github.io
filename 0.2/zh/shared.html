@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>如何使用公共IDL文件 &mdash; Turbo Doc 0.1 documentation</title>
+  <title>如何使用公共IDL文件 &mdash; Turbo  documentation</title>
   
 
   
@@ -26,18 +26,19 @@
 
   
   
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   
 
   
 
   
-    <link rel="top" title="Turbo Doc 0.1 documentation" href="index.html"/>
-        <link rel="next" title="Turbo组件" href="components.html"/>
-        <link rel="prev" title="如何添加一个新API" href="add.html"/> 
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Turbo  documentation" href="../../index.html"/> 
 
   
-  <script src="_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -53,7 +54,7 @@
           
 
           
-            <a href="contents.html" class="icon icon-home"> Turbo Doc
+            <a href="../../index.html" class="icon icon-home"> Turbo
           
 
           
@@ -63,7 +64,7 @@
 
           
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -80,37 +81,16 @@
               
             
             
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="index.html">首页</a><ul class="simple">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">如何使用公共IDL文件</a><ul>
+<li><a class="reference internal" href="#shared-proto-message">1, 新建 “shared.proto”，并且定义一个新Message</a></li>
+<li><a class="reference internal" href="#request">2, 给request对象添加新参数</a></li>
+<li><a class="reference internal" href="#id1">3, 生成代码</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="contents.html">内容列表</a></li>
-<li class="toctree-l1"><a class="reference internal" href="create.html">快速创建一个服务</a><ul class="simple">
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="command.html">命令行工具</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="rules.html">规则和约定</a></li>
-<li class="toctree-l1"><a class="reference internal" href="add.html">如何添加新API</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">如何使用公共IDL文件</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="components.html">Turbo提供的组件</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="interceptor.html">Interceptor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preprocessor.html">Preprocessor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="postprocessor.html">Postprocessor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hijacker.html">Hijacker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="convertor.html">Message类型转换器</a></li>
-<li class="toctree-l2"><a class="reference internal" href="errorhandler.html">ErrorHandler</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="thrift.html">支持Thrift</a></li>
-<li class="toctree-l1"><a class="reference internal" href="config.html">配置文件说明</a></li>
-</ul>
-
+</div>
             
           
         </div>
@@ -123,7 +103,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="contents.html">Turbo Doc</a>
+          <a href="../../index.html">Turbo</a>
         
       </nav>
 
@@ -151,7 +131,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="contents.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
         
       <li>如何使用公共IDL文件</li>
     
@@ -159,7 +139,7 @@
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/shared.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/0.2/zh/shared.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -175,17 +155,17 @@
   <div class="section" id="shared">
 <span id="idl"></span><h1>如何使用公共IDL文件<a class="headerlink" href="#shared" title="Permalink to this headline">¶</a></h1>
 <p>有时，我们希望把一些所有请求都会用到的数据包含在发送给service的request中。
-于是，我们会项目外的另一个地方新建一个公共的文件，比如&#8221;shared.proto&#8221;，然后定义一个新的Message。
+于是，我们会项目外的另一个地方新建一个公共的文件，比如”shared.proto”，然后定义一个新的Message。
 然后，再把这个新Message添加到其他request对象中。</p>
 <p>下面的例子介绍了如何在Turbo中这么做。</p>
 <div class="section" id="shared-proto-message">
-<h2>1, 新建 &#8220;shared.proto&#8221;，并且定义一个新Message<a class="headerlink" href="#shared-proto-message" title="Permalink to this headline">¶</a></h2>
-<p>创建文件夹&#8221;common&#8221;（或者其他名字）:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ mkdir -p $GOPATH/src/package/path/to/common
+<h2>1, 新建 “shared.proto”，并且定义一个新Message<a class="headerlink" href="#shared-proto-message" title="Permalink to this headline">¶</a></h2>
+<p>创建文件夹”common”（或者其他名字）:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ mkdir -p $GOPATH/src/package/path/to/common
 </pre></div>
 </div>
-<p>在里面创建文件 &#8220;shared.proto&#8221;:</p>
-<div class="highlight-proto"><div class="highlight"><pre><span class="na">syntax</span> <span class="o">=</span> <span class="s">&quot;proto3&quot;</span><span class="p">;</span>
+<p>在里面创建文件 “shared.proto”:</p>
+<div class="highlight-proto"><div class="highlight"><pre><span></span><span class="na">syntax</span> <span class="o">=</span> <span class="s">&quot;proto3&quot;</span><span class="p">;</span>
 <span class="kn">package</span> <span class="nn">proto</span><span class="p">;</span>
 
 <span class="kd">message</span> <span class="nc">CommonValues</span> <span class="p">{</span>
@@ -196,8 +176,8 @@
 </div>
 <div class="section" id="request">
 <h2>2, 给request对象添加新参数<a class="headerlink" href="#request" title="Permalink to this headline">¶</a></h2>
-<p>编辑 &#8220;yourservice.proto&#8221;:</p>
-<div class="highlight-diff"><div class="highlight"><pre>syntax = &quot;proto3&quot;;
+<p>编辑 “yourservice.proto”:</p>
+<div class="highlight-diff"><div class="highlight"><pre><span></span>syntax = &quot;proto3&quot;;
 package proto;
 <span class="gi">+</span>
 <span class="gi">+import &quot;shared.proto&quot;;</span>
@@ -211,13 +191,13 @@ message SayHelloRequest {
 </div>
 <div class="section" id="id1">
 <h2>3, 生成代码<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>$ turbo generate package/path/to/yourservice -r grpc -I $GOPATH/src/package/path/to/yourservice
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ turbo generate package/path/to/yourservice -r grpc -I $GOPATH/src/package/path/to/yourservice
  -I $GOPATH/src/package/path/to/common
 </pre></div>
 </div>
 <p>完成！</p>
-<p>测试前，编辑 &#8220;youserviceimpl.go&#8221;，返回 &#8220;someId&#8221;:</p>
-<div class="highlight-diff"><div class="highlight"><pre>func (s *YourService) SayHello(ctx context.Context, req *proto.SayHelloRequest) (*proto.SayHelloResponse, error) {
+<p>测试前，编辑 “youserviceimpl.go”，返回 “someId”:</p>
+<div class="highlight-diff"><div class="highlight"><pre><span></span>func (s *YourService) SayHello(ctx context.Context, req *proto.SayHelloRequest) (*proto.SayHelloResponse, error) {
 <span class="gi">+      someId := strconv.FormatInt(req.Values.SomeId, 10)</span>
 <span class="gd">-      return &amp;proto.SayHelloResponse{Message: &quot;[grpc server]Hello, &quot; + req.YourName}, nil</span>
 <span class="gi">+      return &amp;proto.SayHelloResponse{Message: &quot;[grpc server]Hello, &quot; + req.YourName + &quot;, someId=&quot; + someId}, nil</span>
@@ -225,11 +205,11 @@ message SayHelloRequest {
 </pre></div>
 </div>
 <p>重启服务并测试:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ curl -w &quot;\n&quot; -X GET &quot;http://localhost:8081/hello?your_name=Alice&amp;some_id=12345&quot;
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; -X GET &quot;http://localhost:8081/hello?your_name=Alice&amp;some_id=12345&quot;
 {&quot;message&quot;:&quot;[grpc server]Hello, Alice, someId=12345&quot;}
 </pre></div>
 </div>
-<p>Turbo很智能，queryString中的参数&#8221;some_id&#8221;会被自动设置给&#8221;SayHelloRequest.CommonValues.SomeId&#8221;。</p>
+<p>Turbo很智能，queryString中的参数”some_id”会被自动设置给”SayHelloRequest.CommonValues.SomeId”。</p>
 <p>除了queryString，也可以读取URL路径里的参数，或者在拦截器中设置在context.Context里的参数。</p>
 </div>
 </div>
@@ -242,21 +222,12 @@ message SayHelloRequest {
           </div>
           <footer>
   
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="components.html" class="btn btn-neutral float-right" title="Turbo组件" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="add.html" class="btn btn-neutral" title="如何添加一个新API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, xiaozhang.
+        &copy; Copyright 2017, Xiao Zhang.
 
     </p>
   </div>
@@ -277,23 +248,24 @@ message SayHelloRequest {
 
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'0.1',
+            URL_ROOT:'../../',
+            VERSION:'',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: ''
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
 
   
 
   
   
-    <script type="text/javascript" src="_static/js/theme.js"></script>
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
   
 
   

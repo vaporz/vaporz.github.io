@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>命令行工具 &mdash; Turbo Doc 0.1 documentation</title>
+  <title>命令行工具 &mdash; Turbo  documentation</title>
   
 
   
@@ -26,18 +26,19 @@
 
   
   
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   
 
   
 
   
-    <link rel="top" title="Turbo Doc 0.1 documentation" href="index.html"/>
-        <link rel="next" title="规则和约定" href="rules.html"/>
-        <link rel="prev" title="快速创建一个新的服务" href="create.html"/> 
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Turbo  documentation" href="../../index.html"/> 
 
   
-  <script src="_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -53,7 +54,7 @@
           
 
           
-            <a href="contents.html" class="icon icon-home"> Turbo Doc
+            <a href="../../index.html" class="icon icon-home"> Turbo
           
 
           
@@ -63,7 +64,7 @@
 
           
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -80,37 +81,15 @@
               
             
             
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="index.html">首页</a><ul class="simple">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">命令行工具</a><ul>
+<li><a class="reference internal" href="#turbo-create-package-path-servicename-r-grpc-thrift">turbo create package_path ServiceName -r (grpc|thrift)</a></li>
+<li><a class="reference internal" href="#turbo-generate-package-path-r-grpc-thrift-i-absolute-path-to-proto-thrift-files-i">turbo generate package_path -r (grpc/thrift) -I (absolute_path_to_proto/thrift_files) -I …</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="contents.html">内容列表</a></li>
-<li class="toctree-l1"><a class="reference internal" href="create.html">快速创建一个服务</a><ul class="simple">
 </ul>
-</li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">命令行工具</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="rules.html">规则和约定</a></li>
-<li class="toctree-l1"><a class="reference internal" href="add.html">如何添加新API</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="shared.html">如何使用公共IDL文件</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="components.html">Turbo提供的组件</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="interceptor.html">Interceptor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preprocessor.html">Preprocessor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="postprocessor.html">Postprocessor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hijacker.html">Hijacker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="convertor.html">Message类型转换器</a></li>
-<li class="toctree-l2"><a class="reference internal" href="errorhandler.html">ErrorHandler</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="thrift.html">支持Thrift</a></li>
-<li class="toctree-l1"><a class="reference internal" href="config.html">配置文件说明</a></li>
-</ul>
-
+</div>
             
           
         </div>
@@ -123,7 +102,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="contents.html">Turbo Doc</a>
+          <a href="../../index.html">Turbo</a>
         
       </nav>
 
@@ -151,7 +130,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="contents.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
         
       <li>命令行工具</li>
     
@@ -159,7 +138,7 @@
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/command.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/0.1/zh/command.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -176,10 +155,10 @@
 <span id="id1"></span><h1>命令行工具<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="turbo-create-package-path-servicename-r-grpc-thrift">
 <h2>turbo create package_path ServiceName -r (grpc|thrift)<a class="headerlink" href="#turbo-create-package-path-servicename-r-grpc-thrift" title="Permalink to this headline">¶</a></h2>
-<p>&#8216;turbo create&#8217; 用来创建一个新项目，包含了可直接运行的HTTP server和gRPC／Thrfit server。
-&#8216;ServiceName&#8217;<a href="#id2"><span class="problematic" id="id3">**</span></a>必须**是一个驼峰（CamelCase）字符串。
+<p>‘turbo create’ 用来创建一个新项目，包含了可直接运行的HTTP server和gRPC／Thrfit server。
+‘ServiceName’<a href="#id2"><span class="problematic" id="id3">**</span></a>必须**是一个驼峰（CamelCase）字符串。
 项目目录结构:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ turbo create package/path/to/yourservice YourService -r grpc
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ turbo create package/path/to/yourservice YourService -r grpc
 $ cd $GOPATH/src/package/path/to/yourservice
 $ tree
 .
@@ -202,16 +181,16 @@ $ tree
 </div>
 </div>
 <div class="section" id="turbo-generate-package-path-r-grpc-thrift-i-absolute-path-to-proto-thrift-files-i">
-<h2>turbo generate package_path -r (grpc/thrift) -I (absolute_path_to_proto/thrift_files) -I ...<a class="headerlink" href="#turbo-generate-package-path-r-grpc-thrift-i-absolute-path-to-proto-thrift-files-i" title="Permalink to this headline">¶</a></h2>
-<p>&#8216;turbo generate&#8217; 用来生成 switcher.go 和 [service_name].pb.go，生在文件放在&#8217;gen&#8217;目录下.</p>
+<h2>turbo generate package_path -r (grpc/thrift) -I (absolute_path_to_proto/thrift_files) -I …<a class="headerlink" href="#turbo-generate-package-path-r-grpc-thrift-i-absolute-path-to-proto-thrift-files-i" title="Permalink to this headline">¶</a></h2>
+<p>‘turbo generate’ 用来生成 switcher.go 和 [service_name].pb.go，生在文件放在’gen’目录下.</p>
 <p>当 service.yaml 或者 [service_name].proto|.thrift有改动时，这个命令很有用，
 比如添加了新的API，修改了已有的API定义，修改了url到service接口的映射关系等。
 例子:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ turbo generate package/path/to/yourservice -r grpc
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ turbo generate package/path/to/yourservice -r grpc
  -I $GOPATH/src/package/path/to/yourservice -I $GOPATH/src/shared
 </pre></div>
 </div>
-<p>&#8220;-I&#8221; 可以重复多次, 比如你一个公共的IDL文件 &#8220;shared.proto&#8221; 的话，公共文件的绝对路径可以用&#8221;-I&#8221;加进来。</p>
+<p>“-I” 可以重复多次, 比如你一个公共的IDL文件 “shared.proto” 的话，公共文件的绝对路径可以用”-I”加进来。</p>
 </div>
 </div>
 
@@ -223,21 +202,12 @@ $ tree
           </div>
           <footer>
   
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="rules.html" class="btn btn-neutral float-right" title="规则和约定" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="create.html" class="btn btn-neutral" title="快速创建一个新的服务" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, xiaozhang.
+        &copy; Copyright 2017, Xiao Zhang.
 
     </p>
   </div>
@@ -258,23 +228,24 @@ $ tree
 
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'0.1',
+            URL_ROOT:'../../',
+            VERSION:'',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: ''
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
 
   
 
   
   
-    <script type="text/javascript" src="_static/js/theme.js"></script>
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
   
 
   

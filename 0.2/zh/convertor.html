@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Message类型转换器 &mdash; Turbo Doc 0.1 documentation</title>
+  <title>Message类型转换器 &mdash; Turbo  documentation</title>
   
 
   
@@ -26,19 +26,19 @@
 
   
   
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   
 
   
 
   
-    <link rel="top" title="Turbo Doc 0.1 documentation" href="index.html"/>
-        <link rel="up" title="Turbo组件" href="components.html"/>
-        <link rel="next" title="ErrorHandler" href="errorhandler.html"/>
-        <link rel="prev" title="Hijacker" href="hijacker.html"/> 
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Turbo  documentation" href="../../index.html"/> 
 
   
-  <script src="_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -54,7 +54,7 @@
           
 
           
-            <a href="contents.html" class="icon icon-home"> Turbo Doc
+            <a href="../../index.html" class="icon icon-home"> Turbo
           
 
           
@@ -64,7 +64,7 @@
 
           
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -81,37 +81,11 @@
               
             
             
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="index.html">首页</a><ul class="simple">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Message类型转换器</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="contents.html">内容列表</a></li>
-<li class="toctree-l1"><a class="reference internal" href="create.html">快速创建一个服务</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="command.html">命令行工具</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="rules.html">规则和约定</a></li>
-<li class="toctree-l1"><a class="reference internal" href="add.html">如何添加新API</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="shared.html">如何使用公共IDL文件</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1 current"><a class="reference internal" href="components.html">Turbo提供的组件</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="interceptor.html">Interceptor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preprocessor.html">Preprocessor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="postprocessor.html">Postprocessor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hijacker.html">Hijacker</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">Message类型转换器</a></li>
-<li class="toctree-l2"><a class="reference internal" href="errorhandler.html">ErrorHandler</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="thrift.html">支持Thrift</a></li>
-<li class="toctree-l1"><a class="reference internal" href="config.html">配置文件说明</a></li>
-</ul>
-
+</div>
             
           
         </div>
@@ -124,7 +98,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="contents.html">Turbo Doc</a>
+          <a href="../../index.html">Turbo</a>
         
       </nav>
 
@@ -152,9 +126,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="contents.html">Docs</a> &raquo;</li>
-        
-          <li><a href="components.html">Turbo组件</a> &raquo;</li>
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
         
       <li>Message类型转换器</li>
     
@@ -162,7 +134,7 @@
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/convertor.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/0.2/zh/convertor.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -178,9 +150,9 @@
   <div class="section" id="message">
 <span id="convertor"></span><h1>Message类型转换器<a class="headerlink" href="#message" title="Permalink to this headline">¶</a></h1>
 <p>Turbo 会自动在URL，queryString和context.Context中查询参数，然后根据struct中的字段名设置到request对象中。</p>
-<p>Turbo 也允许你&#8221;手动&#8221;组装一个struct对象，举个例子：
-编辑 &#8220;yourservice/grpcapi/component/components.go&#8221;:</p>
-<div class="highlight-diff"><div class="highlight"><pre>func InitComponents() {
+<p>Turbo 也允许你”手动”组装一个struct对象，举个例子：
+编辑 “yourservice/grpcapi/component/components.go”:</p>
+<div class="highlight-diff"><div class="highlight"><pre><span></span>func InitComponents() {
 <span class="gi">+      turbo.RegisterMessageFieldConvertor(new(proto.CommonValues), convertCommonValues)</span>
 }
 
@@ -191,9 +163,9 @@
 <span class="gi">+}</span>
 </pre></div>
 </div>
-<p>OK了, 方法 &#8220;convertCommonValues&#8221; 被注册给了类型 &#8220;proto.CommonValues&#8221;，在方法里面，&#8221;SomeId&#8221;被修改为&#8221;123456789&#8221;，不管之前是什么值。</p>
+<p>OK了, 方法 “convertCommonValues” 被注册给了类型 “proto.CommonValues”，在方法里面，”SomeId”被修改为”123456789”，不管之前是什么值。</p>
 <p>重启服务然后测试:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ curl -w &quot;\n&quot; -X GET &quot;http://localhost:8081/hello?your_name=Alice&amp;some_id=123&quot;
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; -X GET &quot;http://localhost:8081/hello?your_name=Alice&amp;some_id=123&quot;
 {&quot;message&quot;:&quot;[grpc server]Hello, Alice, someId=123456789&quot;}
 </pre></div>
 </div>
@@ -207,21 +179,12 @@
           </div>
           <footer>
   
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="errorhandler.html" class="btn btn-neutral float-right" title="ErrorHandler" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="hijacker.html" class="btn btn-neutral" title="Hijacker" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, xiaozhang.
+        &copy; Copyright 2017, Xiao Zhang.
 
     </p>
   </div>
@@ -242,23 +205,24 @@
 
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'0.1',
+            URL_ROOT:'../../',
+            VERSION:'',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: ''
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
 
   
 
   
   
-    <script type="text/javascript" src="_static/js/theme.js"></script>
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
   
 
   

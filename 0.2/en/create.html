@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Create a service on the fly &mdash; Turbo Doc 0.1 documentation</title>
+  <title>Create a service on the fly &mdash; Turbo  documentation</title>
   
 
   
@@ -26,18 +26,19 @@
 
   
   
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   
 
   
 
   
-    <link rel="top" title="Turbo Doc 0.1 documentation" href="index.html"/>
-        <link rel="next" title="Command line tools" href="command.html"/>
-        <link rel="prev" title="Turbo" href="index.html"/> 
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Turbo  documentation" href="../../index.html"/> 
 
   
-  <script src="_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -53,7 +54,7 @@
           
 
           
-            <a href="contents.html" class="icon icon-home"> Turbo Doc
+            <a href="../../index.html" class="icon icon-home"> Turbo
           
 
           
@@ -63,7 +64,7 @@
 
           
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -80,39 +81,17 @@
               
             
             
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="index.html">Home</a><ul class="simple">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Create a service on the fly</a><ul>
+<li><a class="reference internal" href="#before-the-start">0, Before the start</a></li>
+<li><a class="reference internal" href="#install-turbo-command-line-tools">1, Install Turbo command line tools</a></li>
+<li><a class="reference internal" href="#create-your-service">2, Create your service</a></li>
+<li><a class="reference internal" href="#run">3, Run</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="contents.html">Table of Contents</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Create a service on the fly</a><ul class="simple">
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="command.html">Command line tools</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="rules.html">Rules and Conventions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="add.html">How to add a new API</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="shared.html">Use a shared struct</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="components.html">Components</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="interceptor.html">Interceptor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preprocessor.html">Preprocessor</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="postprocessor.html">Postprocessor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hijacker.html">Hijacker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="convertor.html">Message Field Convertor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="errorhandler.html">ErrorHandler</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="thrift.html">Thrift support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="config.html">Configs in service.yaml</a></li>
-</ul>
-
+</div>
             
           
         </div>
@@ -125,7 +104,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="contents.html">Turbo Doc</a>
+          <a href="../../index.html">Turbo</a>
         
       </nav>
 
@@ -153,7 +132,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="contents.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
         
       <li>Create a service on the fly</li>
     
@@ -161,7 +140,7 @@
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/create.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/0.2/en/create.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -180,57 +159,57 @@
 <h2>0, Before the start<a class="headerlink" href="#before-the-start" title="Permalink to this headline">¶</a></h2>
 <p>Obviously, you have to install <span class="xref std std-ref">Golang</span> and <span class="xref std std-ref">Protocol buffers(v3)</span> first.</p>
 <p>Download turbo repo with:</p>
-<div class="highlight-shell"><div class="highlight"><pre>go get github.com/vaporz/turbo
+<div class="highlight-shell"><div class="highlight"><pre><span></span>go get github.com/vaporz/turbo
 </pre></div>
 </div>
 <p>For dependency management, we provide 2 ways:</p>
 <p>(Recommended) Install <span class="xref std std-ref">glide</span> for dependency management:</p>
-<div class="highlight-python"><div class="highlight"><pre>cd github.com/vaporz/turbo/turbo
-glide install
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">vaporz</span><span class="o">/</span><span class="n">turbo</span><span class="o">/</span><span class="n">turbo</span>
+<span class="n">glide</span> <span class="n">install</span>
 </pre></div>
 </div>
 <p>(Not Recommended) Or install required packages manually:</p>
-<div class="highlight-python"><div class="highlight"><pre>go get google.golang.org/grpc
-go get git.apache.org/thrift.git/lib/go/thrift
-go get github.com/kylelemons/go-gypsy/yaml
-go get github.com/gorilla/mux
-go get github.com/spf13/cobra
-go get github.com/spf13/viper
-go get github.com/bitly/go-simplejson
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">go</span> <span class="n">get</span> <span class="n">google</span><span class="o">.</span><span class="n">golang</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">grpc</span>
+<span class="n">go</span> <span class="n">get</span> <span class="n">git</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">thrift</span><span class="o">.</span><span class="n">git</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">go</span><span class="o">/</span><span class="n">thrift</span>
+<span class="n">go</span> <span class="n">get</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">kylelemons</span><span class="o">/</span><span class="n">go</span><span class="o">-</span><span class="n">gypsy</span><span class="o">/</span><span class="n">yaml</span>
+<span class="n">go</span> <span class="n">get</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">gorilla</span><span class="o">/</span><span class="n">mux</span>
+<span class="n">go</span> <span class="n">get</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">spf13</span><span class="o">/</span><span class="n">cobra</span>
+<span class="n">go</span> <span class="n">get</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">spf13</span><span class="o">/</span><span class="n">viper</span>
+<span class="n">go</span> <span class="n">get</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bitly</span><span class="o">/</span><span class="n">go</span><span class="o">-</span><span class="n">simplejson</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="install-turbo-command-line-tools">
 <h2>1, Install Turbo command line tools<a class="headerlink" href="#install-turbo-command-line-tools" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>cd github.com/vaporz/turbo
-make
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">vaporz</span><span class="o">/</span><span class="n">turbo</span>
+<span class="n">make</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="create-your-service">
 <h2>2, Create your service<a class="headerlink" href="#create-your-service" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>$ turbo create package/path/to/yourservice YourService -r grpc
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ turbo create package/path/to/yourservice YourService -r grpc
 </pre></div>
 </div>
-<p>Directory &#8220;$GOPATH/src/package/path/to/yourservice&#8221; should appear.</p>
-<p>There&#8217;re also some generated files in this folder.</p>
+<p>Directory “$GOPATH/src/package/path/to/yourservice” should appear.</p>
+<p>There’re also some generated files in this folder.</p>
 <p>Example project: <a class="reference external" href="https://github.com/vaporz/turbo-example/tree/master/yourservice">https://github.com/vaporz/turbo-example/tree/master/yourservice</a></p>
 </div>
 <div class="section" id="run">
 <h2>3, Run<a class="headerlink" href="#run" title="Permalink to this headline">¶</a></h2>
-<p>That&#8217;s it! Now let&#8217;s Play!</p>
+<p>That’s it! Now let’s Play!</p>
 <p>Start both gRPC server and HTTP server:</p>
-<div class="highlight-python"><div class="highlight"><pre>cd $GOPATH/src/package/path/to/yourservice
+<div class="highlight-default"><div class="highlight"><pre><span></span>cd $GOPATH/src/package/path/to/yourservice
 go run main.go
 </pre></div>
 </div>
 <p>Send a request:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ curl -w &quot;\n&quot; &quot;http://localhost:8081/hello?your_name=Alice&quot;
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; &quot;http://localhost:8081/hello?your_name=Alice&quot;
 message:&quot;Hello, Alice&quot;
 </pre></div>
 </div>
 <p>Or you can start gRPC server and HTTP server separately:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ cd $GOPATH/src/package/path/to/yourservice
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ cd $GOPATH/src/package/path/to/yourservice
 # start grpc service
 $ go run grpcservice/yourservice.go
 # start http server
@@ -248,21 +227,12 @@ $ go run grpcapi/yourserviceapi.go
           </div>
           <footer>
   
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="command.html" class="btn btn-neutral float-right" title="Command line tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="index.html" class="btn btn-neutral" title="Turbo" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, xiaozhang.
+        &copy; Copyright 2017, Xiao Zhang.
 
     </p>
   </div>
@@ -283,23 +253,24 @@ $ go run grpcapi/yourserviceapi.go
 
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'0.1',
+            URL_ROOT:'../../',
+            VERSION:'',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: ''
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
 
   
 
   
   
-    <script type="text/javascript" src="_static/js/theme.js"></script>
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
   
 
   
