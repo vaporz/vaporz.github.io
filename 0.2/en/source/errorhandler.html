@@ -154,7 +154,7 @@
 <span class="gi">+       s.RegisterComponent(&quot;errorHandler&quot;, errorHandler)</span>
 }
 
-<span class="gi">+func errorHandler(resp http.ResponseWriter, req *http.Request, err error) {</span>
+<span class="gi">+var errorHandler turbo.ErrorHandlerFunc = func (resp http.ResponseWriter, req *http.Request, err error) {</span>
 <span class="gi">+      resp.Write([]byte(&quot;from errorHandler:&quot; + err.Error()))</span>
 <span class="gi">+}</span>
 </pre></div>

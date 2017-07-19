@@ -178,7 +178,7 @@
 <span class="gi">+       s.RegisterComponent(&quot;hijackEatApple&quot;, hijackEatApple)</span>
 }
 
-<span class="gi">+func hijackEatApple(resp http.ResponseWriter, req *http.Request) {</span>
+<span class="gi">+var hijackEatApple turbo.Hijacker = func (resp http.ResponseWriter, req *http.Request) {</span>
 <span class="gi">+      client := turbo.GrpcService().(gen.YourServiceClient)</span>
 <span class="gi">+      r := new(gen.EatAppleRequest)</span>
 <span class="gi">+      r.Num = &quot;999&quot;</span>

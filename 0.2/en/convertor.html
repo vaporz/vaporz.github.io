@@ -177,7 +177,7 @@
 <span class="gi">+       s.RegisterComponent(&quot;convertCommonValues&quot;, convertCommonValues)</span>
 }
 
-<span class="gi">+func convertCommonValues(req *http.Request) reflect.Value {</span>
+<span class="gi">+var convertCommonValues turbo.Convertor = func (req *http.Request) reflect.Value {</span>
 <span class="gi">+      result := &amp;proto.CommonValues{}</span>
 <span class="gi">+      result.SomeId = 123456789</span>
 <span class="gi">+      return reflect.ValueOf(result)</span>

@@ -153,10 +153,10 @@
 <p>下面例子中，将会修改 API “/eat_apple/{num:[0-9]+}” 的返回结果：</p>
 <p>编辑 “yourservice/grpcapi/component/components.go”:</p>
 <div class="highlight-diff"><div class="highlight"><pre><span></span>func RegisterComponents(s *turbo.GrpcServer) {
-<span class="gi">+       s.RegisterComponent(&quot;preEatApple&quot;, preEatApple)</span>
+<span class="gi">+       s.RegisterComponent(&quot;postEatApple&quot;, postEatApple)</span>
 }
 
-<span class="gi">+func postEatApple(resp http.ResponseWriter, req *http.Request, serviceResp interface{}) {</span>
+<span class="gi">+var postEatApple turbo.Postprocessor = func (resp http.ResponseWriter, req *http.Request, serviceResp interface{}) {</span>
 <span class="gi">+      sr := serviceResp.(*proto.EatAppleResponse)</span>
 <span class="gi">+      resp.Write([]byte(&quot;this is from postprocesser, message=&quot; + sr.Message))</span>
 <span class="gi">+}</span>

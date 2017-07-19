@@ -180,8 +180,8 @@ $ tree
 <h2>turbo generate package_path -r (grpc/thrift) -I (absolute_path_to_proto/thrift_files) -I …<a class="headerlink" href="#turbo-generate-package-path-r-grpc-thrift-i-absolute-path-to-proto-thrift-files-i" title="Permalink to this headline">¶</a></h2>
 <p>‘turbo generate’ generates switcher.go and [service_name].pb.go to ‘gen’ directory.</p>
 <p>This command is useful when either service.yaml or [service_name].proto|.thrift is changed.
-For example, add a new API, change an existing API, change url-grpc mapping, etc.
-Example:</p>
+For example, add a new API, change an existing API, change url-grpc mapping, etc.</p>
+<p>Example:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>$ turbo generate package/path/to/yourservice -r grpc
  -I $GOPATH/src/package/path/to/yourservice -I $GOPATH/src/shared
 </pre></div>

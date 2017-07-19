@@ -177,7 +177,7 @@
 <span class="gi">+       s.RegisterComponent(&quot;preEatApple&quot;, preEatApple)</span>
 }
 
-<span class="gi">+func preEatApple(resp http.ResponseWriter, req *http.Request) error {</span>
+<span class="gi">+var preEatApple turbo.Preprocessor = func (resp http.ResponseWriter, req *http.Request) error {</span>
 <span class="gi">+      num,err := strconv.Atoi(req.Form[&quot;num&quot;][0])</span>
 <span class="gi">+      if err!=nil {</span>
 <span class="gi">+              resp.Write([]byte(&quot;&#39;num&#39; is not numberic&quot;))</span>

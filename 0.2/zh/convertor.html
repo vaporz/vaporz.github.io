@@ -171,13 +171,13 @@
   <div class="section" id="message">
 <span id="convertor"></span><h1>Message类型转换器<a class="headerlink" href="#message" title="Permalink to this headline">¶</a></h1>
 <p>Turbo 会自动在URL，queryString和context.Context中查询参数，然后根据struct中的字段名设置到request对象中。</p>
-<p>Turbo 也允许你”手动”组装一个struct对象，举个例子：
-编辑 “yourservice/grpcapi/component/components.go”:</p>
+<p>Turbo 也允许你”手动”组装一个struct对象，举个例子：</p>
+<p>编辑 “yourservice/grpcapi/component/components.go”:</p>
 <div class="highlight-diff"><div class="highlight"><pre><span></span>func RegisterComponents(s *turbo.GrpcServer) {
 <span class="gi">+       s.RegisterComponent(&quot;CommonValues&quot;, convertCommonValues)</span>
 }
 
-<span class="gi">+func convertCommonValues(req *http.Request) reflect.Value {</span>
+<span class="gi">+var convertCommonValues turbo.Convertor = func(req *http.Request) reflect.Value {</span>
 <span class="gi">+      result := &amp;proto.CommonValues{}</span>
 <span class="gi">+      result.SomeId = 123456789</span>
 <span class="gi">+      return reflect.ValueOf(result)</span>

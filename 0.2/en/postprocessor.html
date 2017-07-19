@@ -178,7 +178,7 @@
 <span class="gi">+       s.RegisterComponent(&quot;postEatApple&quot;, postEatApple)</span>
 }
 
-<span class="gi">+func postEatApple(resp http.ResponseWriter, req *http.Request, serviceResp interface{}) {</span>
+<span class="gi">+var postEatApple turbo.Postprocessor = func (resp http.ResponseWriter, req *http.Request, serviceResp interface{}) {</span>
 <span class="gi">+      sr := serviceResp.(*proto.EatAppleResponse)</span>
 <span class="gi">+      resp.Write([]byte(&quot;this is from postprocesser, message=&quot; + sr.Message))</span>
 <span class="gi">+}</span>
