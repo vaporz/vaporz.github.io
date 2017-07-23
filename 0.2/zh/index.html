@@ -37,7 +37,7 @@
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Turbo Doc 0.1 documentation" href="#"/>
         <link rel="next" title="快速创建一个新的服务" href="create.html"/>
-        <link rel="prev" title="内容列表" href="contents.html"/> 
+        <link rel="prev" title="目录" href="contents.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -84,13 +84,14 @@
             
             
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="contents.html">目录</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">首页</a></li>
-<li class="toctree-l1"><a class="reference internal" href="contents.html">内容列表</a></li>
 <li class="toctree-l1"><a class="reference internal" href="create.html">快速创建一个服务</a></li>
 <li class="toctree-l1"><a class="reference internal" href="command.html">命令行工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rules.html">规则和约定</a></li>
 <li class="toctree-l1"><a class="reference internal" href="add.html">如何添加新API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shared.html">如何使用公共IDL文件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json.html">支持RESTFUL JSON API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="components.html">Turbo提供的组件</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="interceptor.html">Interceptor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="preprocessor.html">Preprocessor</a></li>
@@ -171,10 +172,11 @@
 <div class="section" id="id1">
 <h2>主要功能<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Turbo能生成一个反向代理服务器，把HTTP请求转换为 grpc 或者 Thrift 格式的请求.</li>
-<li>支持 gRPC 和 <a class="reference internal" href="thrift.html#thrift"><span class="std std-ref">Thrift</span></a>.</li>
-<li><a class="reference internal" href="interceptor.html#interceptor"><span class="std std-ref">拦截器（Interceptor）</span></a>.</li>
-<li><a class="reference internal" href="preprocessor.html#preprocessor"><span class="std std-ref">预处理器（PreProcessor）</span></a> 和 <a class="reference internal" href="postprocessor.html#postprocessor"><span class="std std-ref">后处理器（PostProcessor）</span></a>: 可定制的URL-RPC映射过程.</li>
+<li>Turbo能生成一个反向代理服务器，把HTTP请求转换为 grpc 或者 Thrift 格式的请求。</li>
+<li>支持 gRPC 和 <a class="reference internal" href="thrift.html#thrift"><span class="std std-ref">Thrift</span></a>。</li>
+<li>支持 :ref:<a href="#id2"><span class="problematic" id="id3">`</span></a>RESTFUL JSON API &lt;json&gt;`（”application/json”）。</li>
+<li><a class="reference internal" href="interceptor.html#interceptor"><span class="std std-ref">拦截器（Interceptor）</span></a>。</li>
+<li><a class="reference internal" href="preprocessor.html#preprocessor"><span class="std std-ref">预处理器（PreProcessor）</span></a> 和 <a class="reference internal" href="postprocessor.html#postprocessor"><span class="std std-ref">后处理器（PostProcessor）</span></a>: 可定制的URL-RPC映射过程。</li>
 <li><a class="reference internal" href="hijacker.html#hijacker"><span class="std std-ref">劫持器（Hijacker）</span></a>: 接管整个request处理过程，你想干什么都行！</li>
 <li><a class="reference internal" href="convertor.html#convertor"><span class="std std-ref">Message字段转换器（MessageFieldConvertor）</span></a>: 告诉 Turbo 怎么给struct里的参数赋值。</li>
 <li>不需要重启服务，在运行时修改和重新载入 <a class="reference internal" href="config.html#config"><span class="std std-ref">配置文件</span></a> ！</li>
@@ -195,7 +197,7 @@
         <a href="create.html" class="btn btn-neutral float-right" title="快速创建一个新的服务" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="contents.html" class="btn btn-neutral" title="内容列表" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="contents.html" class="btn btn-neutral" title="目录" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
