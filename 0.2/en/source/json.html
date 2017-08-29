@@ -150,7 +150,7 @@
 <span id="json"></span><h1>RESTFULL JSON API<a class="headerlink" href="#restfull-json-api" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="grpc">
 <h2>GRPC<a class="headerlink" href="#grpc" title="Permalink to this headline">¶</a></h2>
-<p>For example, define a API like this:</p>
+<p>For example, define an API like this:</p>
 <div class="highlight-proto"><div class="highlight"><pre><span></span><span class="kd">message</span> <span class="nc">SayHelloRequest</span> <span class="p">{</span>
     <span class="kt">string</span> <span class="na">stringValue</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
     <span class="kt">int64</span> <span class="na">int64Value</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
@@ -173,7 +173,7 @@
 </pre></div>
 </div>
 <p>Refer to <a class="reference internal" href="../../zh/source/add.html#add"><span class="std std-ref">How to add a new API</span></a>, implement this API.</p>
-<p>Then, start server, send a POST request(Content-Type=application／json) with a body like this:</p>
+<p>Then, start server, send a POST request(Content-Type=application/json) with a body like this:</p>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
        <span class="nt">&quot;stringValue&quot;</span><span class="p">:</span><span class="s2">&quot;a string value&quot;</span><span class="p">,</span>
        <span class="nt">&quot;int64Value&quot;</span><span class="p">:</span><span class="mi">1234</span>
@@ -210,7 +210,7 @@
 </pre></div>
 </div>
 <p>Refer to <a class="reference internal" href="../../zh/source/add.html#add"><span class="std std-ref">How to add a new API</span></a>, implement this API.</p>
-<p>Then, start server, send a POST request(Content-Type=application／json) with a body like this:</p>
+<p>Then, start server, send a POST request(Content-Type=application/json) with a body like this:</p>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
        <span class="nt">&quot;StringValue&quot;</span><span class="p">:</span><span class="s2">&quot;a string value&quot;</span><span class="p">,</span>
        <span class="nt">&quot;int32Value&quot;</span><span class="p">:</span><span class="mi">1234</span><span class="p">,</span>
