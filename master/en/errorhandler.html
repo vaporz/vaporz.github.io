@@ -174,7 +174,7 @@
 <span id="id1"></span><h1>ErrorHandler<a class="headerlink" href="#errorhandler" title="Permalink to this headline">¶</a></h1>
 <p>By default, a HTTP code 500 error is returned if any error occurred.</p>
 <p>You can customize this behavior via ErrorHandler:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>func RegisterComponents(s *turbo.GrpcServer) {
+<div class="highlight-diff"><div class="highlight"><pre><span></span>func (i *ServiceInitializer) InitService(s turbo.Servable) error {
 <span class="gi">+       s.RegisterComponent(&quot;errorHandler&quot;, errorHandler)</span>
 }
 

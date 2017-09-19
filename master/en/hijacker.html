@@ -176,7 +176,7 @@
 <p>If a hijacker is assigned to an URL, it will take over the process between the last Before() and the first After() function.</p>
 <p>You can do everything, which means you also have to call gRPC method yourself.</p>
 <p>In this example, URL “/eat_apple/{num:[0-9]+}” is hijacked, no matter what the value is in query string, the value of parameter “num” is set to “999”.</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>func RegisterComponents(s *turbo.GrpcServer) {
+<div class="highlight-diff"><div class="highlight"><pre><span></span>func (i *ServiceInitializer) InitService(s turbo.Servable) error {
 <span class="gi">+       s.RegisterComponent(&quot;hijackEatApple&quot;, hijackEatApple)</span>
 }
 

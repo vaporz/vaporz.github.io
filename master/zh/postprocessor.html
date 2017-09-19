@@ -176,7 +176,7 @@
 <p>Postprocessor用来处理后端返回的对象（当然你也可以顺便干点别的事），你可以自由定制处理的方式。</p>
 <p>下面例子中，将会修改 API “/eat_apple/{num:[0-9]+}” 的返回结果：</p>
 <p>编辑 “yourservice/grpcapi/component/components.go”:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>func RegisterComponents(s *turbo.GrpcServer) {
+<div class="highlight-diff"><div class="highlight"><pre><span></span>func (i *ServiceInitializer) InitService(s turbo.Servable) error {
 <span class="gi">+       s.RegisterComponent(&quot;postEatApple&quot;, postEatApple)</span>
 }
 

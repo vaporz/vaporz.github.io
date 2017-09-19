@@ -219,15 +219,15 @@
 import (
        &quot;github.com/vaporz/turbo-example/yourservice/gen/proto&quot;
        &quot;google.golang.org/grpc&quot;
-<span class="gi">+      i &quot;github.com/vaporz/turbo-example/yourservice/interceptor&quot;</span>
+<span class="gi">+      &quot;github.com/vaporz/turbo-example/yourservice/interceptor&quot;</span>
 )
 
 func GrpcClient(conn *grpc.ClientConn) interface{} {
        return proto.NewTestServiceClient(conn)
 }
 
-func RegisterComponents(s *turbo.GrpcServer) {
-<span class="gi">+       s.RegisterComponent(&quot;LogInterceptor&quot;, i.LogInterceptor{})</span>
+func (i *ServiceInitializer) InitService(s turbo.Servable) error {
+<span class="gi">+       s.RegisterComponent(&quot;LogInterceptor&quot;, interceptor.LogInterceptor{})</span>
 }
 </pre></div>
 </div>
