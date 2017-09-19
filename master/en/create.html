@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Create a service on the fly &mdash; Turbo Doc 0.1 documentation</title>
+  <title>Create a service on the fly &mdash; Turbo Doc 0.2 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Turbo Doc 0.1 documentation" href="index.html"/>
+    <link rel="top" title="Turbo Doc 0.2 documentation" href="index.html"/>
         <link rel="next" title="Command line tools" href="command.html"/>
         <link rel="prev" title="Turbo" href="index.html"/> 
 
@@ -88,11 +88,10 @@
 <li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Create a service on the fly</a></li>
 <li class="toctree-l1"><a class="reference internal" href="command.html">Command line tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rules.html">Rules and Conventions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="add.html">How to add a new API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="shared.html">Use a shared struct</a></li>
-<li class="toctree-l1"><a class="reference internal" href="json.html">Support RESTFUL JSON API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rules.html">Rules and Conventions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="components.html">Components</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="map.html">HTTP API Mapping</a></li>
 <li class="toctree-l2"><a class="reference internal" href="interceptor.html">Interceptor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="preprocessor.html">Preprocessor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="postprocessor.html">Postprocessor</a></li>
@@ -101,6 +100,8 @@
 <li class="toctree-l2"><a class="reference internal" href="errorhandler.html">ErrorHandler</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="shared.html">Use a shared struct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json.html">Support RESTFUL JSON API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="thrift.html">Thrift support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="config.html">Configs in service.yaml</a></li>
 </ul>
@@ -170,18 +171,12 @@
 <span id="create"></span><h1>Create a service on the fly<a class="headerlink" href="#create-a-service-on-the-fly" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="before-the-start">
 <h2>0, Before the start<a class="headerlink" href="#before-the-start" title="Permalink to this headline">¶</a></h2>
-<p>Obviously, you have to install <a class="reference external" href="https://golang.org">Golang</a> and <a class="reference external" href="https://developers.google.com/protocol-buffers/">Protocol buffers(v3)</a> first.</p>
+<p>Obviously, you have to install <a class="reference external" href="https://golang.org">Golang</a> and <a class="reference external" href="https://developers.google.com/protocol-buffers/">Protocol buffers</a> first.</p>
 <p>Then download turbo repo with:</p>
 <div class="highlight-shell"><div class="highlight"><pre><span></span>go get github.com/vaporz/turbo
 </pre></div>
 </div>
-<p>For dependency management, we provide 2 ways:</p>
-<p>(Recommended) Use <a class="reference external" href="https://github.com/Masterminds/glide">glide</a></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">vaporz</span><span class="o">/</span><span class="n">turbo</span>
-<span class="n">glide</span> <span class="n">install</span> <span class="o">//</span> <span class="k">if</span> <span class="n">you</span><span class="s1">&#39;ve met any problem, try &quot;rm -rf ~/.glide &amp;&amp; glide install&quot;, still not work? ask Google.</span>
-</pre></div>
-</div>
-<p>(Not Recommended) Or install required packages manually:</p>
+<p>Packages turbo used:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">go</span> <span class="n">get</span> <span class="n">google</span><span class="o">.</span><span class="n">golang</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">grpc</span>
 <span class="n">go</span> <span class="n">get</span> <span class="n">git</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">thrift</span><span class="o">.</span><span class="n">git</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">go</span><span class="o">/</span><span class="n">thrift</span>
 <span class="n">go</span> <span class="n">get</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">golang</span><span class="o">/</span><span class="n">protobuf</span>
@@ -190,6 +185,11 @@
 <span class="n">go</span> <span class="n">get</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">spf13</span><span class="o">/</span><span class="n">cobra</span>
 <span class="n">go</span> <span class="n">get</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">spf13</span><span class="o">/</span><span class="n">viper</span>
 <span class="n">go</span> <span class="n">get</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bitly</span><span class="o">/</span><span class="n">go</span><span class="o">-</span><span class="n">simplejson</span>
+</pre></div>
+</div>
+<p>For <strong>CONTRIBUTORs</strong>, it’s recommended to use <a class="reference external" href="https://github.com/Masterminds/glide">glide</a> for dependency management:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">vaporz</span><span class="o">/</span><span class="n">turbo</span>
+<span class="n">glide</span> <span class="n">install</span> <span class="o">//</span> <span class="k">if</span> <span class="n">you</span><span class="s1">&#39;ve met any problem, try &quot;rm -rf ~/.glide &amp;&amp; glide install&quot;, still not work? ask Google.</span>
 </pre></div>
 </div>
 </div>
@@ -276,7 +276,7 @@ $ go run grpcapi/yourserviceapi.go
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.1',
+            VERSION:'0.2',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

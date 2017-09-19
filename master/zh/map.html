@@ -1,0 +1,278 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>HTTP接口与后端接口映射 &mdash; Turbo Doc 0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Turbo Doc 0.2 documentation" href="index.html"/>
+        <link rel="up" title="Turbo组件" href="components.html"/>
+        <link rel="next" title="Interceptor" href="interceptor.html"/>
+        <link rel="prev" title="Turbo组件" href="components.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="contents.html" class="icon icon-home"> Turbo Doc
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="contents.html">目录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">首页</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create.html">快速创建一个服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command.html">命令行工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add.html">如何添加新API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rules.html">规则和约定</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="components.html">Turbo提供的组件</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">HTTP接口与后端接口映射</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interceptor.html">Interceptor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessor.html">Preprocessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postprocessor.html">Postprocessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hijacker.html">Hijacker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="convertor.html">Message类型转换器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errorhandler.html">ErrorHandler</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="shared.html">如何使用公共IDL文件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json.html">支持RESTFUL JSON API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thrift.html">支持Thrift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">配置文件说明</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">Turbo Doc</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+          <li><a href="components.html">Turbo组件</a> &raquo;</li>
+        
+      <li>HTTP接口与后端接口映射</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/map.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="http">
+<span id="map"></span><h1>HTTP接口与后端接口映射<a class="headerlink" href="#http" title="Permalink to this headline">¶</a></h1>
+<p>前后端接口的映射关系通过配置文件中的”urlmapping”节点保存。</p>
+<p>在 <a class="reference external" href="add">前面的例子</a> 中，有如下的配置:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">urlmapping</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /hello SayHello</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /eat_apple/{num:[0-9]+} EatApple</span>
+</pre></div>
+</div>
+<p>在这段配置中，发送给HTTP接口”GET /hello”的请求将转发到后端接口”SayHello”，
+而发送给HTTP接口”GET /eat_apple/{num:[0-9]+}”的请求将转发给后端接口”EatApple”，而且在URL中定义了一个叫做”num”的参数，
+参数的格式为”[0-9]+”，很明显，这个正则表达式的意思是数字。</p>
+<p>在Turbo内部，URL路由和正则功能是由好用又强大的”github.com/gorilla/mux”提供的，因此，关于URL路由功能，请参考 <a class="reference external" href="https://github.com/gorilla/mux">该项目的文档</a> 。</p>
+<p>HTTP接口与后端接口的映射关系可以是多对一的，也就是可以多个HTTP接口映射到同一个后端接口上，比如:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">urlmapping</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /hello SayHello</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">POST /hello SayHello</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /new/hello SayHello</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /eat_apple/{num:[0-9]+} EatApple</span>
+</pre></div>
+</div>
+<p>这样，两个新接口”POST /hello”和”GET /new/hello”都将被映射到”SayHello”上。</p>
+<p>如果多个HTTP接口只是谓词不同，而URL是相同的，那也可以写在同一行，比如:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">urlmapping</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET,POST,UPDATE /hello SayHello</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /new/hello SayHello</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /eat_apple/{num:[0-9]+} EatApple</span>
+</pre></div>
+</div>
+<p>“GET,POST,UPDATE /hello”表示了三个HTTP接口，他们的URL相同，但谓词不同，并且都被映射到后端接口”SayHello”。</p>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="interceptor.html" class="btn btn-neutral float-right" title="Interceptor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="components.html" class="btn btn-neutral" title="Turbo组件" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Xiao Zhang.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.2',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

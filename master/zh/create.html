@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>快速创建一个新的服务 &mdash; Turbo Doc 0.1 documentation</title>
+  <title>快速创建一个新的服务 &mdash; Turbo Doc 0.2 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Turbo Doc 0.1 documentation" href="index.html"/>
+    <link rel="top" title="Turbo Doc 0.2 documentation" href="index.html"/>
         <link rel="next" title="命令行工具" href="command.html"/>
         <link rel="prev" title="Turbo" href="index.html"/> 
 
@@ -88,11 +88,10 @@
 <li class="toctree-l1"><a class="reference internal" href="index.html">首页</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">快速创建一个服务</a></li>
 <li class="toctree-l1"><a class="reference internal" href="command.html">命令行工具</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rules.html">规则和约定</a></li>
 <li class="toctree-l1"><a class="reference internal" href="add.html">如何添加新API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="shared.html">如何使用公共IDL文件</a></li>
-<li class="toctree-l1"><a class="reference internal" href="json.html">支持RESTFUL JSON API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rules.html">规则和约定</a></li>
 <li class="toctree-l1"><a class="reference internal" href="components.html">Turbo提供的组件</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="map.html">HTTP接口与后端接口映射</a></li>
 <li class="toctree-l2"><a class="reference internal" href="interceptor.html">Interceptor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="preprocessor.html">Preprocessor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="postprocessor.html">Postprocessor</a></li>
@@ -101,6 +100,8 @@
 <li class="toctree-l2"><a class="reference internal" href="errorhandler.html">ErrorHandler</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="shared.html">如何使用公共IDL文件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json.html">支持RESTFUL JSON API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="thrift.html">支持Thrift</a></li>
 <li class="toctree-l1"><a class="reference internal" href="config.html">配置文件说明</a></li>
 </ul>
@@ -170,18 +171,12 @@
 <span id="id1"></span><h1>快速创建一个新的服务<a class="headerlink" href="#create" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id2">
 <h2>0, 开始之前<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<p>显然，你得先安装 <a class="reference external" href="https://golang.org">Golang</a> 和 <a class="reference external" href="https://developers.google.com/protocol-buffers/">Protocol buffers(v3)</a> 。</p>
+<p>显然，你得先安装 <a class="reference external" href="https://golang.org">Golang</a> 和 <a class="reference external" href="https://developers.google.com/protocol-buffers/">Protocol buffers</a> 。</p>
 <p>然后下载Turbo代码：</p>
 <div class="highlight-shell"><div class="highlight"><pre><span></span>go get github.com/vaporz/turbo
 </pre></div>
 </div>
-<p>至于依赖管理，有两种方式：</p>
-<p>(推荐) 通过 <a class="reference external" href="https://github.com/Masterminds/glide">glide</a> 安装:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>cd github.com/vaporz/turbo
-glide install // 如果出错，可以尝试运行&quot;rm -rf ~/.glide &amp;&amp; glide install&quot;，还不行？那就网上搜一下吧。。。
-</pre></div>
-</div>
-<p>(不推荐) 手动安装这些包:</p>
+<p>Turbo依赖的package:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">go</span> <span class="n">get</span> <span class="n">google</span><span class="o">.</span><span class="n">golang</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">grpc</span>
 <span class="n">go</span> <span class="n">get</span> <span class="n">git</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">thrift</span><span class="o">.</span><span class="n">git</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">go</span><span class="o">/</span><span class="n">thrift</span>
 <span class="n">go</span> <span class="n">get</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">golang</span><span class="o">/</span><span class="n">protobuf</span>
@@ -190,6 +185,11 @@ glide install // 如果出错，可以尝试运行&quot;rm -rf ~/.glide &amp;&am
 <span class="n">go</span> <span class="n">get</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">spf13</span><span class="o">/</span><span class="n">cobra</span>
 <span class="n">go</span> <span class="n">get</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">spf13</span><span class="o">/</span><span class="n">viper</span>
 <span class="n">go</span> <span class="n">get</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bitly</span><span class="o">/</span><span class="n">go</span><span class="o">-</span><span class="n">simplejson</span>
+</pre></div>
+</div>
+<p>对于 <strong>开发者</strong>，推荐通过 <a class="reference external" href="https://github.com/Masterminds/glide">glide</a> 管理依赖:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>cd github.com/vaporz/turbo
+glide install // 如果出错，可以尝试运行&quot;rm -rf ~/.glide &amp;&amp; glide install&quot;，还不行？那就网上搜一下吧。。。
 </pre></div>
 </div>
 </div>
@@ -276,7 +276,7 @@ $ go run grpcapi/yourserviceapi.go
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.1',
+            VERSION:'0.2',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
