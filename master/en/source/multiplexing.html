@@ -169,7 +169,10 @@
 <ol class="arabic simple" start="2">
 <li>Modify service.yaml, add new APIs</li>
 </ol>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>urlmapping:
+<div class="highlight-diff"><div class="highlight"><pre><span></span>config:
+<span class="gd">-  grpc_service_name: TestService</span>
+<span class="gi">+  grpc_service_name: TestService,CatService</span>
+urlmapping:
 <span class="gi">+ - GET /cat/meow CatService Meow</span>
 </pre></div>
 </div>
@@ -225,7 +228,10 @@
 <ol class="arabic simple" start="2">
 <li>Modify service.yaml, add new APIs</li>
 </ol>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>urlmapping:
+<div class="highlight-diff"><div class="highlight"><pre><span></span>config:
+<span class="gd">-  thrift_service_name: TestService</span>
+<span class="gi">+  thrift_service_name: TestService,CatService</span>
+urlmapping:
 <span class="gi">+ - GET /cat/meow CatService Meow</span>
 </pre></div>
 </div>
