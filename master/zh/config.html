@@ -36,6 +36,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Turbo Doc 0.2 documentation" href="index.html"/>
+        <link rel="next" title="启动多个service" href="multiplexing.html"/>
         <link rel="prev" title="支持Thrift" href="thrift.html"/> 
 
   
@@ -103,6 +104,7 @@
 <li class="toctree-l1"><a class="reference internal" href="json.html">支持RESTFUL JSON API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="thrift.html">支持Thrift</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">配置文件说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multiplexing.html">启动多个service</a></li>
 </ul>
 
             
@@ -228,11 +230,11 @@
 
 <span class="c1"># 这个映射是Turbo最核心的配置！</span>
 <span class="c1"># 这项配置告诉Turbo怎么把一个HTTP请求代理到后端的service方法上。</span>
-<span class="c1"># 配置的格式是 &quot;HTTP_METHOD URL SERVICE_METHOD_NAME&quot;.</span>
+<span class="c1"># 配置的格式是 &quot;HTTP_METHOD URL SERVICE_NAME SERVICE_METHOD_NAME&quot;.</span>
 <span class="c1"># Turbo是借助于好用的 [gorilla mux](github.com/gorilla/mux) 来实现这个功能的，它还支持获取URL里的参数。</span>
 <span class="l l-Scalar l-Scalar-Plain">urlmapping</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET,POST /hello SayHello</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /eat_apple/{num:[0-9]+} EatApple</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET,POST /hello YourService SayHello</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /eat_apple/{num:[0-9]+} YourService EatApple</span>
 
 <span class="c1"># 通过方法 turbo.Server.RegisterComponent(&quot;name&quot;, component) 来注册一个组件。</span>
 <span class="c1"># 习惯上，&quot;name&quot; 是被注册的组件struct的名字 (比如 &quot;LogInterceptor&quot;)。</span>
@@ -267,6 +269,8 @@
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="multiplexing.html" class="btn btn-neutral float-right" title="启动多个service" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="thrift.html" class="btn btn-neutral" title="支持Thrift" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

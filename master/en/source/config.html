@@ -211,8 +211,8 @@
 <span class="c1"># The format is &quot;HTTP_METHOD URL SERVICE_METHOD_NAME&quot;.</span>
 <span class="c1"># Trubo use that awsome [gorilla mux](github.com/gorilla/mux) as router, it also support variables in URL.</span>
 <span class="l l-Scalar l-Scalar-Plain">urlmapping</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET,POST /hello SayHello</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /eat_apple/{num:[0-9]+} EatApple</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET,POST /hello YourService SayHello</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /eat_apple/{num:[0-9]+} YourService EatApple</span>
 
 <span class="c1"># Register Turbo components via turbo.Server.RegisterComponent(&quot;name&quot;, component)</span>
 <span class="c1"># As a convention, &quot;name&quot; is the same with the component struct|func&#39;s name (e.g. &quot;LogInterceptor&quot;).</span>

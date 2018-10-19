@@ -170,8 +170,8 @@
 <h2>2, Add new url-grpc mapping<a class="headerlink" href="#add-new-url-grpc-mapping" title="Permalink to this headline">¶</a></h2>
 <p>Modify “service.yaml”:</p>
 <div class="highlight-diff"><div class="highlight"><pre><span></span>urlmapping:
-   - GET /hello SayHello
-<span class="gi">+  - GET /eat_apple/{num:[0-9]+} EatApple</span>
+   - GET /hello YourService SayHello
+<span class="gi">+  - GET /eat_apple/{num:[0-9]+} YourService EatApple</span>
 </pre></div>
 </div>
 </div>

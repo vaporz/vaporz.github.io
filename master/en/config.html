@@ -36,6 +36,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Turbo Doc 0.2 documentation" href="index.html"/>
+        <link rel="next" title="Service Multiplexing" href="multiplexing.html"/>
         <link rel="prev" title="Thrift support" href="thrift.html"/> 
 
   
@@ -103,6 +104,7 @@
 <li class="toctree-l1"><a class="reference internal" href="json.html">Support RESTFUL JSON API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="thrift.html">Thrift support</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Configs in service.yaml</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multiplexing.html">Service Multiplexing</a></li>
 </ul>
 
             
@@ -231,8 +233,8 @@
 <span class="c1"># The format is &quot;HTTP_METHOD URL SERVICE_METHOD_NAME&quot;.</span>
 <span class="c1"># Trubo use that awsome [gorilla mux](github.com/gorilla/mux) as router, it also support variables in URL.</span>
 <span class="l l-Scalar l-Scalar-Plain">urlmapping</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET,POST /hello SayHello</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /eat_apple/{num:[0-9]+} EatApple</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET,POST /hello YourService SayHello</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /eat_apple/{num:[0-9]+} YourService EatApple</span>
 
 <span class="c1"># Register Turbo components via turbo.Server.RegisterComponent(&quot;name&quot;, component)</span>
 <span class="c1"># As a convention, &quot;name&quot; is the same with the component struct|func&#39;s name (e.g. &quot;LogInterceptor&quot;).</span>
@@ -267,6 +269,8 @@
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="multiplexing.html" class="btn btn-neutral float-right" title="Service Multiplexing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="thrift.html" class="btn btn-neutral" title="Thrift support" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

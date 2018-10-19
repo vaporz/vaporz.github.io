@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>How to add a new API &mdash; Turbo Doc 0.2 documentation</title>
+  <title>Service Multiplexing &mdash; Turbo Doc 0.2 documentation</title>
   
 
   
@@ -36,8 +36,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Turbo Doc 0.2 documentation" href="index.html"/>
-        <link rel="next" title="Rules and Conventions" href="rules.html"/>
-        <link rel="prev" title="Command line tools" href="command.html"/> 
+        <link rel="prev" title="Configs in service.yaml" href="config.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -88,7 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
 <li class="toctree-l1"><a class="reference internal" href="create.html">Create a service on the fly</a></li>
 <li class="toctree-l1"><a class="reference internal" href="command.html">Command line tools</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">How to add a new API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add.html">How to add a new API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rules.html">Rules and Conventions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="components.html">Components</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="map.html">HTTP API Mapping</a></li>
@@ -104,7 +103,7 @@
 <li class="toctree-l1"><a class="reference internal" href="json.html">Support RESTFUL JSON API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="thrift.html">Thrift support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="config.html">Configs in service.yaml</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multiplexing.html">Service Multiplexing</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Service Multiplexing</a></li>
 </ul>
 
             
@@ -149,13 +148,13 @@
     
       <li><a href="contents.html">Docs</a> &raquo;</li>
         
-      <li>How to add a new API</li>
+      <li>Service Multiplexing</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/add.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/multiplexing.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -168,59 +167,126 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="how-to-add-a-new-api">
-<span id="add"></span><h1>How to add a new API<a class="headerlink" href="#how-to-add-a-new-api" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="define-new-grpc-api">
-<h2>1, Define new gRPC API<a class="headerlink" href="#define-new-grpc-api" title="Permalink to this headline">¶</a></h2>
-<p>Modify “yourservice.proto”, add new method “eatApple”:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gi">+message EatAppleRequest {</span>
-<span class="gi">+    string num = 1;</span>
-<span class="gi">+}</span>
-<span class="gi">+</span>
-<span class="gi">+message EatAppleResponse {</span>
-<span class="gi">+    string message = 1;</span>
+  <div class="section" id="service-multiplexing">
+<span id="multiplexing"></span><h1>Service Multiplexing<a class="headerlink" href="#service-multiplexing" title="Permalink to this headline">¶</a></h1>
+<p>Sometimes we need to start a server running multiple services in the same process, sharing the same port.</p>
+<div class="section" id="grpc">
+<h2>gRPC<a class="headerlink" href="#grpc" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Define new service in .proto file</li>
+</ol>
+<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gi">+message MeowRequest {</span>
 <span class="gi">+}</span>
 
- service YourService {
-     rpc sayHello (SayHelloRequest) returns (SayHelloResponse) {}
-<span class="gi">+    rpc eatApple (EatAppleRequest) returns (EatAppleResponse) {}</span>
- }
-</pre></div>
-</div>
-</div>
-<div class="section" id="add-new-url-grpc-mapping">
-<h2>2, Add new url-grpc mapping<a class="headerlink" href="#add-new-url-grpc-mapping" title="Permalink to this headline">¶</a></h2>
-<p>Modify “service.yaml”:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>urlmapping:
-   - GET /hello YourService SayHello
-<span class="gi">+  - GET /eat_apple/{num:[0-9]+} YourService EatApple</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="generate-new-codes">
-<h2>3, Generate new codes<a class="headerlink" href="#generate-new-codes" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ turbo generate package/path/to/yourservice -r grpc -I $GOPATH/src/package/path/to/yourservice
-</pre></div>
-</div>
-</div>
-<div class="section" id="implement-new-grpc-method">
-<h2>4, Implement new gRPC method<a class="headerlink" href="#implement-new-grpc-method" title="Permalink to this headline">¶</a></h2>
-<p>Edit “grpcservice/impl/yourserviceimpl.go”:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gi">+func (s *YourService) EatApple(ctx context.Context, req *proto.EatAppleRequest) (*proto.EatAppleResponse, error) {</span>
-<span class="gi">+      return &amp;proto.EatAppleResponse{Message: &quot;Good taste! Apple num=&quot; + strconv.FormatInt(int64(req.Num), 10)}, nil</span>
+<span class="gi">+message MeowResponse {</span>
+<span class="gi">+  string message = 1;</span>
+<span class="gi">+}</span>
+
+<span class="gi">+service CatService {</span>
+<span class="gi">+  rpc meow (MeowRequest) returns (MeowResponse) {}</span>
 <span class="gi">+}</span>
 </pre></div>
 </div>
-<p>Now, restart both HTTP and gRPC server, then test:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span># start grpc service
-$ go run grpcservice/yourservice.go
-# start http server
-$ go run grpcapi/yourserviceapi.go
-# test
-$ curl &quot;http://localhost:8081/eat_apple/5&quot;
-message:&quot;Good taste! Apple num=5&quot;
+<ol class="arabic simple" start="2">
+<li>Modify service.yaml, add new APIs</li>
+</ol>
+<div class="highlight-diff"><div class="highlight"><pre><span></span>urlmapping:
+<span class="gi">+ - GET /cat/meow CatService Meow</span>
 </pre></div>
 </div>
+<ol class="arabic simple" start="3">
+<li>Generate new code</li>
+</ol>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>$ turbo generate package/path/to/yourservice -r grpc -I <span class="nv">$GOPATH</span>/src/package/path/to/yourservice
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>On gRPC server side, implement the new service</li>
+</ol>
+<div class="highlight-diff"><div class="highlight"><pre><span></span>func RegisterServer(s *grpc.Server) {
+       proto.RegisterTestServiceServer(s, &amp;TestService{})
+<span class="gi">+      proto.RegisterCatServiceServer(s, &amp;CatService{})</span>
+}
+
+<span class="gi">+type CatService struct {</span>
+<span class="gi">+}</span>
+
+<span class="gi">+func (c *CatService) Meow(ctx context.Context, req *proto.MeowRequest) (*proto.MeowResponse, error) {</span>
+<span class="gi">+      return &amp;proto.MeowResponse{Message: &quot;Meow!&quot;}, nil</span>
+<span class="gi">+}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li>On HTTP server side, register the new service</li>
+</ol>
+<div class="highlight-diff"><div class="highlight"><pre><span></span>func GrpcClient(conn *grpc.ClientConn) map[string]interface{} {
+       return map[string]interface{}{
+               &quot;TestService&quot;: proto.NewTestServiceClient(conn),
+<span class="gi">+              &quot;CatService&quot;: proto.NewCatServiceClient(conn),</span>
+       }
+}
+</pre></div>
+</div>
+<p>DONE!</p>
+</div>
+<div class="section" id="thrift">
+<h2>Thrift<a class="headerlink" href="#thrift" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Define new service in .thrift file</li>
+</ol>
+<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gi">+struct MeowResponse {</span>
+<span class="gi">+ 1: string message,</span>
+<span class="gi">+}</span>
+
+<span class="gi">+service CatService {</span>
+<span class="gi">+  MeowResponse Meow (1:string msg)</span>
+<span class="gi">+}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Modify service.yaml, add new APIs</li>
+</ol>
+<div class="highlight-diff"><div class="highlight"><pre><span></span>urlmapping:
+<span class="gi">+ - GET /cat/meow CatService Meow</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Generate new code</li>
+</ol>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>$ turbo generate package/path/to/yourservice -r thrift -I <span class="nv">$GOPATH</span>/src/package/path/to/yourservice
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>On server side, implement the new service</li>
+</ol>
+<div class="highlight-diff"><div class="highlight"><pre><span></span>func TProcessor() map[string]thrift.TProcessor {
+       return map[string]thrift.TProcessor{
+               &quot;TestService&quot;: gen.NewTestServiceProcessor(TestService{}),
+<span class="gi">+              &quot;CatService&quot;: gen.NewCatServiceProcessor(CatService{}),</span>
+       }
+}
+
+<span class="gi">+type CatService struct {</span>
+<span class="gi">+}</span>
+
+<span class="gi">+func (c CatService) Meow(msg string) (r *gen.MeowResponse, err error) {</span>
+<span class="gi">+      return &amp;gen.MeowResponse{Message: msg}, nil</span>
+<span class="gi">+}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li>On HTTP server side, register the new service</li>
+</ol>
+<div class="highlight-diff"><div class="highlight"><pre><span></span>func ThriftClient(trans thrift.TTransport, f thrift.TProtocolFactory) map[string]interface{} {
+       iprot := f.GetProtocol(trans)
+       return map[string]interface{}{
+               &quot;TestService&quot;: t.NewTestServiceClientProtocol(trans, iprot, thrift.NewTMultiplexedProtocol(iprot, &quot;TestService&quot;)),
+<span class="gi">+              &quot;CatService&quot;: t.NewCatServiceClientProtocol(trans, iprot, thrift.NewTMultiplexedProtocol(iprot, &quot;CatService&quot;)),</span>
+       }
+}
+</pre></div>
+</div>
+<p>完成！</p>
 </div>
 </div>
 
@@ -234,10 +300,8 @@ message:&quot;Good taste! Apple num=5&quot;
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="rules.html" class="btn btn-neutral float-right" title="Rules and Conventions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-      
-        <a href="command.html" class="btn btn-neutral" title="Command line tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="config.html" class="btn btn-neutral" title="Configs in service.yaml" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
