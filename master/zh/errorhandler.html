@@ -176,7 +176,8 @@
 <p>默认配置下，有error发生时，会返回 HTTP 500 错误.</p>
 <p>你可以通过 ErrorHandler 来定制行为:</p>
 <div class="highlight-diff"><div class="highlight"><pre><span></span>func (i *ServiceInitializer) InitService(s turbo.Servable) error {
-<span class="gi">+       s.RegisterComponent(&quot;errorHandler&quot;, errorHandler)</span>
+<span class="gi">+       s.ServerField().RegisterComponent(&quot;errorHandler&quot;, errorHandler)</span>
+    return nil
 }
 
 <span class="gi">+var errorHandler turbo.ErrorHandlerFunc = func (resp http.ResponseWriter, req *http.Request, err error) {</span>

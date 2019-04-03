@@ -152,7 +152,8 @@
 <p>Preprocessor可以用来执行一些某个API特有的逻辑，比如，参数校验，设置默认值，做类型转换，记录log等等。</p>
 <p>下面的例子中，对参数’num’的值做了一些校验:</p>
 <div class="highlight-diff"><div class="highlight"><pre><span></span>func (i *ServiceInitializer) InitService(s turbo.Servable) error {
-<span class="gi">+       s.RegisterComponent(&quot;preEatApple&quot;, preEatApple)</span>
+<span class="gi">+       s.ServerField().RegisterComponent(&quot;preEatApple&quot;, preEatApple)</span>
+    return nil
 }
 
 <span class="gi">+var preEatApple turbo.Preprocessor = func (resp http.ResponseWriter, req *http.Request) error {</span>
