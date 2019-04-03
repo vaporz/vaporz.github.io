@@ -199,7 +199,7 @@ import (
 )
 
 func (i *ServiceInitializer) InitService(s turbo.Servable) error {
-<span class="gi">+       s.ServerField().RegisterComponent(&quot;LogInterceptor&quot;, interceptor.LogInterceptor{})</span>
+<span class="gi">+       s.RegisterComponent(&quot;LogInterceptor&quot;, interceptor.LogInterceptor{})</span>
     return nil
 }
 </pre></div>

@@ -178,7 +178,7 @@
 <p>下面例子中，将会修改 API “/eat_apple/{num:[0-9]+}” 的返回结果：</p>
 <p>编辑 “yourservice/grpcapi/component/components.go”:</p>
 <div class="highlight-diff"><div class="highlight"><pre><span></span>func (i *ServiceInitializer) InitService(s turbo.Servable) error {
-<span class="gi">+       s.ServerField().RegisterComponent(&quot;postEatApple&quot;, postEatApple)</span>
+<span class="gi">+       s.RegisterComponent(&quot;postEatApple&quot;, postEatApple)</span>
     return nil
 }
 
