@@ -62,74 +62,73 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="kift">Kift</h1>
 
-<p>Thrift(v0.12.0) plugin for KSP(v1.7.3+).</p>
-<p><a href="https://vaporz.github.io/Kift/index_cn.md">--&gt;���Ľ��ܵ������&lt;--</a></p>
+<p>������̫�ռƻ�(v1.7.3+)��Thrift(v0.12.0)���.</p>
 <p><img src="https://github.com/vaporz/Kift/blob/image/drone.png" width="200"></p>
-<p>I tried to use GRPC at first, but it appears that GRPC requires .NET Framework 4.5+, and unfortunately, KSP is built on .NET Framework 3.5, which is quite old.</p>
-<h2 id="architecture">Architecture</h2>
+<p>һ��ʼ������GRPC����GRPCҪ��.NET Framework�İ汾��4.5���ϣ���KSP�ǻ���3.5�汾�ģ����ϵİ汾��</p>
+<h2 id="">����ܹ�</h2>
 <p><img src="https://github.com/vaporz/Kift/blob/image/arch.png" width="700"></p>
-<p>Kift starts a Thrift server inside of KSP process. The server receives requests, then send them to a Message Queue. A KSP addon will dequeue requests from the queue, and run the corresponding Executor. The server will wait until the response to a request is returned.</p>
-<h2 id="supported-languages">Supported languages</h2>
-<p>Theoritically, any programming language supported by Thrift v0.12.0 is supported by Kift.</p>
-<p><a href="https://github.com/apache/thrift/blob/v0.12.0/LANGUAGES.md">Languages supported by Thrift v0.12.0</a>:</p>
-<p>C, C++, Go, Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C#, Cocoa, JavaScript, Node.js, Smalltalk, OCaml and Delphi, etc.</p>
-<h2 id="getting-started">Getting Started</h2>
-<h3 id="1-install-kift">1, Install Kift</h3>
-<p>Download Kift.zip, copy the Kift folder in zip file into &quot;Kerbal Space Programe/GameData&quot; directory.</p>
-<p>Now the server side is ready.</p>
-<h3 id="2-install-thrift-and-generate-stub-codes">2, Install Thrift, and generate stub codes</h3>
-<p>To interact with the Thrift server within KSP process, you have to write your own client code.</p>
-<p><a href="https://thrift.apache.org/">Thrift</a> is a software framework, for scalable cross-language services development. 
-With the help of Thrift, you can write client code in any programming language, as long as it&#39;s supported by Thrift.</p>
-<p>APIs provided by Kift are defined by the IDL file &quot;service.thrift&quot; in folder &quot;Kift&quot;.</p>
-<p><a href="https://thrift.apache.org/download">Download a copy of Thrift v0.12.0</a>, then generate stub codes with following command:</p>
+<p>Kift��KSP���������һ��Thrift Server�̡߳� ���Server�������󣬲����͵�һ����Ϣ���У�MQ����KSP����һ��Addon���MQ��������Ϣ�������ж�Ӧ��Executor��
+��ÿһ��Request��Server�ڽ��յ�Response֮ǰ����һֱ�����ȴ���ֱ���յ�Response�����߳�ʱ��</p>
+<h2 id="ı">֧�ֵı������</h2>
+<p>�����ϣ�ֻҪ��Thrift v0.12.0֧�ֵ����ԣ�Kift��֧�֡�</p>
+<p><a href="https://github.com/apache/thrift/blob/v0.12.0/LANGUAGES.md">Thrift v0.12.0֧�ֵ�������</a>:</p>
+<p>C, C++, Go, Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C#, Cocoa, JavaScript, Node.js, Smalltalk, OCaml �� Delphi�� �ȵ�.</p>
+<h2 id="-1">����ָ��</h2>
+<h3 id="1-װkift">1, ��װKift</h3>
+<p>����Kift.zip����ѹ�����е�Kift�ļ��и��Ƶ�&quot;Kerbal Space Programe/GameData&quot;�ڡ�</p>
+<p>���ڷ���˾�׼�����ˡ�</p>
+<h3 id="2-װthrift루stub-code">2, ��װThrift������׮���루stub code��</h3>
+<p>Ϊ�˸�Thrift Server�˻���������Ҫ�Լ�дClient�˵Ĵ��롣</p>
+<p><a href="https://thrift.apache.org/">Thrift</a>��һ�������ܣ�������������չ�������Եĳ���ͨ��Thrift�İ�������������κ�����дClient�˴��룬ֻҪThrift֧�֡�</p>
+<p>Kift�ṩ��API�������ڡ�Kift���ļ����ڵ�IDL�ļ���service.thrift���С�</p>
+<p><a href="https://thrift.apache.org/download">���� Thrift v0.12.0</a>��Ȼ�����������������׮���룺</p>
 <pre><code class="lang-shell">thrift --gen &lt;language&gt; &lt;Thrift filename&gt;
-</code></pre><p>For example, if you&#39;re using C#, then generate C# stub codes with</p>
+</code></pre><p>���磬�������C#�������Ǿ����У�</p>
 <pre><code class="lang-shell">$thrift -r --gen csharp service.thrift
-</code></pre><p>if you&#39;re using Golang, then run</p>
+</code></pre><p>�������Golang���Ǿ����У�</p>
 <pre><code class="lang-shell">$thrift -r --gen go service.thrift
-</code></pre><h3 id="3-connect-to-thrift-server-and-call-kift-apis">3, Connect to Thrift server, and call Kift APIs</h3>
-<p>Following lines of code show how to get current vessel info in game:</p>
-<pre><code class="lang-csharp"> // The game is started, and MUST be in Flight scene.
- // Import KiftClient.CSharp.dll
+</code></pre><h3 id="3-serverˣkift-api">3, ����Server�ˣ�����Kift API</h3>
+<p>�����ʾ�����룬չʾ����λ�ȡ��ǰ��Ϸ�еķ�������ص����ݣ�</p>
+<pre><code class="lang-csharp"> // ��Ϸ�Ѿ���������ұ�����Flight������
+ // �������� KiftClient.CSharp.dll
  using KiftClient.CSharp;
- Client c = new Client(&quot;localhost&quot;, 9090); // Listened port is configable in &quot;Kift/server.cfg&quot;
- KiftService.Client client = c.Connect(); // Connect to server
- KVessel v = client.currentVessel(); // Call API &quot;currentVessel&quot;
+ Client c = new Client(&quot;localhost&quot;, 9090); // �����˿��ǿ����õģ������ļ���&quot;Kift/server.cfg&quot;
+ KiftService.Client client = c.Connect(); // ����Server
+ KVessel v = client.currentVessel(); // ���� API &quot;currentVessel&quot;
  Console.WriteLine(v.Name);
 </code></pre><h2 id="kift-apis">Kift APIs</h2>
-<p>Kift provides two sets of APIs: &quot;InfoSync APIs&quot; and &quot;Command APIs&quot;. </p>
-<p>&quot;InfoSync APIs&quot; pull infos from the game. &quot;Command APIs&quot; send commands to control vessels/parts/game.</p>
-<p>Command APIs are devided into three categories according to the target.</p>
+<p>Kift�ṩ������API��������ͬ��API���͡�ָ��API����</p>
+<p>������ͬ��API������Ϸ��<strong>����</strong>���ݣ�����ָ��API��������Ϸ<strong>����</strong>ָ��Ա�����ؾߣ������Լ���Ϸ�����</p>
+<p>��ָ��API���ָ���Ŀ�겻�ã��ֳ�����С�ࡣ</p>
 <ul>
-<li><a href="#infosync-apis">InfoSync APIs</a><ul>
-<li><a href="#snapshot">Real time snapshot</a></li>
-<li><a href="#getinfo-apis">GetInfo APIs</a></li>
+<li><a href="#����ͬ��API">����ͬ��API</a><ul>
+<li><a href="#ʵʱ����">ʵʱ����</a></li>
+<li><a href="#���ݶ�ȡ">���ݶ�ȡ</a></li>
 </ul>
 </li>
-<li><a href="#command-apis">Command APIs</a><ul>
-<li><a href="#vessel-control-apis">Vessel Control APIs</a></li>
-<li><a href="#part-control-apis">Part Control APIs</a></li>
-<li><a href="#game-control-apis">Game Control APIs</a></li>
+<li><a href="#ָ��API">ָ��API</a><ul>
+<li><a href="#�ؾ߿���">�ؾ߿���</a></li>
+<li><a href="#��������">��������</a></li>
+<li><a href="#��Ϸ����">��Ϸ����</a></li>
 </ul>
 </li>
 </ul>
-<h3 id="infosync-apis">InfoSync APIs</h3>
-<h4 id="snapshot">Snapshot</h4>
-<p>Read data at real time(approximately), useful when you want to monitor any data, such as height, speed, etc.</p>
+<h3 id="api">����ͬ��API</h3>
+<h4 id="ʵʱ">ʵʱ����</h4>
+<p>ʵʱ��ȡ���ݣ�����ʵʱ������������һЩָ�����ݣ�����߶ȣ��ٶȵȡ�</p>
 <p>// TODO link to Snapshot doc</p>
-<h4 id="getinfo-apis">GetInfo APIs</h4>
-<p>Get data from current game, such as current vessel, the part list of a vessel, etc.</p>
+<h4 id="ݶȡ">���ݶ�ȡ</h4>
+<p>�ӵ�ǰ��Ϸ�ж�ȡ���ݣ����統ǰ�ؾ����ݣ���ȡ�ؾ߲����б�ȡ�</p>
 <p>// TODO link to Getinfo API doc</p>
-<h3 id="command-apis">Command APIs</h3>
-<h4 id="vessel-control-apis">Vessel Control APIs</h4>
-<p>APIs to control a vessel, such as pitch/yaw/roll, enable/disable RCS, deploy/restract landing legs, etc.</p>
+<h3 id="api-1">ָ��API</h3>
+<h4 id="ؾ">�ؾ߿���</h4>
+<p>���ڿ���һ���ؾߵ�API��������Ƹ���/ƫ��/Ͱ��������/�ر�RCS������/������½�����ȵȡ�</p>
 <p>// TODO link to Vessel Control API doc</p>
-<h4 id="part-control-apis">Part Control APIs</h4>
-<p>APIs to control a part, such as deploy/restract a solar panel, open/close a cargo bay, etc.</p>
+<h4 id="-2">��������</h4>
+<p>���ڿ��Ƶ���������API�������/����̫���ܷ��壬��/�رջ��գ��ȵȡ�</p>
 <p>// TODO link to Part Control API doc</p>
-<h4 id="game-control-apis">Game Control APIs</h4>
-<p>APIs to control the game, such as time warp, change camera mode, set/remove maneuver nodes etc.</p>
+<h4 id="ϸ">��Ϸ����</h4>
+<p>���ڿ�����Ϸ�����API������ʱ����٣��ı��ӽ�ģʽ������/ɾ�������㣬�ȵȡ�</p>
 <p>// TODO link to Game Control API doc</p>
 </article>
           </div>
