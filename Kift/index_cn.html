@@ -63,11 +63,11 @@
 <h1 id="kift">Kift</h1>
 
 <p>Thrift(v0.12.0) plugin for KSP(v1.7.3+).</p>
-<p><a href="https://github.com/vaporz/Kift/blob/master/README_cn.md">--&gt;�����ĵ��������&lt;--</a></p>
-<p><img src="images/drone.png" width="200"></p>
+<p><a href="https://vaporz.github.io/Kift/index_cn.md">--&gt;���Ľ��ܵ������&lt;--</a></p>
+<p><img src="https://github.com/vaporz/Kift/blob/image/drone.png" width="200"></p>
 <p>I tried to use GRPC at first, but it appears that GRPC requires .NET Framework 4.5+, and unfortunately, KSP is built on .NET Framework 3.5, which is quite old.</p>
 <h2 id="architecture">Architecture</h2>
-<p><img src="images/arch.png" width="700"></p>
+<p><img src="https://github.com/vaporz/Kift/blob/image/arch.png" width="700"></p>
 <p>Kift starts a Thrift server inside of KSP process. The server receives requests, then send them to a Message Queue. A KSP addon will dequeue requests from the queue, and run the corresponding Executor. The server will wait until the response to a request is returned.</p>
 <h2 id="supported-languages">Supported languages</h2>
 <p>Theoritically, any programming language supported by Thrift v0.12.0 is supported by Kift.</p>
@@ -139,7 +139,7 @@ With the help of Thrift, you can write client code in any programming language, 
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/vaporz/Kift/blob/master/KiftServer/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/vaporz/Kift/blob/master/KiftServer/index_cn.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>
