@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>PLACEHOLDER | KiftServer </title>
+    <title>Kift APIs | KiftServer </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="PLACEHOLDER | KiftServer ">
+    <meta name="title" content="Kift APIs | KiftServer ">
     <meta name="generator" content="docfx 2.44.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
@@ -67,9 +67,55 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="placeholder">PLACEHOLDER</h1>
+<h1 id="kift-apis">Kift APIs</h1>
 
-<p>TODO: Add .NET projects to <em>src</em> folder and run <code>docfx</code> to generate a <strong>REAL</strong> <em>API Documentation</em>!</p>
+<p>Kift provides two sets of APIs: &quot;InfoSync APIs&quot; and &quot;Command APIs&quot;. </p>
+<p>&quot;InfoSync APIs&quot; pull infos from the game. &quot;Command APIs&quot; send commands to control vessels/parts/game.</p>
+<p>Command APIs are devided into three categories according to the target.</p>
+<ul>
+<li><a href="#infosync-apis">InfoSync APIs</a><ul>
+<li><a href="#snapshot">Real time snapshot</a></li>
+<li><a href="#getinfo-apis">GetInfo APIs</a></li>
+</ul>
+</li>
+<li><a href="#command-apis">Command APIs</a><ul>
+<li><a href="#vessel-control-apis">Vessel Control APIs</a></li>
+<li><a href="#part-control-apis">Part Control APIs</a></li>
+<li><a href="#game-control-apis">Game Control APIs</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="infosync-apis">InfoSync APIs</h2>
+<h3 id="snapshot">Snapshot</h3>
+<p>Read data at real time(approximately), useful when you want to monitor any data, such as height, speed, etc.</p>
+<p><a href="https://vaporz.github.io/Kift/api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_snapshot_KiftServer_SnapshotRequest_">SnapshotResponse snapshot(1:SnapshotRequest req)</a></p>
+<h3 id="getinfo-apis">GetInfo APIs</h3>
+<p>Get data from current game, such as current vessel, the part list of a vessel, etc.</p>
+<p><a href="https://vaporz.github.io/Kift/api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_listVessel">list<kvessel> listVessel()</kvessel></a></p>
+<p><a href="https://vaporz.github.io/Kift/api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_currentVessel">KVessel currentVessel()</a></p>
+<p><a href="https://vaporz.github.io/Kift/api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_currentVessel">KVessel getVessel(1:string vesselId)</a></p>
+<p><a href="https://vaporz.github.io/Kift/api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_getVessel_System_String_">list<kpart> getVesselParts(1:string vesselId)</kpart></a></p>
+<p><a href="https://vaporz.github.io/Kift/api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_getVesselPartsById_System_String_System_Collections_Generic_List_System_Int64__">list<kpart> getVesselPartsById(1:string vesselId, 2:list<i64> partIds)</i64></kpart></a></p>
+<p><a href="">list<kpart> getVesselPartsByType(1:string vesselId, 2:PartType type)</kpart></a></p>
+<p><a href="">list<kpart> getPartsById(1:list<i64> partIds)</i64></kpart></a></p>
+<p><a href="">list<kcelestialbody> listCelestialBody()</kcelestialbody></a></p>
+<p><a href="">KCelestialBody getCelestialBody(1:string name)</a></p>
+<p><a href="">GetTargetVesselOrbitInfoResponse getTargetVesselOrbitInfo(1:string vesselId, 2:string targetVesselId)</a></p>
+<p><a href="">GetTargetBodyOrbitInfoResponse getTargetBodyOrbitInfo(1:string vesselId, 2:string targetBodyName)</a></p>
+<p><a href="">GetTargetVesselOrbitInfoFromManeuverNodeResponse getTargetVesselOrbitInfoFromManeuverNode(1:string vesselId, 2:double ut, 3:string targetVesselId)</a></p>
+<p><a href="">GetTargetBodyOrbitInfoFromManeuverNodeResponse getTargetBodyOrbitInfoFromManeuverNode(1:string vesselId, 2:double ut, 3:string targetBodyName)</a></p>
+<p><a href="">AttitudeInfo getVesselAttitudeInfo(1:string vesselId)</a></p>
+<p><a href="">AttitudeInfo getPartAttitudeInfo(1:i64 partId)</a></p>
+<h2 id="command-apis">Command APIs</h2>
+<h3 id="vessel-control-apis">Vessel Control APIs</h3>
+<p>APIs to control a vessel, such as pitch/yaw/roll, enable/disable RCS, deploy/restract landing legs, etc.</p>
+<p>// TODO link to Vessel Control API doc</p>
+<h3 id="part-control-apis">Part Control APIs</h3>
+<p>APIs to control a part, such as deploy/restract a solar panel, open/close a cargo bay, etc.</p>
+<p>// TODO link to Part Control API doc</p>
+<h3 id="game-control-apis">Game Control APIs</h3>
+<p>APIs to control the game, such as time warp, change camera mode, set/remove maneuver nodes etc.</p>
+<p>// TODO link to Game Control API doc</p>
 </article>
           </div>
           
