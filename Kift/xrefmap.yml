@@ -799,6 +799,19 @@ references:
   isSpec: "True"
   fullName: KiftServer.KiftServiceHandler.parachuteMinPressure
   nameWithType: KiftServiceHandler.parachuteMinPressure
+- uid: KiftServer.KiftServiceHandler.ping
+  name: ping()
+  href: api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_ping
+  commentId: M:KiftServer.KiftServiceHandler.ping
+  fullName: KiftServer.KiftServiceHandler.ping()
+  nameWithType: KiftServiceHandler.ping()
+- uid: KiftServer.KiftServiceHandler.ping*
+  name: ping
+  href: api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_ping_
+  commentId: Overload:KiftServer.KiftServiceHandler.ping
+  isSpec: "True"
+  fullName: KiftServer.KiftServiceHandler.ping
+  nameWithType: KiftServiceHandler.ping
 - uid: KiftServer.KiftServiceHandler.pitch(System.String,System.Double)
   name: pitch(String, Double)
   href: api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_pitch_System_String_System_Double_
@@ -1501,19 +1514,6 @@ references:
   isSpec: "True"
   fullName: KiftServer.KiftServiceHandler.targetVessel
   nameWithType: KiftServiceHandler.targetVessel
-- uid: KiftServer.KiftServiceHandler.test
-  name: test()
-  href: api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_test
-  commentId: M:KiftServer.KiftServiceHandler.test
-  fullName: KiftServer.KiftServiceHandler.test()
-  nameWithType: KiftServiceHandler.test()
-- uid: KiftServer.KiftServiceHandler.test*
-  name: test
-  href: api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_test_
-  commentId: Overload:KiftServer.KiftServiceHandler.test
-  isSpec: "True"
-  fullName: KiftServer.KiftServiceHandler.test
-  nameWithType: KiftServiceHandler.test
 - uid: KiftServer.KiftServiceHandler.throttle(System.String,System.Double)
   name: throttle(String, Double)
   href: api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_throttle_System_String_System_Double_
