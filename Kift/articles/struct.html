@@ -70,7 +70,7 @@
 <h1 id="thrift-struct-comments">Thrift struct comments</h1>
 
 <p>Comments about some thrift struct fields. Not all fields are listed, only when it&#39;s necessary.</p>
-<p>struct KVessel {
+<pre><code>struct KVessel {
   1: string id,
   2: string name,
   3: VesselType type,
@@ -88,8 +88,9 @@
   15: optional map&lt;string, observor.VesselResource&gt; totalResources,
   16: optional map&lt;string, observor.VesselResource&gt; inUseResources,
   17: KOrbit orbit,
-}</p>
-<p>struct KOrbit {
+}
+
+struct KOrbit {
   1: string bodyName,
   2: double apoapsis,
   3: double periapsis,
@@ -114,10 +115,26 @@
   22: double timeToSOIChange,
   23: double orbitalSpeed,
   24: KOrbitType type,
-}</p>
-<p>struct KCelestialBody{
+}
+
+struct KPart {
+  1: i64 id,
+  2: string name,
+  3: string title,
+  4: i32 stage,
+  5: double mass,
+  6: double dryMass,
+  7: bool shielded,
+  8: double temperature,
+  9: double skinTemperature,
+  10: double maxTemperature,
+  11: double maxSkinTemperature,
+  12: optional Resources resources,
+}
+
+struct KCelestialBody{
   1: string name,
-  2: list<kcelestialbody> satellites,
+  2: list&lt;KCelestialBody&gt; satellites,
   3: double mass,
   4: double gravitationalParameter,
   5: double surfaceGravity,
@@ -131,27 +148,30 @@
   13: bool hasAtmosphere,
   14: double atmosphereDepth,
   15: bool hasAtmosphericOxygen,
-  16: list<string> biomes,
+  16: list&lt;string&gt; biomes,
   17: double flyingHighAltitudeThreshold,
   18: double spaceHighAltitudeThreshold,
   19: AttitudeInfo attitudeInfo,
-}<p>
-<p>struct TargetOrbitInfo {
+}
+
+struct TargetOrbitInfo {
   1: double closestApproachTime,
   2: double closestApproachDistance,
   3: double trueAnomalyAtAN,
   4: double trueAnomalyAtDN,
   5: double relativeInclination,
-}</p>
-<p>struct KManeuverNode {
+}
+
+struct KManeuverNode {
   1: string vesselId,
   2: double ut,
   3: KVector3d deltaVVector,
   4: double deltaV,
   5: KVector3d remainingBurnVector,
   6: double remainingDeltaV,
-}</p>
-<p>struct AttitudeInfo {
+}
+
+struct AttitudeInfo {
   1: KVector3d position,
   2: KVector3d direction,
   3: KVector3d velocity,
@@ -162,8 +182,9 @@
   8: KVector3d forward,
   9: KVector3d right,
   10: KQuaternionD rotation,
-}</p>
-<p>struct Wheel {
+}
+
+struct Wheel {
   1: observor.WheelType type,
   2: observor.WheelState state,
   3: double radius,
@@ -195,19 +216,22 @@
   29: double stressPercentage,
   30: double deflection,
   31: double slip,
-}</p>
-<p>struct SolarPanel {
+}
+
+struct SolarPanel {
   1: observor.SolarPanelState state,
   2: bool deployable,
   3: bool deployed,
   4: double energyFlow,
   5: double sunExposure,
-}</p>
-<p>struct Sensor {
+}
+
+struct Sensor {
   1: bool activated,
   2: string reading,
-}</p>
-<p>struct ResourceHarvester {
+}
+
+struct ResourceHarvester {
   1: observor.ResourceHarvesterState state,
   2: bool deployed,
   3: bool activated,
@@ -215,12 +239,14 @@
   5: double thermalEfficiency,
   6: double coreTemperature,
   7: double optimumCoreTemperature,
-}</p>
-<p>struct ConverterResource {
+}
+
+struct ConverterResource {
   1: string resourceName,
   2: double radio,
-}</p>
-<p>struct Converter {
+}
+
+struct Converter {
   1: observor.ResourceConverterState state,
   2: string name,
   3: bool active,
@@ -228,17 +254,20 @@
   5: double thermalEfficiency,
   6: double coreTemperature,
   7: double optimumCoreTemperature,
-  8: list<converterresource> inputs,
-  9: list<converterresource> outputs,
-  10: list<converterresource> requirements,
-}<p>
-<p>struct ResourceConverter {
-  1: list<converter> converters,
-}<p>
-<p>struct ReactionWheel {
+  8: list&lt;ConverterResource&gt; inputs,
+  9: list&lt;ConverterResource&gt; outputs,
+  10: list&lt;ConverterResource&gt; requirements,
+}
+
+struct ResourceConverter {
+  1: list&lt;Converter&gt; converters,
+}
+
+struct ReactionWheel {
   1: observor.ReactionWheelState state,
-}</p>
-<p>struct RCS {
+}
+
+struct RCS {
   1: bool enabled,
   2: bool pitchEnabled,
   3: bool yawEnabled,
@@ -247,49 +276,58 @@
   6: bool forwardEnabled,
   7: bool rightEnabled,
   8: bool hasFuel,
-  9: list<string> propellantNames,
+  9: list&lt;string&gt; propellantNames,
   10: map&lt;string, Propellant&gt; propellants,
-}<p>
-<p>struct Radiator {
+}
+
+struct Radiator {
   1: observor.RadiatorState state,
   2: bool deployable,
   3: bool deployed,
-  4: bool cooling,</p>
-<p>}</p>
-<p>struct Parachute {
+  4: bool cooling,
+
+}
+
+struct Parachute {
   1: observor.ParachuteState state,
   2: bool deployed,
   3: double deployAltitude,
   4: double deployMinPressure,
-}</p>
-<p>struct Light {
+}
+
+struct Light {
   1: bool on,
   2: double powerUsage,
-}</p>
-<p>struct Leg {
+}
+
+struct Leg {
   1: observor.LegState state,
   2: bool deployable,
   3: bool deployed,
   4: bool grounded,
-}</p>
-<p>struct Intake {
+}
+
+struct Intake {
   1: bool open,
   2: double speed,
   3: double flow,
   4: double area,
-}</p>
-<p>struct Fairing {
+}
+
+struct Fairing {
   1: bool jettisoned,
-}</p>
-<p>struct Propellant {
+}
+
+struct Propellant {
   1: string name,
   2: double currentAmount,
   3: double currentRequirement,
   4: double totalResourceAvailable,
   5: double totalResourceCapacity,
   6: bool isDeprived,
-}</p>
-<p>struct Engine {
+}
+
+struct Engine {
   1: bool active,
   2: double thrust, // AvailableThrust?
   3: double maxVacuumThrust,
@@ -297,7 +335,7 @@
   5: double specificImpulse,
   6: double vacuumSpecificImpulse,
   7: double kerbinSeaLevelSpecificImpulse,
-  8: list<string> propellantNames,
+  8: list&lt;string&gt; propellantNames,
   9: map&lt;string, Propellant&gt; propellants,
   10: bool hasFuel,
   11: double throttle,
@@ -307,23 +345,26 @@
   15: bool hasModes,
   16: bool autoSwitchMode,
   17: string mode,
-  18: list<string> modes,
+  18: list&lt;string&gt; modes,
   19: bool gimballed,
   20: double gimbalRange,
   21: bool gimbalLocked,
   22: double gimbalLimit,
-}<p>
-<p>struct DockingPort {
+}
+
+struct DockingPort {
   1: observor.DockingPortState state,
   2: bool hasShield,
   3: bool shieled,
-}</p>
-<p>struct Decoupler {
+}
+
+struct Decoupler {
   1: bool decoupled,
   2: bool stageEnabled,
   3: double impulse,
-}</p>
-<p>struct ControlSurface {
+}
+
+struct ControlSurface {
   1: bool pitchEnabled,
   2: bool yawEnabled,
   3: bool rollEnabled,
@@ -331,12 +372,14 @@
   5: bool inverted,
   6: bool deployed,
   7: double surfaceArea,
-}</p>
-<p>struct CargoBay {
+}
+
+struct CargoBay {
   1: observor.CargoBayState state,
   2: double deployPercent,
-}</p>
-<p>struct Antenna {
+}
+
+struct Antenna {
   1: observor.AntennaState state,
   2: bool canTransmit,
   3: bool allowPartial,
@@ -346,27 +389,14 @@
   7: double packetInterval,
   8: double packetSize,
   9: double packetResourceCost,
-}</p>
-<p>struct Resource {
+}
+
+struct Resource {
   1: string name,
   2: double capacity,
   3: double amount,
-}</p>
-<p>struct KPart {
-  1: i64 id,
-  2: string name,
-  3: string title,
-  4: i32 stage,
-  5: double mass,
-  6: double dryMass,
-  7: bool shielded,
-  8: double temperature,
-  9: double skinTemperature,
-  10: double maxTemperature,
-  11: double maxSkinTemperature,
-  12: optional Resources resources,
-}</p>
-</string></string></string></converter></converterresource></converterresource></converterresource></string></kcelestialbody></article>
+}
+</code></pre></article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">

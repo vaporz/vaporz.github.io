@@ -69,10 +69,41 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="kift">Kift</h1>
 
-<p>aaa
-str
-dfsfdfsd</p>
-</article>
+<p>Thrift(v0.12.0) plugin for KSP(v1.7.3+).</p>
+<p><img src="../images/drone.png" width="200"></p>
+<p>I tried to use GRPC at first, but it appears that GRPC requires .NET Framework 4.5+, and unfortunately, KSP is built on .NET Framework 3.5, which is quite old.</p>
+<h2 id="architecture">Architecture</h2>
+<p><img src="../images/arch.png" width="670"></p>
+<p>Kift starts a Thrift server inside of KSP process. The server receives requests, then send them to a Message Queue. A KSP addon will dequeue requests from the queue, and run the corresponding Executor. The server will wait until the response to a request is returned.</p>
+<h2 id="supported-languages">Supported languages</h2>
+<p>Theoritically, any programming language supported by Thrift v0.12.0 is supported by Kift.</p>
+<p><a href="https://github.com/apache/thrift/blob/v0.12.0/LANGUAGES.md">Languages supported by Thrift v0.12.0</a>:</p>
+<p>C, C++, Go, Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C#, Cocoa, JavaScript, Node.js, Smalltalk, OCaml and Delphi, etc.</p>
+<h2 id="getting-started">Getting Started</h2>
+<h3 id="1-install-kift">1, Install Kift</h3>
+<p>Download Kift.zip, copy the Kift folder in zip file into &quot;Kerbal Space Programe/GameData&quot; directory.</p>
+<p>Now the server side is ready.</p>
+<h3 id="2-install-thrift-and-generate-stub-codes">2, Install Thrift, and generate stub codes</h3>
+<p>To interact with the Thrift server within KSP process, you have to write your own client code.</p>
+<p><a href="https://thrift.apache.org/">Thrift</a> is a software framework, for scalable cross-language services development. 
+With the help of Thrift, you can write client code in any programming language, as long as it&#39;s supported by Thrift.</p>
+<p>APIs provided by Kift are defined by the IDL file &quot;service.thrift&quot; in folder &quot;Kift&quot;.</p>
+<p><a href="https://thrift.apache.org/download">Download a copy of Thrift v0.12.0</a>, then generate stub codes with following command:</p>
+<pre><code class="lang-shell">thrift --gen &lt;language&gt; &lt;Thrift filename&gt;
+</code></pre><p>For example, if you&#39;re using C#, then generate C# stub codes with</p>
+<pre><code class="lang-shell">$thrift -r --gen csharp service.thrift
+</code></pre><p>if you&#39;re using Golang, then run</p>
+<pre><code class="lang-shell">$thrift -r --gen go service.thrift
+</code></pre><h3 id="3-connect-to-thrift-server-and-call-kift-apis">3, Connect to Thrift server, and call Kift APIs</h3>
+<p>Following lines of code show how to get current vessel info in game:</p>
+<pre><code class="lang-csharp"> // The game is started, and MUST be in Flight scene.
+ // Import KiftClient.CSharp.dll
+ using KiftClient.CSharp;
+ Client c = new Client(&quot;localhost&quot;, 9090); // Listened port is configable in &quot;Kift/server.cfg&quot;
+ KiftService.Client client = c.Connect(); // Connect to server
+ KVessel v = client.currentVessel(); // Call API &quot;currentVessel&quot;
+ Console.WriteLine(v.Name);
+</code></pre></article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
