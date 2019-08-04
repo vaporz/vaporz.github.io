@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Configuration | KiftServer </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Configuration | KiftServer ">
+    <meta name="generator" content="docfx 2.44.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="configuration">Configuration</h1>
+
+<p>Default configuration:</p>
+<pre><code class="lang-yaml">KIFT
+{
+    port = 9090
+    maxRpcPerUpdate = 1
+    maxDurationPerUpdateInNanoseconds = 20000000 // 20ms
+}
+</code></pre><h3 id="port">port</h3>
+<p>The port to which the server is listening.</p>
+<h3 id="maxrpcperupdate">maxRpcPerUpdate</h3>
+<p>By default, &quot;maxRpcPerUpdate&quot; is set to 1, which means one RPC is processed for each Update().<br>So the default RPC rate should be the same with the game&#39;s FPS, typically, 60 FPS.</p>
+<p>If &quot;maxRpcPerUpdate&quot; is set to N, then at most N * FPS RPCs are processed per second. 
+For example, if &quot;maxRpcPerUpdate&quot; is set to 5, and the game is running at 60 FPS, then 300 RPCs are processed per second at most.</p>
+<h3 id="maxdurationperupdateinnanoseconds">maxDurationPerUpdateInNanoseconds</h3>
+<p>&quot;maxDurationPerUpdateInNanoseconds&quot; describes how long each Update() should take. 
+The KiftAddon will exit current Update() if the time has elapsed for more than configured duration, since the beginning of current Update().</p>
+<p>Since the time is measured after each RPC, so the actual time each Update() takes is always larger than &quot;maxDurationPerUpdateInNanoseconds&quot;.</p>
+<p>For example, if &quot;maxDurationPerUpdateInNanoseconds&quot; is set to 4 seconds, and each RPC takes 3 seconds to finish. 
+Then there is 1 second left after the first RPC is finished, the second RPC also takes 3 seconds to finish, so it&#39;s 3+3=6 seconds in total.
+6 is larger than 4, so current Update() is done.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/vaporz/Kift/blob/master/KiftServer/articles/config.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright © 2019 Zhang Xiao
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
