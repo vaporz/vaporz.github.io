@@ -69,7 +69,7 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="kift">Kift</h1>
 
-<p>Thrift(v0.12.0) plugin for KSP(v1.7.3+).</p>
+<p><a href="https://thrift.apache.org/">Thrift</a>(v0.12.0) plugin for <a href="https://store.steampowered.com/app/220200/Kerbal_Space_Program/">Kerbal Space Program</a>(v1.7.3+).</p>
 <p><img src="../images/drone.png" width="200"></p>
 <p>I tried to use GRPC at first, but it appears that GRPC requires .NET Framework 4.5+, and unfortunately, KSP is built on .NET Framework 3.5, which is quite old.</p>
 <h2 id="architecture">Architecture</h2>
@@ -97,10 +97,15 @@ With the help of Thrift, you can write client code in any programming language, 
 </code></pre><h3 id="3-connect-to-thrift-server-and-call-kift-apis">3, Connect to Thrift server, and call Kift APIs</h3>
 <p>Following lines of code show how to get current vessel info in game:</p>
 <pre><code class="lang-csharp"> // The game is started, and MUST be in Flight scene.
- // Import KiftClient.CSharp.dll
- using KiftClient.CSharp;
- Client c = new Client(&quot;localhost&quot;, 9090); // Listened port is configable in &quot;Kift/server.cfg&quot;
- KiftService.Client client = c.Connect(); // Connect to server
+
+ // Import KiftServer.dll, or depend on your own generated CSharp stub codes.
+ using KiftServer;
+
+ TTransport transport = new TSocket(&quot;localhost&quot;, 9090); // Listened port is configable in &quot;Kift/server.cfg&quot;
+ TProtocol protocol = new TBinaryProtocol(transport);
+ KiftService.Client client = new KiftService.Client(protocol);
+ transport.Open(); // Connect to server
+
  KVessel v = client.currentVessel(); // Call API &quot;currentVessel&quot;
  Console.WriteLine(v.Name);
 </code></pre><h3 id="kift-apis">Kift APIs</h3>
