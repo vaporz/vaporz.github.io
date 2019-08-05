@@ -604,11 +604,11 @@ references:
   isSpec: "True"
   fullName: KiftServer.KiftServiceHandler.getVesselPartsById
   nameWithType: KiftServiceHandler.getVesselPartsById
-- uid: KiftServer.KiftServiceHandler.getVesselPartsByType(System.String,KiftServer.PartType)
+- uid: KiftServer.KiftServiceHandler.getVesselPartsByType(System.String,Kift.PartType)
   name: getVesselPartsByType(String, PartType)
-  href: api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_getVesselPartsByType_System_String_KiftServer_PartType_
-  commentId: M:KiftServer.KiftServiceHandler.getVesselPartsByType(System.String,KiftServer.PartType)
-  fullName: KiftServer.KiftServiceHandler.getVesselPartsByType(System.String, KiftServer.PartType)
+  href: api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_getVesselPartsByType_System_String_Kift_PartType_
+  commentId: M:KiftServer.KiftServiceHandler.getVesselPartsByType(System.String,Kift.PartType)
+  fullName: KiftServer.KiftServiceHandler.getVesselPartsByType(System.String, Kift.PartType)
   nameWithType: KiftServiceHandler.getVesselPartsByType(String, PartType)
 - uid: KiftServer.KiftServiceHandler.getVesselPartsByType*
   name: getVesselPartsByType
@@ -1163,11 +1163,11 @@ references:
   isSpec: "True"
   fullName: KiftServer.KiftServiceHandler.setBrakes
   nameWithType: KiftServiceHandler.setBrakes
-- uid: KiftServer.KiftServiceHandler.setCameraFocussedBody(KiftServer.SetCameraFocussedBodyRequest)
+- uid: KiftServer.KiftServiceHandler.setCameraFocussedBody(Kift.SetCameraFocussedBodyRequest)
   name: setCameraFocussedBody(SetCameraFocussedBodyRequest)
-  href: api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_setCameraFocussedBody_KiftServer_SetCameraFocussedBodyRequest_
-  commentId: M:KiftServer.KiftServiceHandler.setCameraFocussedBody(KiftServer.SetCameraFocussedBodyRequest)
-  fullName: KiftServer.KiftServiceHandler.setCameraFocussedBody(KiftServer.SetCameraFocussedBodyRequest)
+  href: api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_setCameraFocussedBody_Kift_SetCameraFocussedBodyRequest_
+  commentId: M:KiftServer.KiftServiceHandler.setCameraFocussedBody(Kift.SetCameraFocussedBodyRequest)
+  fullName: KiftServer.KiftServiceHandler.setCameraFocussedBody(Kift.SetCameraFocussedBodyRequest)
   nameWithType: KiftServiceHandler.setCameraFocussedBody(SetCameraFocussedBodyRequest)
 - uid: KiftServer.KiftServiceHandler.setCameraFocussedBody*
   name: setCameraFocussedBody
@@ -1176,11 +1176,11 @@ references:
   isSpec: "True"
   fullName: KiftServer.KiftServiceHandler.setCameraFocussedBody
   nameWithType: KiftServiceHandler.setCameraFocussedBody
-- uid: KiftServer.KiftServiceHandler.setCameraFocussedNode(KiftServer.SetCameraFocussedNodeRequest)
+- uid: KiftServer.KiftServiceHandler.setCameraFocussedNode(Kift.SetCameraFocussedNodeRequest)
   name: setCameraFocussedNode(SetCameraFocussedNodeRequest)
-  href: api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_setCameraFocussedNode_KiftServer_SetCameraFocussedNodeRequest_
-  commentId: M:KiftServer.KiftServiceHandler.setCameraFocussedNode(KiftServer.SetCameraFocussedNodeRequest)
-  fullName: KiftServer.KiftServiceHandler.setCameraFocussedNode(KiftServer.SetCameraFocussedNodeRequest)
+  href: api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_setCameraFocussedNode_Kift_SetCameraFocussedNodeRequest_
+  commentId: M:KiftServer.KiftServiceHandler.setCameraFocussedNode(Kift.SetCameraFocussedNodeRequest)
+  fullName: KiftServer.KiftServiceHandler.setCameraFocussedNode(Kift.SetCameraFocussedNodeRequest)
   nameWithType: KiftServiceHandler.setCameraFocussedNode(SetCameraFocussedNodeRequest)
 - uid: KiftServer.KiftServiceHandler.setCameraFocussedNode*
   name: setCameraFocussedNode
@@ -1189,11 +1189,11 @@ references:
   isSpec: "True"
   fullName: KiftServer.KiftServiceHandler.setCameraFocussedNode
   nameWithType: KiftServiceHandler.setCameraFocussedNode
-- uid: KiftServer.KiftServiceHandler.setCameraFocussedVessel(KiftServer.SetCameraFocussedVesselRequest)
+- uid: KiftServer.KiftServiceHandler.setCameraFocussedVessel(Kift.SetCameraFocussedVesselRequest)
   name: setCameraFocussedVessel(SetCameraFocussedVesselRequest)
-  href: api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_setCameraFocussedVessel_KiftServer_SetCameraFocussedVesselRequest_
-  commentId: M:KiftServer.KiftServiceHandler.setCameraFocussedVessel(KiftServer.SetCameraFocussedVesselRequest)
-  fullName: KiftServer.KiftServiceHandler.setCameraFocussedVessel(KiftServer.SetCameraFocussedVesselRequest)
+  href: api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_setCameraFocussedVessel_Kift_SetCameraFocussedVesselRequest_
+  commentId: M:KiftServer.KiftServiceHandler.setCameraFocussedVessel(Kift.SetCameraFocussedVesselRequest)
+  fullName: KiftServer.KiftServiceHandler.setCameraFocussedVessel(Kift.SetCameraFocussedVesselRequest)
   nameWithType: KiftServiceHandler.setCameraFocussedVessel(SetCameraFocussedVesselRequest)
 - uid: KiftServer.KiftServiceHandler.setCameraFocussedVessel*
   name: setCameraFocussedVessel
@@ -1202,11 +1202,11 @@ references:
   isSpec: "True"
   fullName: KiftServer.KiftServiceHandler.setCameraFocussedVessel
   nameWithType: KiftServiceHandler.setCameraFocussedVessel
-- uid: KiftServer.KiftServiceHandler.setCameraState(KiftServer.SetCameraStateRequest)
+- uid: KiftServer.KiftServiceHandler.setCameraState(Kift.SetCameraStateRequest)
   name: setCameraState(SetCameraStateRequest)
-  href: api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_setCameraState_KiftServer_SetCameraStateRequest_
-  commentId: M:KiftServer.KiftServiceHandler.setCameraState(KiftServer.SetCameraStateRequest)
-  fullName: KiftServer.KiftServiceHandler.setCameraState(KiftServer.SetCameraStateRequest)
+  href: api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_setCameraState_Kift_SetCameraStateRequest_
+  commentId: M:KiftServer.KiftServiceHandler.setCameraState(Kift.SetCameraStateRequest)
+  fullName: KiftServer.KiftServiceHandler.setCameraState(Kift.SetCameraStateRequest)
   nameWithType: KiftServiceHandler.setCameraState(SetCameraStateRequest)
 - uid: KiftServer.KiftServiceHandler.setCameraState*
   name: setCameraState
@@ -1384,11 +1384,11 @@ references:
   isSpec: "True"
   fullName: KiftServer.KiftServiceHandler.setSAS
   nameWithType: KiftServiceHandler.setSAS
-- uid: KiftServer.KiftServiceHandler.setSASMode(System.String,KiftServer.SASMode)
+- uid: KiftServer.KiftServiceHandler.setSASMode(System.String,Kift.SASMode)
   name: setSASMode(String, SASMode)
-  href: api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_setSASMode_System_String_KiftServer_SASMode_
-  commentId: M:KiftServer.KiftServiceHandler.setSASMode(System.String,KiftServer.SASMode)
-  fullName: KiftServer.KiftServiceHandler.setSASMode(System.String, KiftServer.SASMode)
+  href: api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_setSASMode_System_String_Kift_SASMode_
+  commentId: M:KiftServer.KiftServiceHandler.setSASMode(System.String,Kift.SASMode)
+  fullName: KiftServer.KiftServiceHandler.setSASMode(System.String, Kift.SASMode)
   nameWithType: KiftServiceHandler.setSASMode(String, SASMode)
 - uid: KiftServer.KiftServiceHandler.setSASMode*
   name: setSASMode
@@ -1423,11 +1423,11 @@ references:
   isSpec: "True"
   fullName: KiftServer.KiftServiceHandler.setWheels
   nameWithType: KiftServiceHandler.setWheels
-- uid: KiftServer.KiftServiceHandler.snapshot(KiftServer.SnapshotRequest)
+- uid: KiftServer.KiftServiceHandler.snapshot(Kift.SnapshotRequest)
   name: snapshot(SnapshotRequest)
-  href: api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_snapshot_KiftServer_SnapshotRequest_
-  commentId: M:KiftServer.KiftServiceHandler.snapshot(KiftServer.SnapshotRequest)
-  fullName: KiftServer.KiftServiceHandler.snapshot(KiftServer.SnapshotRequest)
+  href: api/KiftServer.KiftServiceHandler.html#KiftServer_KiftServiceHandler_snapshot_Kift_SnapshotRequest_
+  commentId: M:KiftServer.KiftServiceHandler.snapshot(Kift.SnapshotRequest)
+  fullName: KiftServer.KiftServiceHandler.snapshot(Kift.SnapshotRequest)
   nameWithType: KiftServiceHandler.snapshot(SnapshotRequest)
 - uid: KiftServer.KiftServiceHandler.snapshot*
   name: snapshot

@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "D:/workspace/Kift/KiftServer",
+  "source_base_path": "D:/workspace/Kift/server",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "VXP/TeGuVNZaCngiMSxUMw=="
+          "hash": "zsQu3zdAeK/84Ctcf5oi1g=="
         }
       },
       "is_incremental": false,
@@ -21,7 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/config.html",
-          "hash": "HuUvg7UY8/rQYrsLgfAH8w=="
+          "hash": "f5R1NUoWvXXgeS9Me/ODKQ=="
         }
       },
       "is_incremental": false,
@@ -33,7 +33,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/example.html",
-          "hash": "Cnfu5eRp2zsjAtQCuu3nbg=="
+          "hash": "EcrN2RcPqeYocmaqz32WRQ=="
         }
       },
       "is_incremental": false,
@@ -45,7 +45,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/intro.html",
-          "hash": "bP0fSY/BL/hEZUuige0Lpg=="
+          "hash": "8v30/xavq2xu1/eeTwvgeA=="
         }
       },
       "is_incremental": false,
@@ -57,7 +57,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/struct.html",
-          "hash": "vf+t91ijZc41KLcIhcztxQ=="
+          "hash": "Bpyy+wbyUOuSvPYYb2/T+Q=="
         }
       },
       "is_incremental": false,
@@ -69,7 +69,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/struct_cn.html",
-          "hash": "JPHcOEU346HlZP9uLLOCAA=="
+          "hash": "rgsyW0ImLTdJISdcOuY2rA=="
         }
       },
       "is_incremental": false,
@@ -115,7 +115,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "mb2+Yhuze3K+6tFj1fZ/rg=="
+          "hash": "9jGqZZZZKJZkEaKAQy3TbQ=="
         }
       },
       "is_incremental": false,
@@ -127,7 +127,7 @@
       "output": {
         ".html": {
           "relative_path": "api/KiftServer.KiftServiceHandler.html",
-          "hash": "31OsoU8Xqd8FDbYWuVT9Ug=="
+          "hash": "MyZFMHc5E7atzvh5RzYcsg=="
         }
       },
       "is_incremental": false,
@@ -181,13 +181,6 @@
         "full_build_reason_code": "ForceRebuild"
       },
       "processors": {
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
-        },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
@@ -205,6 +198,13 @@
           "can_incremental": false,
           "incrementalPhase": "build",
           "total_file_count": 7,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
           "skipped_file_count": 0
         }
       }
