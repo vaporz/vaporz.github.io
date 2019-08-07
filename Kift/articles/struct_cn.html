@@ -70,249 +70,163 @@
 <h1 id="thrift-struct-ע">Thrift struct ע��</h1>
 
 <p>�йز��� Thrift struct ���Ե�ע�ͣ������������Զ����˳��������Ǳ�Ҫ��</p>
+<p>ע:</p>
+<ul>
+<li>�йس���/��������ԣ���λ�ǡ��ס�</li>
+<li>�й�ʱ������ԣ���λ�ǡ��롱</li>
+<li>�й��¶ȵ����ԣ���λ�ǡ������ġ�</li>
+<li>�й����������ԣ���λ�ǡ�ǧ�ˡ� // TODO</li>
+<li>�йؽǶȵ����ԣ���λ�ǡ��ȡ� // TODO</li>
+</ul>
 <pre><code>struct KVessel {
-  5: double MET, // time elapsed since the mission starts
-  6: i32 stage, // current stage
-  7: string biome, // current biome the vessel is in
-  15: optional map&lt;string, observor.VesselResource&gt; totalResources, // the whole vessel&#39;s resources
-  16: optional map&lt;string, observor.VesselResource&gt; inUseResources, // the resources currently comsumed by parts
+  5: double MET, // ������ʼ�����ʱ��
+  6: i32 stage, // ��ǰ�ּ�
+  7: string biome, // �ؾߵ�ǰ���ڵĵ�ò����
+  15: optional map&lt;string, observor.VesselResource&gt; totalResources, // �����ؾ߳��е���Դ
+  16: optional map&lt;string, observor.VesselResource&gt; inUseResources, // ��ǰ�ɱ����ĵ���Դ
 }
 
 struct KOrbit {
-  1: string bodyName,
-  2: double apoapsis,
-  3: double periapsis,
-  4: double apoapsisAltitude,
-  5: double periapsisAltitude,
-  6: double semiMajorAxis,
-  7: double semiMinorAxis,
-  8: double radius,
-  9: double speed,
-  10: double period,
-  11: double timeToApoapsis,
-  12: double timeToPeriapsis,
-  13: double eccentricity,
-  14: double inclination,
-  15: double longitudeOfAscendingNode,
-  16: double argumentOfPeriapsis,
-  17: double meanAnomalyAtEpoch,
-  18: double epoch,
-  19: double meanAnomaly,
-  20: double eccentricAnomaly,
-  21: double trueAnomaly,
-  22: double timeToSOIChange,
-  23: double orbitalSpeed,
-  24: KOrbitType type,
+  2: double apoapsis, // Զ�ص�߶ȣ����������ĵ�Զ�ص�ľ���
+  3: double periapsis, // ���ص�߶ȣ����������ĵ����ص�ľ���
+  4: double apoapsisAltitude, // Զ�ص㺣ƽ��߶ȣ��Ӻ�ƽ�浽Զ�ص�ľ���
+  5: double periapsisAltitude, // ���ص㺣ƽ��߶ȣ��Ӻ�ƽ�浽���ص�ľ���
+  6: double semiMajorAxis, // �볤��
+  7: double semiMinorAxis, // �̰���
+  8: double radius, // �뾶
+  9: double speed, // ����������ϵ�е�����
+  10: double period, // �������
+  11: double timeToApoapsis, // �����´ε���Զ�ص��ʱ��
+  12: double timeToPeriapsis, // �����´ε�����ص��ʱ��
+  13: double eccentricity, // ƫ����
+  14: double inclination, // ������
+  15: double longitudeOfAscendingNode, // �����㾭��
+  16: double argumentOfPeriapsis, // ���ĵ��
+  17: double meanAnomalyAtEpoch, // ��Ԫʱ��ƽ�����
+  18: double epoch, // ����Ԫ��ʼ�����ʱ��
+  19: double meanAnomaly, // ��ǰƽ�����
+  20: double eccentricAnomaly, // ƫ�����
+  21: double trueAnomaly, // ������
+  22: double timeToSOIChange, // �����л�����һ�����������Ӱ�췶Χ��ʱ��
+  23: double orbitalSpeed, // ����ڱ������������ĵĹ���ٶ�
 }
 
 struct KPart {
-  1: i64 id,
-  2: string name,
-  3: string title,
-  4: i32 stage,
-  5: double mass,
-  6: double dryMass,
-  7: bool shielded,
-  8: double temperature,
-  9: double skinTemperature,
-  10: double maxTemperature,
-  11: double maxSkinTemperature,
-  12: optional Resources resources,
+  4: i32 stage, // (Part.inverseStage)����ϷGUI�ķּ��б��У��ò��������ڵķּ����
+  5: double mass, // ʪ�أ���λ���֡�����
+  6: double dryMass, // ���أ�ȥ��ɱ����ĵ���Դ������λ���֡�
+  10: double maxTemperature, // ������¶ȸ��ڡ�maxTemperature�����򲿼������ݻ�
+  11: double maxSkinTemperature, // ����������¶ȸ��ڡ�maxSkinTemperature�����򲿼������ݻ�
+  12: optional Resources resources, // ������������Դ
 }
 
 struct KCelestialBody{
-  1: string name,
-  2: list&lt;KCelestialBody&gt; satellites,
-  3: double mass,
-  4: double gravitationalParameter,
-  5: double surfaceGravity,
-  6: double rotationalPeriod,
-  7: double rotationalSpeed,
-  8: double rotationAngle,
-  9: double initialRotation,
-  10: double equatorialRadius,
-  11: double sphereOfInfluence,
-  12: KOrbit orbit,
-  13: bool hasAtmosphere,
-  14: double atmosphereDepth,
-  15: bool hasAtmosphericOxygen,
-  16: list&lt;string&gt; biomes,
-  17: double flyingHighAltitudeThreshold,
-  18: double spaceHighAltitudeThreshold,
-  19: AttitudeInfo attitudeInfo,
+  4: double gravitationalParameter, // ������������
+  5: double surfaceGravity, // ��ƽ���������
+  6: double rotationalPeriod, // �����ճ��ȣ���������̫���գ�
+  7: double rotationalSpeed, // ������ת���ٶ�
+  8: double rotationAngle, // ��ǰ������ת�Ƕ�
+  9: double initialRotation, // ��UTΪ0ʱ�̵ĺ�����ת�Ƕ�
+  10: double equatorialRadius, // ����뾶
+  11: double sphereOfInfluence, // ����Ӱ�췶Χ
+  13: bool hasAtmosphere, // �Ƿ��д�����
+  14: double atmosphereDepth, // ��������
+  15: bool hasAtmosphericOxygen, // �����Ƿ���
+  16: list&lt;string&gt; biomes, // ������������ò���б�
+  17: double flyingHighAltitudeThreshold, // �������и��ڴ˸߶ȣ����϶�Ϊ��high��
+  18: double spaceHighAltitudeThreshold, // ����и��ڴ˸߶ȣ����϶�Ϊ��high��
 }
 
 struct TargetOrbitInfo {
-  1: double closestApproachTime,
-  2: double closestApproachDistance,
-  3: double trueAnomalyAtAN,
-  4: double trueAnomalyAtDN,
-  5: double relativeInclination,
+  1: double closestApproachTime, // ��Ŀ����������ʱ��
+  2: double closestApproachDistance, // ��Ŀ��������ʱ�ľ���
+  3: double trueAnomalyAtAN, // �����������ǣ��Ƕȷ�Χ��0��180
+  4: double trueAnomalyAtDN, // �����������ǣ��Ƕȷ�Χ��0��180
+  5: double relativeInclination, // �����Ŀ����ƽ��Ĺ�����
 }
 
 struct KManeuverNode {
-  1: string vesselId,
-  2: double ut,
-  3: KVector3d deltaVVector,
-  4: double deltaV,
-  5: KVector3d remainingBurnVector,
-  6: double remainingDeltaV,
+  3: KVector3d deltaVVector, // Ԥ���deltaV���������ᷢ���ı�
+  4: double deltaV, // Ԥ��deltaV�����ı��������ᷢ���ı䣬��λ����/�롱
+  5: KVector3d remainingBurnVector, // ʣ��deltaV�����������ؾ�ʵʩ�������ı�
+  6: double remainingDeltaV, // ʣ��deltaV�����ı����������ؾ�ʵʩ�������ı�
 }
 
-struct AttitudeInfo {
-  1: KVector3d position,
-  2: KVector3d direction,
-  3: KVector3d velocity,
-  4: KVector3d prograde,
-  5: KVector3d normal,
-  6: KVector3d radial,
-  7: KVector3d up,
-  8: KVector3d forward,
-  9: KVector3d right,
-  10: KQuaternionD rotation,
+  1: KVector3d position, // position in world space
+  2: KVector3d direction, // the direction to which the vessel is pointing to in world space
+  3: KVector3d velocity, // velocity in world space
+  4: KVector3d prograde, // prograde direction of orbit in world space
+  5: KVector3d normal, // normal direction of orbit in world space
+  6: KVector3d radial, // radial direction of orbit in world space
+  7: KVector3d up, // up direction in world space, equal to &quot;direction&quot;
+  8: KVector3d forward, // forward direction in world space
+  9: KVector3d right, // right direction in world space
+  10: KQuaternionD rotation, // rotation in world space
+
+struct AttitudeInfo { // �������Ծ��ԡ���������ϵ����Ϊ�ο�ϵ����prograde��normal��radial��δ�����������滯
+  1: KVector3d position, // λ��
+  2: KVector3d direction, // ָ��
+  3: KVector3d velocity, // �ٶ�
+  4: KVector3d prograde, // ���˳�з������ֶ���Z�ᣩ
+  5: KVector3d normal, // ������������ֶ���Y�ᣩ
+  6: KVector3d radial, // ������������ֶ���X�ᣩ
+  7: KVector3d up, // ������̬��Up���������ֶ���Y�ᣩ������ָ��
+  8: KVector3d forward, // ������̬��Forward���������ֶ���Z�ᣩ
+  9: KVector3d right, // ������̬��Right���������ֶ���X�ᣩ
+  10: KQuaternionD rotation, // ��ת
 }
 
 struct Wheel {
-  1: observor.WheelType type,
-  2: observor.WheelState state,
-  3: double radius,
-  4: bool grounded,
-  5: bool hasBrakes,
-  6: double brakeForce,
-  7: bool autoFrictionControl,
-  8: double manualFrictionControl,
-  9: bool deployable,
-  10: bool deployed,
-  11: bool powered,
-  12: bool motorEnabled,
-  13: bool inverted,
-  14: observor.MotorState motorState,
-  15: double motorOutput,
-  16: bool tractionControlEnabled,
-  17: double tractionControl,
-  18: double driveLimiter,
-  19: bool steerable,
-  20: bool steeringEnabled,
-  21: bool steeringInverted,
-  22: bool hasSuspension,
-  23: double suspensionSpringStrength,
-  24: double suspensionDamperStrength,
-  25: bool broken,
-  26: bool repairable,
-  27: double stress,
-  28: double stressTolerance,
-  29: double stressPercentage,
-  30: double deflection,
-  31: double slip,
-}
-
-struct SolarPanel {
-  1: observor.SolarPanelState state,
-  2: bool deployable,
-  3: bool deployed,
-  4: double energyFlow,
-  5: double sunExposure,
-}
-
-struct Sensor {
-  1: bool activated,
-  2: string reading,
+  3: double radius, // ���ְ뾶
+  6: double brakeForce, // ɲ�����Ȱٷֱ�
+  7: bool autoFrictionControl, // �Ƿ������Զ�ץ�������ƣ�ץ�������ƣ�
+  8: double manualFrictionControl, // �ֶ�ץ������������
+  11: bool powered, // �Ƿ�ͨ���������
+  13: bool inverted, // �Ƿ���ﷴת
+  15: double motorOutput, // ��ǰŤ���������λ��ţ�ס�
+  16: bool tractionControlEnabled, // �Ƿ�����ǣ��������
+  17: double tractionControl, // ǣ���������Χ������ǣ��������ʱ����������
+  18: double driveLimiter, // ǣ����������ƣ�����ǣ��������ʱ����������
+  19: bool steerable, // �Ƿ��ת��
+  20: bool steeringEnabled, // �Ƿ�����ת��
+  21: bool steeringInverted, // �Ƿ�תת��
+  22: bool hasSuspension, // �Ƿ�������ϵͳ
+  23: double suspensionSpringStrength, // ���ҵ���ǿ��
+  24: double suspensionDamperStrength, // ����������ǿ��
+  27: double stress, // ��ǰ����ѹ������λ��????��
+  28: double stressTolerance, // ����ѹ�����ޣ�������ѹ��ʱ������
+  29: double stressPercentage, // ��ǰ����ѹ��ռѹ�����޵İٷֱ�
+  30: double deflection, // ����ƫת�� ?????
+  31: double slip, // ���ֻ����� ?????
 }
 
 struct ResourceHarvester {
-  1: observor.ResourceHarvesterState state,
-  2: bool deployed,
-  3: bool activated,
-  4: double extractionRate,
-  5: double thermalEfficiency,
-  6: double coreTemperature,
-  7: double optimumCoreTemperature,
+  4: double extractionRate, // �����ٶȣ���λ��Unit/�롱
+  5: double thermalEfficiency, // ��Ч��
+  6: double coreTemperature, // �����¶�
+  7: double optimumCoreTemperature, // ���ź����¶�
 }
 
 struct ConverterResource {
-  1: string resourceName,
-  2: double radio,
+  // ������������ԴA�ı���Ϊ0.3��������ԴB�ı���Ϊ0.7����ô��ÿ���1��λ��Դ��������0.3��λA����0.7��λB��
+  2: double radio, // ��Դ����
 }
 
 struct Converter {
-  1: observor.ResourceConverterState state,
-  2: string name,
-  3: bool active,
-  4: string status,
-  5: double thermalEfficiency,
-  6: double coreTemperature,
-  7: double optimumCoreTemperature,
-  8: list&lt;ConverterResource&gt; inputs,
-  9: list&lt;ConverterResource&gt; outputs,
-  10: list&lt;ConverterResource&gt; requirements,
-}
-
-struct ResourceConverter {
-  1: list&lt;Converter&gt; converters,
-}
-
-struct ReactionWheel {
-  1: observor.ReactionWheelState state,
-}
-
-struct RCS {
-  1: bool enabled,
-  2: bool pitchEnabled,
-  3: bool yawEnabled,
-  4: bool rollEnabled,
-  5: bool upEnabled,
-  6: bool forwardEnabled,
-  7: bool rightEnabled,
-  8: bool hasFuel,
-  9: list&lt;string&gt; propellantNames,
-  10: map&lt;string, Propellant&gt; propellants,
-}
-
-struct Radiator {
-  1: observor.RadiatorState state,
-  2: bool deployable,
-  3: bool deployed,
-  4: bool cooling,
-
-}
-
-struct Parachute {
-  1: observor.ParachuteState state,
-  2: bool deployed,
-  3: double deployAltitude,
-  4: double deployMinPressure,
-}
-
-struct Light {
-  1: bool on,
-  2: double powerUsage,
-}
-
-struct Leg {
-  1: observor.LegState state,
-  2: bool deployable,
-  3: bool deployed,
-  4: bool grounded,
-}
-
-struct Intake {
-  1: bool open,
-  2: double speed,
-  3: double flow,
-  4: double area,
-}
-
-struct Fairing {
-  1: bool jettisoned,
+  5: double thermalEfficiency, // ��Ч��
+  6: double coreTemperature, // �����¶�
+  7: double optimumCoreTemperature, // ���ź����¶�
+  8: list&lt;ConverterResource&gt; inputs, // ת��������Դ���
+  9: list&lt;ConverterResource&gt; outputs, // ת�������Դ���
+  10: list&lt;ConverterResource&gt; requirements, // ת��������Դ
 }
 
 struct Propellant {
-  1: string name,
-  2: double currentAmount,
-  3: double currentRequirement,
-  4: double totalResourceAvailable,
-  5: double totalResourceCapacity,
-  6: bool isDeprived,
+  2: double currentAmount, // ��ǰ�������٣���λ��Unit/�롱
+  3: double currentRequirement, // ��ǰ���õ��������٣���λ��Unit/�롱����Щ��������ҪһЩʱ�����ı���������
+  4: double totalResourceAvailable, // ������Դʣ����
+  5: double totalResourceCapacity, // ������Դ����
+  6: bool isDeprived, // �Ƿ��Ѻľ�
 }
 
 struct Engine {

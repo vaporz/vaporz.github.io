@@ -57,19 +57,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/struct.html",
-          "hash": "Bpyy+wbyUOuSvPYYb2/T+Q=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/struct_cn.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/struct_cn.html",
-          "hash": "rgsyW0ImLTdJISdcOuY2rA=="
+          "hash": "MVblQ2d1s9k2Q9YGFsIu1Q=="
         }
       },
       "is_incremental": false,
@@ -123,11 +111,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "obj/api/KiftServer.KiftServiceHandler.yml",
+      "source_relative_path": "obj/api/Kift.Server.KiftServiceHandler.yml",
       "output": {
         ".html": {
-          "relative_path": "api/KiftServer.KiftServiceHandler.html",
-          "hash": "MyZFMHc5E7atzvh5RzYcsg=="
+          "relative_path": "api/Kift.Server.KiftServiceHandler.html",
+          "hash": "cl8roeklxH/e23mWwCPzww=="
         }
       },
       "is_incremental": false,
@@ -135,11 +123,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "obj/api/KiftServer.yml",
+      "source_relative_path": "obj/api/Kift.Server.yml",
       "output": {
         ".html": {
-          "relative_path": "api/KiftServer.html",
-          "hash": "lyZeCOgKZEXaPWzjqLBoow=="
+          "relative_path": "api/Kift.Server.html",
+          "hash": "wgVdzHykixtjSAjJs0O+cQ=="
         }
       },
       "is_incremental": false,
@@ -151,7 +139,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "3hZc5ZJW/VM2N8UKa8KLnQ=="
+          "hash": "P8LffZYzqeJQe4nqzWcvuQ=="
         }
       },
       "is_incremental": false,
@@ -181,6 +169,13 @@
         "full_build_reason_code": "ForceRebuild"
       },
       "processors": {
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
@@ -188,23 +183,16 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 6,
+          "skipped_file_count": 0
+        },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
           "total_file_count": 2,
-          "skipped_file_count": 0
-        },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": false,
-          "incrementalPhase": "build",
-          "total_file_count": 7,
-          "skipped_file_count": 0
-        },
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
           "skipped_file_count": 0
         }
       }

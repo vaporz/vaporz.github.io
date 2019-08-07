@@ -72,12 +72,12 @@
 <p>Comments about some thrift struct fields. Not all structs and fields are listed here, only when it&#39;s necessary.</p>
 <p>Notes:</p>
 <ul>
-<li>fields about distance are in meters</li>
+<li>fields about length/distance are in meters</li>
 <li>fields about time are in seconds</li>
 <li>fields about temperature are in Kelvin</li>
 <li>COM is short for &quot;center of mass&quot;</li>
 </ul>
-<pre><code>struct KVessel {
+<pre><code>struct Vessel {
   5: double MET, // time elapsed since the mission starts
   6: i32 stage, // current stage
   7: string biome, // current biome the vessel is in
@@ -85,7 +85,7 @@
   16: optional map&lt;string, observor.VesselResource&gt; inUseResources, // the resources currently comsumed by parts
 }
 
-struct KOrbit {
+struct Orbit {
   2: double apoapsis, // the distance from the body&#39;s COM to apoapsis
   3: double periapsis, // the distance from the body&#39;s COM to periapsis
   4: double apoapsisAltitude, // the distance from sea level of the body to apoapsis
@@ -106,18 +106,18 @@ struct KOrbit {
   23: double orbitalSpeed, // magnitude of velocity which is relative to the body&#39;s COM
 }
 
-struct KPart {
+struct Part {
   4: i32 stage, // (Part.inverseStage)the stage the part appears in the actual stage GUI
   10: double maxTemperature, // the part will be detroyed if temperature is higher than maxTemperature
   11: double maxSkinTemperature, // the part will be detroyed if skin temperature is higher than maxSkinTemperature
   12: optional Resources resources, // resources contained in this part
 }
 
-struct KCelestialBody{
+struct CelestialBody{
   4: double gravitationalParameter, // https://en.wikipedia.org/wiki/Standard_gravitational_parameter
   5: double surfaceGravity, // sea level gravity
   6: double rotationalPeriod, // sidereal rotation period
-  7: double rotationalSpeed, // rotational speed, in radians per second
+  7: double rotationalSpeed, // rotational speed, in radians per second ?? change to degrees
   8: double rotationAngle, // current body rotation angle, in degrees
   9: double initialRotation, // body rotation angle at UT 0, in degrees
   17: double flyingHighAltitudeThreshold, // a vessel is considered to be flying &quot;high&quot; in atmosphere above this altitude
@@ -132,237 +132,91 @@ struct TargetOrbitInfo {
   5: double relativeInclination, // angle of inclination relative to target&#39;s orbit, in degrees
 }
 
-struct KManeuverNode {
-  3: KVector3d deltaVVector, // the planned deltaV vector, won&#39;t change
+struct ManeuverNode {
+  3: Vector3d deltaVVector, // the planned deltaV vector, won&#39;t change
   4: double deltaV, // the planned deltaV magnitude, won&#39;t change, in m/s
-  5: KVector3d remainingBurnVector, // the remaining deltaV vector, changes as the vessel is maneuvering
+  5: Vector3d remainingBurnVector, // the remaining deltaV vector, changes as the vessel is maneuvering
   6: double remainingDeltaV, // the magnitude of remaining deltaV vector, changes as the vessel is maneuvering
 }
 
-struct AttitudeInfo {
-  1: KVector3d position, // position in world space
-  2: KVector3d direction, // the direction to which the vessel is pointing to in world space
-  3: KVector3d velocity, // velocity in world space
-  4: KVector3d prograde, // prograde direction of orbit in world space
-  5: KVector3d normal, // normal direction of orbit in world space
-  6: KVector3d radial, // radial direction of orbit in world space
-  7: KVector3d up, // up direction in world space, equal to &quot;direction&quot;
-  8: KVector3d forward, // forward direction in world space
-  9: KVector3d right, // right direction in world space
+struct AttitudeInfo { // all the fields are from world reference frame, not normalized except prograde, normal and radial
+  1: Vector3d position, // position in world space
+  2: Vector3d direction, // the direction to which the vessel is pointing to in world space
+  3: Vector3d velocity, // velocity in world space
+  4: Vector3d prograde, // prograde direction of orbit in world space
+  5: Vector3d normal, // normal direction of orbit in world space
+  6: Vector3d radial, // radial direction of orbit in world space
+  7: Vector3d up, // up direction in world space, equal to &quot;direction&quot;
+  8: Vector3d forward, // forward direction in world space
+  9: Vector3d right, // right direction in world space
   10: KQuaternionD rotation, // rotation in world space
 }
 
 struct Wheel {
-  1: observor.WheelType type,
-  2: observor.WheelState state,
-  3: double radius,
-  4: bool grounded,
-  5: bool hasBrakes,
-  6: double brakeForce,
-  7: bool autoFrictionControl,
-  8: double manualFrictionControl,
-  9: bool deployable,
-  10: bool deployed,
-  11: bool powered,
-  12: bool motorEnabled,
-  13: bool inverted,
-  14: observor.MotorState motorState,
-  15: double motorOutput,
-  16: bool tractionControlEnabled,
-  17: double tractionControl,
-  18: double driveLimiter,
-  19: bool steerable,
-  20: bool steeringEnabled,
-  21: bool steeringInverted,
-  22: bool hasSuspension,
-  23: double suspensionSpringStrength,
-  24: double suspensionDamperStrength,
-  25: bool broken,
-  26: bool repairable,
-  27: double stress,
-  28: double stressTolerance,
-  29: double stressPercentage,
-  30: double deflection,
-  31: double slip,
-}
-
-struct SolarPanel {
-  1: observor.SolarPanelState state,
-  2: bool deployable,
-  3: bool deployed,
-  4: double energyFlow,
-  5: double sunExposure,
-}
-
-struct Sensor {
-  1: bool activated,
-  2: string reading,
-}
-
-struct ResourceHarvester {
-  1: observor.ResourceHarvesterState state,
-  2: bool deployed,
-  3: bool activated,
-  4: double extractionRate,
-  5: double thermalEfficiency,
-  6: double coreTemperature,
-  7: double optimumCoreTemperature,
+  3: double radius, // wheel radius, in meters
+  6: double brakeForce, // brake force percentage
+  8: double manualFrictionControl, // only take effect when auto-friction-control is disabled
+  11: bool powered, // true if the wheel is powered by motors
+  15: double motorOutput, // current torque generated, in Newton meters.
+  16: bool tractionControlEnabled, // can be enabled only when the wheel is powered by motors
+  17: double tractionControl, // take effect if traction control is enabled
+  18: double driveLimiter, // take effect if traction control is disabled
+  27: double stress, // current stress on the wheel, in // TODO Newtons?
+  28: double stressTolerance, // stress above which the wheel will be broken
+  29: double stressPercentage, // percentage of stress to tolerance
 }
 
 struct ConverterResource {
-  1: string resourceName,
-  2: double radio,
-}
-
-struct Converter {
-  1: observor.ResourceConverterState state,
-  2: string name,
-  3: bool active,
-  4: string status,
-  5: double thermalEfficiency,
-  6: double coreTemperature,
-  7: double optimumCoreTemperature,
-  8: list&lt;ConverterResource&gt; inputs,
-  9: list&lt;ConverterResource&gt; outputs,
-  10: list&lt;ConverterResource&gt; requirements,
-}
-
-struct ResourceConverter {
-  1: list&lt;Converter&gt; converters,
-}
-
-struct ReactionWheel {
-  1: observor.ReactionWheelState state,
-}
-
-struct RCS {
-  1: bool enabled,
-  2: bool pitchEnabled,
-  3: bool yawEnabled,
-  4: bool rollEnabled,
-  5: bool upEnabled,
-  6: bool forwardEnabled,
-  7: bool rightEnabled,
-  8: bool hasFuel,
-  9: list&lt;string&gt; propellantNames,
-  10: map&lt;string, Propellant&gt; propellants,
-}
-
-struct Radiator {
-  1: observor.RadiatorState state,
-  2: bool deployable,
-  3: bool deployed,
-  4: bool cooling,
-
-}
-
-struct Parachute {
-  1: observor.ParachuteState state,
-  2: bool deployed,
-  3: double deployAltitude,
-  4: double deployMinPressure,
-}
-
-struct Light {
-  1: bool on,
-  2: double powerUsage,
-}
-
-struct Leg {
-  1: observor.LegState state,
-  2: bool deployable,
-  3: bool deployed,
-  4: bool grounded,
-}
-
-struct Intake {
-  1: bool open,
-  2: double speed,
-  3: double flow,
-  4: double area,
-}
-
-struct Fairing {
-  1: bool jettisoned,
+  // for example, ratios of input resource A and B are 0.3 and 0.7, 
+  // then for each 1 unit output resource (in total), 0.3 units of A and 0.7 units of B are consumed.
+  2: double ratio, 
 }
 
 struct Propellant {
-  1: string name,
-  2: double currentAmount,
-  3: double currentRequirement,
-  4: double totalResourceAvailable,
-  5: double totalResourceCapacity,
-  6: bool isDeprived,
+  2: double currentAmount, //  ???
+  3: double currentRequirement, // ???
+  4: double totalResourceAvailable, // total resource amount reachable 
+  5: double totalResourceCapacity, // total resource capacity reachable 
+  6: bool isDeprived, // whether the object has ran out of given resource
 }
 
 struct Engine {
-  1: bool active,
-  2: double thrust, // AvailableThrust?
-  3: double maxVacuumThrust,
-  4: double thrustPercentage,
-  5: double specificImpulse,
-  6: double vacuumSpecificImpulse,
-  7: double kerbinSeaLevelSpecificImpulse,
-  8: list&lt;string&gt; propellantNames,
-  9: map&lt;string, Propellant&gt; propellants,
-  10: bool hasFuel,
-  11: double throttle,
-  12: bool throttleLocked,
-  13: bool canRestart,
-  14: bool canShutdown,
-  15: bool hasModes,
-  16: bool autoSwitchMode,
-  17: string mode,
-  18: list&lt;string&gt; modes,
-  19: bool gimballed,
-  20: double gimbalRange,
-  21: bool gimbalLocked,
-  22: double gimbalLimit,
-}
-
-struct DockingPort {
-  1: observor.DockingPortState state,
-  2: bool hasShield,
-  3: bool shieled,
+  2: double thrust, // current thrust, in Newtons
+  3: double maxVacuumThrust, // ?? x1000? amount of thrust in vacuum with thrustPercentage set to 100% 
+  4: double thrustPercentage, // percentage to which the max thrust is limited
+  5: double specificImpulse, // current specific impulse, in seconds
+  6: double vacuumSpecificImpulse, // specific impulse in vacuum, in seconds
+  7: double kerbinSeaLevelSpecificImpulse, // specific impulse at sea level at Kerbin
+  9: map&lt;string, Propellant&gt; propellants, // propellants reachable and used by this engine
+  11: double throttle, // current throttle, may be different from vessel&#39;s mainThrottle if the engine takes time to change
+  15: bool hasModes, // true if this is a multi-mode engine
+  20: double gimbalRange, // in degrees
+  22: double gimbalLimit, // gimbal limit range, range from -100(reversed) to 100
 }
 
 struct Decoupler {
-  1: bool decoupled,
-  2: bool stageEnabled,
-  3: double impulse,
+  1: bool decoupled, // true if fired
+  2: bool stagingEnabled, // true if enabled in staging sequence
+  3: double ejectionForce, // impulse, in Newton seconds
 }
 
 struct ControlSurface {
-  1: bool pitchEnabled,
-  2: bool yawEnabled,
-  3: bool rollEnabled,
-  4: double authorityLimiter,
-  5: bool inverted,
-  6: bool deployed,
-  7: double surfaceArea,
-}
-
-struct CargoBay {
-  1: observor.CargoBayState state,
-  2: double deployPercent,
+  4: double authorityLimiter, // the range it can move, in percentage
+  7: double surfaceArea, // in m^2
 }
 
 struct Antenna {
-  1: observor.AntennaState state,
-  2: bool canTransmit,
-  3: bool allowPartial,
-  4: double power,
-  5: bool combinable,
-  6: double combinableExponent,
-  7: double packetInterval,
-  8: double packetSize,
-  9: double packetResourceCost,
+  3: bool allowPartial, // true if partial data transmission is allowed
+  5: bool combinable, // true if can be conbined with other antennas to increase signal strengh
+  6: double combinableExponent, // the exponent used to calculate conbined power
+  7: double packetInterval, // in second.
+  8: double packetSize, // ??? in Mbits
+  9: double packetResourceCost, // how many units of electricity is comsumed per packet
 }
 
 struct Resource {
-  1: string name,
-  2: double capacity,
-  3: double amount,
+  2: double capacity, // capacity amount of resource stored in this part
+  3: double amount, // current amount of resource stored in this part
 }
 </code></pre></article>
           </div>
