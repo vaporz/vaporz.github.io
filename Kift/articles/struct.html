@@ -75,6 +75,8 @@
 <li>fields about length/distance are in meters</li>
 <li>fields about time are in seconds</li>
 <li>fields about temperature are in Kelvin</li>
+<li>fields about mass are in Kg</li>
+<li>fields about angles are in degrees</li>
 <li>COM is short for &quot;center of mass&quot;</li>
 </ul>
 <pre><code>struct Vessel {
@@ -117,7 +119,7 @@ struct CelestialBody{
   4: double gravitationalParameter, // https://en.wikipedia.org/wiki/Standard_gravitational_parameter
   5: double surfaceGravity, // sea level gravity
   6: double rotationalPeriod, // sidereal rotation period
-  7: double rotationalSpeed, // rotational speed, in radians per second ?? change to degrees
+  7: double rotationalSpeed, // sidereal rotational speed, in degrees per second
   8: double rotationAngle, // current body rotation angle, in degrees
   9: double initialRotation, // body rotation angle at UT 0, in degrees
   17: double flyingHighAltitudeThreshold, // a vessel is considered to be flying &quot;high&quot; in atmosphere above this altitude
@@ -161,8 +163,8 @@ struct Wheel {
   16: bool tractionControlEnabled, // can be enabled only when the wheel is powered by motors
   17: double tractionControl, // take effect if traction control is enabled
   18: double driveLimiter, // take effect if traction control is disabled
-  27: double stress, // current stress on the wheel, in // TODO Newtons?
-  28: double stressTolerance, // stress above which the wheel will be broken
+  27: double stress, // current stress on the wheel, in kPA
+  28: double stressTolerance, // stress above which the wheel will be broken, in kPA
   29: double stressPercentage, // percentage of stress to tolerance
 }
 
@@ -173,8 +175,8 @@ struct ConverterResource {
 }
 
 struct Propellant {
-  2: double currentAmount, //  ???
-  3: double currentRequirement, // ???
+  2: double currentAmount, //  current flow speed, in Units per second
+  3: double currentRequirement, // current Maximum flow speed with current throttle, in Units per second
   4: double totalResourceAvailable, // total resource amount reachable 
   5: double totalResourceCapacity, // total resource capacity reachable 
   6: bool isDeprived, // whether the object has ran out of given resource
@@ -182,7 +184,7 @@ struct Propellant {
 
 struct Engine {
   2: double thrust, // current thrust, in Newtons
-  3: double maxVacuumThrust, // ?? x1000? amount of thrust in vacuum with thrustPercentage set to 100% 
+  3: double maxVacuumThrust, // amount of thrust in vacuum with thrustPercentage set to 100%, in Newtons
   4: double thrustPercentage, // percentage to which the max thrust is limited
   5: double specificImpulse, // current specific impulse, in seconds
   6: double vacuumSpecificImpulse, // specific impulse in vacuum, in seconds
@@ -210,7 +212,7 @@ struct Antenna {
   5: bool combinable, // true if can be conbined with other antennas to increase signal strengh
   6: double combinableExponent, // the exponent used to calculate conbined power
   7: double packetInterval, // in second.
-  8: double packetSize, // ??? in Mbits
+  8: double packetSize, // in Mits
   9: double packetResourceCost, // how many units of electricity is comsumed per packet
 }
 
