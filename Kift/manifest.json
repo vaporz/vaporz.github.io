@@ -21,7 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/config.html",
-          "hash": "aJ+TCK7NP7L311TGpBd7lg=="
+          "hash": "zAEJlUyV3e12IsNRgLCzjA=="
         }
       },
       "is_incremental": false,
@@ -45,7 +45,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/intro.html",
-          "hash": "5f2Jcv9l85BAbnXN6J+C5w=="
+          "hash": "bBUFPVmguBwERLHO4z1O6Q=="
         }
       },
       "is_incremental": false,
@@ -93,7 +93,34 @@
       "output": {
         ".html": {
           "relative_path": "articles/toc.html",
-          "hash": "WMfqkl+fmk6fTo6Lc0h/bQ=="
+          "hash": "zA3xQQvOqeXnhO808lEWsw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "articles/zh_cn/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/zh_cn/intro.html",
+          "hash": "vw5MfSsOm6Fq4xoEJfOHwg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/zh_cn/struct.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/zh_cn/struct.html",
+          "hash": "xqr4v0PIyZPtUx/+nUaF6Q=="
         }
       },
       "is_incremental": false,
@@ -127,7 +154,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "3Hnk+LVNSwfcgmH1bZueaQ=="
+          "hash": "MHyYH6DjsivcNsMD1vkUNg=="
         }
       },
       "is_incremental": false,
@@ -200,16 +227,16 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 10,
+          "skipped_file_count": 0
+        },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
           "total_file_count": 2,
-          "skipped_file_count": 0
-        },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": false,
-          "incrementalPhase": "build",
-          "total_file_count": 8,
           "skipped_file_count": 0
         },
         "TocDocumentProcessor": {
