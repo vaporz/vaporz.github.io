@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Kift | KiftServer </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Kift | KiftServer ">
+    <meta name="generator" content="docfx 2.44.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="kift">Kift</h1>
+
+<img src="https://github.com/vaporz/Kift/blob/master/server/images/drone.png" width="200">
+<p>坎巴拉太空计划(<a href="https://store.steampowered.com/app/220200/Kerbal_Space_Program/">Kerbal Space Program</a>, v1.7.3+)的<a href="https://thrift.apache.org/">Thrift</a>(v0.12.0)插件.</p>
+<p>在线文档: <a href="https://vaporz.github.io/Kift/index.html">https://vaporz.github.io/Kift/index.html</a></p>
+<p>一开始打算用GRPC，但GRPC要求.NET Framework的版本在4.5以上，而KSP是基于3.5版本的，很老的版本。</p>
+<h2 id="软件架构">软件架构</h2>
+<img src="https://github.com/vaporz/Kift/blob/master/server/images/arch.png" width="670">
+<p>Kift在KSP进程里启动一个Thrift Server线程。 这个Server接收请求，并发送到一个消息队列（MQ）。KSP中有一个Addon会从MQ中消费消息，并运行对应的Executor。
+对每一个Request，Server在接收到Response之前，会一直阻塞等待，直到收到Response，或者超时。</p>
+<h2 id="支持的编程语言">支持的编程语言</h2>
+<p>理论上，只要是Thrift v0.12.0支持的语言，Kift都支持。</p>
+<p><a href="https://github.com/apache/thrift/blob/v0.12.0/LANGUAGES.md">Thrift v0.12.0支持的语言有</a>:</p>
+<p>C, C++, Go, Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C#, Cocoa, JavaScript, Node.js, Smalltalk, OCaml 和 Delphi， 等等.</p>
+<h2 id="给开发者的说明">给开发者的说明</h2>
+<ul>
+<li>复制&quot;Kerbal Space Program&quot;文件夹，粘贴到&quot;Kift&quot;文件夹内.</li>
+</ul>
+<h2 id="入门指南">入门指南</h2>
+<h3 id="1-安装kift">1, 安装Kift</h3>
+<p>下载<a href="https://github.com/vaporz/Kift/releases">Kift.zip</a>，将压缩包中的Kift文件夹复制到&quot;Kerbal Space Programe/GameData&quot;内。</p>
+<p>现在服务端就准备好了。当你的游戏载入完成，显示出主菜单是，Thrift server应该已经启动，并准备好接收请求了。</p>
+<h3 id="2-连接server端调用kift-api">2, 连接Server端，调用Kift API</h3>
+<p>为了跟Thrift Server端互动，你需要自己写Client端的代码。</p>
+<p>下面的示例代码，展示了如何获取当前游戏中的飞行器相关的数据：</p>
+<pre><code class="lang-csharp"> // 游戏已经启动，并且必须在Flight场景下
+
+ // 导入&quot;Kift.ThriftGen.dll&quot;(编译自&quot;Kift/thrift-gen/gen-csharp&quot;),
+ // 或者你可以自己生成桩代码，然后编译并导入你的DLL文件。
+ using Kift;
+
+ // 导入&quot;Thrift.dll&quot;: https://cwiki.apache.org/confluence/display/thrift/ThriftUsageCSharp
+ using Thrift.Protocol;
+ using Thrift.Transport;
+
+ ...
+
+ // 监听端口是可配置的，配置文件是&quot;Kerbal Space Program/GameData/Kift/server.cfg&quot;
+ TTransport transport = new TSocket(&quot;localhost&quot;, 9090);
+ TProtocol protocol = new TCompactProtocol(transport);
+ KiftService.Client client = new KiftService.Client(protocol);
+ transport.Open(); // 连接Server
+
+ Vessel v = client.currentVessel(); // 请求 API &quot;currentVessel&quot;
+ Console.WriteLine(v.Name);
+
+ ...
+
+ transport.Close(); // 最后关闭连接
+
+</code></pre>
+<h3 id="3-为其他编程语言生成thrift桩代码">3, 为其他编程语言生成Thrift桩代码</h3>
+<p>在&quot;Kift/thrift-gen&quot;文件夹内有一些现成的Thrift生成代码，涵盖的语言有：<br>
+C, C++, C#, Go, Java, JavaScript, Node.js, Lua, PHP, Ruby 和 Rust。</p>
+<p>只需要向你的项目中导入这些代码，然后你就可以创建Client来连接Server，并请求Kift API了。</p>
+<p>如果你使用的语言不在列表中，你可以自己生成。</p>
+<p><a href="https://thrift.apache.org/">Thrift</a>是一个软件框架，用来开发可扩展，跨语言的程序。通过Thrift的帮助，你可以用任何语言写Client端代码，只要Thrift支持。</p>
+<p>Kift提供的API都定义在“Kift”文件夹内的IDL文件“service.thrift”中。</p>
+<p><a href="https://thrift.apache.org/download">下载 Thrift v0.12.0</a>，然后用下面的命令生成桩代码：</p>
+<pre><code class="lang-shell">thrift --gen &lt;language&gt; &lt;Thrift filename&gt;
+</code></pre>
+<p>例如，如果你用C#开发，那就运行：</p>
+<pre><code class="lang-shell">$thrift -r --gen csharp service.thrift
+</code></pre>
+<p>如果你用Golang，那就运行：</p>
+<pre><code class="lang-shell">$thrift -r --gen go service.thrift
+</code></pre>
+<h2 id="kift-apis">Kift APIs</h2>
+<p>Kift提供两大类API：“数据同步API”和“指令API”。</p>
+<p>“数据同步API”从游戏中<strong>接收</strong>数据，而“指令API”则向游戏<strong>发送</strong>指令，以便控制载具，部件以及游戏本身。</p>
+<p>“指令API”又根据目标不用，分成三个小类。</p>
+<ul>
+<li><a href="https://vaporz.github.io/Kift/api/index.html#infosync-apis">数据同步API</a>
+<ul>
+<li><a href="https://vaporz.github.io/Kift/api/index.html#snapshot">实时快照</a><br>
+实时读取数据（几乎实时），方便你监控一些指标数据，比如高度，速度等。</li>
+<li><a href="https://vaporz.github.io/Kift/api/index.html#getinfo-apis">数据读取</a><br>
+从当前游戏中读取数据，比如当前载具数据，获取载具不见列表等。</li>
+</ul>
+</li>
+<li><a href="https://vaporz.github.io/Kift/api/index.html#command-apis">指令API</a>
+<ul>
+<li><a href="https://vaporz.github.io/Kift/api/index.html#vessel-control-apis">载具控制</a><br>
+用于控制一个载具的API，比如控制俯仰/偏航/桶滚，开启/关闭RCS，部署/收起着陆器，等等。</li>
+<li><a href="https://vaporz.github.io/Kift/api/index.html#part-control-apis">部件控制</a><br>
+用于控制单个部件的API，比如打开/收起太阳能帆板，打开/关闭货舱，等等。</li>
+<li><a href="https://vaporz.github.io/Kift/api/index.html#game-control-apis">游戏控制</a><br>
+用于控制游戏本身的API，比如时间加速，改变视角模式，增加/删除机动点，等等。</li>
+</ul>
+</li>
+</ul>
+<p>更多细节请查看在线文档: <a href="https://vaporz.github.io/Kift/api/index.html">https://vaporz.github.io/Kift/api/index.html</a></p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/vaporz/Kift/blob/master/server/articles/intro_cn.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright © 2019 Zhang Xiao
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
