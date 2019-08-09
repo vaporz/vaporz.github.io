@@ -72,22 +72,24 @@
 <p>Default configuration:</p>
 <pre><code class="lang-yaml">KIFT
 {
-    port = 9090
-    maxRpcPerUpdate = 1
-    maxDurationPerUpdateInNanoseconds = 20000000 // 20ms
+	port = 9090
+	maxRpcPerUpdate = 1
+	maxDurationPerUpdateInNanoseconds = 20000000 // 20ms
 }
-</code></pre><h3 id="port">port</h3>
+</code></pre>
+<h3 id="port">port</h3>
 <p>The port to which the server is listening.</p>
 <h3 id="maxrpcperupdate">maxRpcPerUpdate</h3>
-<p>By default, &quot;maxRpcPerUpdate&quot; is set to 1, which means one RPC is processed for each Update().<br>So the default RPC rate should be the same with the game&#39;s FPS, typically, 60 FPS.</p>
-<p>If &quot;maxRpcPerUpdate&quot; is set to N, then at most N * FPS RPCs are processed per second. 
+<p>By default, &quot;maxRpcPerUpdate&quot; is set to 1, which means one RPC is processed for each Update().<br>
+So the default RPC rate should be the same with the game's FPS, typically, 60 FPS.</p>
+<p>If &quot;maxRpcPerUpdate&quot; is set to N, then at most N * FPS RPCs are processed per second.
 For example, if &quot;maxRpcPerUpdate&quot; is set to 5, and the game is running at 60 FPS, then 300 RPCs are processed per second at most.</p>
 <h3 id="maxdurationperupdateinnanoseconds">maxDurationPerUpdateInNanoseconds</h3>
-<p>&quot;maxDurationPerUpdateInNanoseconds&quot; describes how long each Update() should take. 
+<p>&quot;maxDurationPerUpdateInNanoseconds&quot; describes how long each Update() should take.
 The KiftAddon will exit current Update() if the time has elapsed for more than configured duration, since the beginning of current Update().</p>
 <p>Since the time is measured after each RPC, so the actual time each Update() takes is always larger than &quot;maxDurationPerUpdateInNanoseconds&quot;.</p>
-<p>For example, if &quot;maxDurationPerUpdateInNanoseconds&quot; is set to 4 seconds, and each RPC takes 3 seconds to finish. 
-Then there is 1 second left after the first RPC is finished, the second RPC also takes 3 seconds to finish, so it&#39;s 3+3=6 seconds in total.
+<p>For example, if &quot;maxDurationPerUpdateInNanoseconds&quot; is set to 4 seconds, and each RPC takes 3 seconds to finish.
+Then there is 1 second left after the first RPC is finished, the second RPC also takes 3 seconds to finish, so it's 3+3=6 seconds in total.
 6 is larger than 4, so current Update() is done.</p>
 </article>
           </div>

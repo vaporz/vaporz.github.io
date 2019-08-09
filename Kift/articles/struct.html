@@ -69,7 +69,7 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="thrift-struct-comments">Thrift struct comments</h1>
 
-<p>Comments about some thrift struct fields. Not all structs and fields are listed here, only when it&#39;s necessary.</p>
+<p>Comments about some thrift struct fields. Not all structs and fields are listed here, only when it's necessary.</p>
 <p>Notes:</p>
 <ul>
 <li>fields about length/distance are in meters</li>
@@ -83,16 +83,16 @@
   5: double MET, // time elapsed since the mission starts
   6: i32 stage, // current stage
   7: string biome, // current biome the vessel is in
-  15: optional map&lt;string, observor.VesselResource&gt; totalResources, // the whole vessel&#39;s resources
+  15: optional map&lt;string, observor.VesselResource&gt; totalResources, // the whole vessel's resources
   16: optional map&lt;string, observor.VesselResource&gt; inUseResources, // the resources currently comsumed by parts
 }
 
 struct Orbit {
-  2: double apoapsis, // the distance from the body&#39;s COM to apoapsis
-  3: double periapsis, // the distance from the body&#39;s COM to periapsis
+  2: double apoapsis, // the distance from the body's COM to apoapsis
+  3: double periapsis, // the distance from the body's COM to periapsis
   4: double apoapsisAltitude, // the distance from sea level of the body to apoapsis
   5: double periapsisAltitude, // the distance from sea level of the body to periapsis
-  8: double radius, // current distance from the body&#39;s COM to the orbiting object&#39;s COM
+  8: double radius, // current distance from the body's COM to the orbiting object's COM
   9: double speed, // magnitude of velocity in world space
   10: double period, // orbital period
   13: double eccentricity, // https://en.wikipedia.org/wiki/Orbital_eccentricity
@@ -104,8 +104,8 @@ struct Orbit {
   19: double meanAnomaly, // https://en.wikipedia.org/wiki/Mean_anomaly
   20: double eccentricAnomaly, // https://en.wikipedia.org/wiki/Eccentric_anomaly
   21: double trueAnomaly, // https://en.wikipedia.org/wiki/True_anomaly
-  22: double timeToSOIChange, // the time after which the vessel will shift to another body&#39;s sphere of influence
-  23: double orbitalSpeed, // magnitude of velocity which is relative to the body&#39;s COM
+  22: double timeToSOIChange, // the time after which the vessel will shift to another body's sphere of influence
+  23: double orbitalSpeed, // magnitude of velocity which is relative to the body's COM
 }
 
 struct Part {
@@ -131,12 +131,12 @@ struct TargetOrbitInfo {
   2: double closestApproachDistance, // the distance at &quot;closestApproachTime&quot;
   3: double trueAnomalyAtAN, // angle of true anomaly at ascending node, in degrees, between 0 and 180
   4: double trueAnomalyAtDN, // angle of true anomaly at descending node, in degrees, between 0 and 180
-  5: double relativeInclination, // angle of inclination relative to target&#39;s orbit, in degrees
+  5: double relativeInclination, // angle of inclination relative to target's orbit, in degrees
 }
 
 struct ManeuverNode {
-  3: Vector3d deltaVVector, // the planned deltaV vector, won&#39;t change
-  4: double deltaV, // the planned deltaV magnitude, won&#39;t change, in m/s
+  3: Vector3d deltaVVector, // the planned deltaV vector, won't change
+  4: double deltaV, // the planned deltaV magnitude, won't change, in m/s
   5: Vector3d remainingBurnVector, // the remaining deltaV vector, changes as the vessel is maneuvering
   6: double remainingDeltaV, // the magnitude of remaining deltaV vector, changes as the vessel is maneuvering
 }
@@ -190,7 +190,7 @@ struct Engine {
   6: double vacuumSpecificImpulse, // specific impulse in vacuum, in seconds
   7: double kerbinSeaLevelSpecificImpulse, // specific impulse at sea level at Kerbin
   9: map&lt;string, Propellant&gt; propellants, // propellants reachable and used by this engine
-  11: double throttle, // current throttle, may be different from vessel&#39;s mainThrottle if the engine takes time to change
+  11: double throttle, // current throttle, may be different from vessel's mainThrottle if the engine takes time to change
   15: bool hasModes, // true if this is a multi-mode engine
   20: double gimbalRange, // in degrees
   22: double gimbalLimit, // gimbal limit range, range from -100(reversed) to 100
@@ -220,7 +220,8 @@ struct Resource {
   2: double capacity, // capacity amount of resource stored in this part
   3: double amount, // current amount of resource stored in this part
 }
-</code></pre></article>
+</code></pre>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">

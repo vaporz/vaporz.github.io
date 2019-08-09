@@ -69,13 +69,13 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="kift">Kift</h1>
 
-<p><img src="../images/drone.png" width="200"></p>
+<img src="../images/drone.png" width="200">
 <p><a href="https://thrift.apache.org/">Thrift</a>(v0.12.0) plugin for <a href="https://store.steampowered.com/app/220200/Kerbal_Space_Program/">Kerbal Space Program</a>（v1.7.3+).</p>
 <p>Doc portal: <a href="https://vaporz.github.io/Kift/index.html">https://vaporz.github.io/Kift/index.html</a></p>
 <p><a href="https://github.com/vaporz/Kift/blob/master/README_cn.md">--&gt;中文介绍点击这里&lt;--</a></p>
 <p>I tried to use GRPC at first, but it appears that GRPC requires .NET Framework 4.5+, and unfortunately, KSP is built on .NET Framework 3.5, which is quite old.</p>
 <h2 id="architecture">Architecture</h2>
-<p><img src="../images/arch.png" width="670"></p>
+<img src="../images/arch.png" width="670">
 <p>Kift starts a Thrift server inside of KSP process. The server receives requests, then send them to a Message Queue. A KSP addon will dequeue requests from the queue, and run the corresponding Executor. The server will wait until the response to a request is returned.</p>
 <h2 id="supported-languages">Supported languages</h2>
 <p>Theoritically, any programming language supported by Thrift v0.12.0 is supported by Kift.</p>
@@ -91,9 +91,9 @@
 <p>Now the server side is ready. When your game is loaded and the main menu shows up, the Thift server is started and listening for Requests.</p>
 <h3 id="2-connect-to-thrift-server-and-call-kift-apis">2, Connect to Thrift server, and call Kift APIs</h3>
 <p>To interact with the Thrift server within KSP process, you have to write your own client side codes.</p>
-<p>Following lines of code show how to call a Kift API to get current vessel&#39;s info, in C#:</p>
+<p>Following lines of code show how to call a Kift API to get current vessel's info, in C#:</p>
 <pre><code class="lang-csharp"> // The game is started, and MUST be in Flight scene.
-
+ 
  // Import &quot;Kift.ThriftGen.dll&quot;(built from &quot;Kift/thrift-gen/gen-csharp&quot;),
  // or generate stub codes by yourself, then build and import your DLL file.
  using Kift;
@@ -116,33 +116,45 @@
  ...
 
  transport.Close(); // finally close the connection
-</code></pre><h3 id="3-thrift-stub-code-for-other-languages">3, Thrift stub code for other languages</h3>
-<p>There&#39;re ready-to-use stub codes under &quot;Kift/thrift-gen&quot;, including:<br>C, C++, C#, Go, Java, JavaScript, Node.js, Lua, PHP, Ruby and Rust.</p>
+</code></pre>
+<h3 id="3-thrift-stub-code-for-other-languages">3, Thrift stub code for other languages</h3>
+<p>There're ready-to-use stub codes under &quot;Kift/thrift-gen&quot;, including:<br>
+C, C++, C#, Go, Java, JavaScript, Node.js, Lua, PHP, Ruby and Rust.</p>
 <p>Just import the stub code to your project, then you can create a client to connect to server, and eventually call Kift APIs.</p>
 <p>If the language you are using is not in the list, you can generate thrift stub codes by yourself.</p>
-<p><a href="https://thrift.apache.org/">Thrift</a> is a software framework, for scalable cross-language services development. 
-With the help of Thrift, you can write client code in any programming language, as long as it&#39;s supported by Thrift.</p>
+<p><a href="https://thrift.apache.org/">Thrift</a> is a software framework, for scalable cross-language services development.
+With the help of Thrift, you can write client code in any programming language, as long as it's supported by Thrift.</p>
 <p>Kift APIs are defined in IDL file &quot;service.thrift&quot; in folder &quot;Kift/thrift-gen&quot;.</p>
 <p><a href="https://thrift.apache.org/download">Download a copy of Thrift v0.12.0</a>, then generate stub codes with following command:</p>
 <pre><code class="lang-shell">thrift --gen &lt;language&gt; &lt;Thrift filename&gt;
-</code></pre><p>For example, if you&#39;re using C#, then generate C# stub codes with</p>
+</code></pre>
+<p>For example, if you're using C#, then generate C# stub codes with</p>
 <pre><code class="lang-shell">$thrift -r --gen csharp service.thrift
-</code></pre><p>if you&#39;re using Golang, then run</p>
+</code></pre>
+<p>if you're using Golang, then run</p>
 <pre><code class="lang-shell">$thrift -r --gen go service.thrift
-</code></pre><h2 id="kift-apis">Kift APIs</h2>
-<p>Kift provides two sets of APIs: &quot;InfoSync APIs&quot; and &quot;Command APIs&quot;. </p>
+</code></pre>
+<h2 id="kift-apis">Kift APIs</h2>
+<p>Kift provides two sets of APIs: &quot;InfoSync APIs&quot; and &quot;Command APIs&quot;.</p>
 <p>&quot;InfoSync APIs&quot; pull infos from the game. &quot;Command APIs&quot; send commands to control vessels/parts/game.</p>
 <p>Command APIs are devided into three categories according to the target.</p>
 <ul>
-<li><a href="https://vaporz.github.io/Kift/api/index.html#infosync-apis">InfoSync APIs</a><ul>
-<li><a href="https://vaporz.github.io/Kift/api/index.html#snapshot">Real time snapshot</a><br>Read data at real time(approximately), useful when you want to monitor any data, such as height, speed, etc.</li>
-<li><a href="https://vaporz.github.io/Kift/api/index.html#getinfo-apis">GetInfo APIs</a><br>Get data from current game, such as current vessel, the part list of a vessel, etc.</li>
+<li><a href="https://vaporz.github.io/Kift/api/index.html#infosync-apis">InfoSync APIs</a>
+<ul>
+<li><a href="https://vaporz.github.io/Kift/api/index.html#snapshot">Real time snapshot</a><br>
+Read data at real time(approximately), useful when you want to monitor any data, such as height, speed, etc.</li>
+<li><a href="https://vaporz.github.io/Kift/api/index.html#getinfo-apis">GetInfo APIs</a><br>
+Get data from current game, such as current vessel, the part list of a vessel, etc.</li>
 </ul>
 </li>
-<li><a href="https://vaporz.github.io/Kift/api/index.html#command-apis">Command APIs</a><ul>
-<li><a href="https://vaporz.github.io/Kift/api/index.html#vessel-control-apis">Vessel Control APIs</a><br>APIs to control a vessel, such as pitch/yaw/roll, enable/disable RCS, deploy/restract landing legs, etc.</li>
-<li><a href="https://vaporz.github.io/Kift/api/index.html#part-control-apis">Part Control APIs</a><br>APIs to control a part, such as deploy/restract a solar panel, open/close a cargo bay, etc.</li>
-<li><a href="https://vaporz.github.io/Kift/api/index.html#game-control-apis">Game Control APIs</a><br>APIs to control the game, such as time warp, change camera mode, set/remove maneuver nodes etc.</li>
+<li><a href="https://vaporz.github.io/Kift/api/index.html#command-apis">Command APIs</a>
+<ul>
+<li><a href="https://vaporz.github.io/Kift/api/index.html#vessel-control-apis">Vessel Control APIs</a><br>
+APIs to control a vessel, such as pitch/yaw/roll, enable/disable RCS, deploy/restract landing legs, etc.</li>
+<li><a href="https://vaporz.github.io/Kift/api/index.html#part-control-apis">Part Control APIs</a><br>
+APIs to control a part, such as deploy/restract a solar panel, open/close a cargo bay, etc.</li>
+<li><a href="https://vaporz.github.io/Kift/api/index.html#game-control-apis">Game Control APIs</a><br>
+APIs to control the game, such as time warp, change camera mode, set/remove maneuver nodes etc.</li>
 </ul>
 </li>
 </ul>
