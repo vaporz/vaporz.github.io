@@ -69,12 +69,12 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="kift">Kift</h1>
 
-<img src="https://github.com/vaporz/Kift/blob/master/server/images/drone.png" width="200">
+<img src="../images/drone.png" width="200">
 <p>坎巴拉太空计划(<a href="https://store.steampowered.com/app/220200/Kerbal_Space_Program/">Kerbal Space Program</a>, v1.7.3+)的<a href="https://thrift.apache.org/">Thrift</a>(v0.12.0)插件.</p>
 <p>在线文档: <a href="https://vaporz.github.io/Kift/index.html">https://vaporz.github.io/Kift/index.html</a></p>
 <p>一开始打算用GRPC，但GRPC要求.NET Framework的版本在4.5以上，而KSP是基于3.5版本的，很老的版本。</p>
 <h2 id="软件架构">软件架构</h2>
-<img src="https://github.com/vaporz/Kift/blob/master/server/images/arch.png" width="670">
+<img src="../images/arch.png" width="670">
 <p>Kift在KSP进程里启动一个Thrift Server线程。 这个Server接收请求，并发送到一个消息队列（MQ）。KSP中有一个Addon会从MQ中消费消息，并运行对应的Executor。
 对每一个Request，Server在接收到Response之前，会一直阻塞等待，直到收到Response，或者超时。</p>
 <h2 id="支持的编程语言">支持的编程语言</h2>
