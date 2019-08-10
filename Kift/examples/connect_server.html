@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Auto-stage helper | KiftServer </title>
+    <title>Connect to Thrift Server | KiftServer </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Auto-stage helper | KiftServer ">
+    <meta name="title" content="Connect to Thrift Server | KiftServer ">
     <meta name="generator" content="docfx 2.44.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
@@ -67,109 +67,34 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="auto-stage-helper">Auto-stage helper</h1>
+<h1 id="connect-to-thrift-server">Connect to Thrift Server</h1>
 
-<p>This script will first activate stages until launch clamps are releases(if any).</p>
-<p>Then it'll activate a stage in one of the following conditions:</p>
-<ol>
-<li>No engines are in &quot;active&quot; state.</li>
-<li>All the engines in &quot;active&quot; state have ran out of fuel.</li>
-</ol>
-<pre><code class="lang-csharp">// Import Kift.Client.dll, Kift.ThriftGen.dll, Thrift.dll
+<p>Connect to Thrift Server with generated codes.</p>
+<pre><code class="lang-csharp">// Import Kift.ThriftGen.dll, Thrift.dll
 using System;
-using System.Collections.Generic;
-using System.Threading;
+using Thrift.Protocol;
+using Thrift.Transport;
 
 namespace Kift.Examples
 {
-    public class AutoStage
+    public class ConnectServer
     {
-        private static List&lt;Part&gt; FindActiveEngines(List&lt;Part&gt; engines)
-        {
-            List&lt;Part&gt; result = new List&lt;Part&gt;();
-            foreach (Part p in engines)
-            {
-                if (p.Engine.Active)
-                {
-                    result.Add(p);
-                }
-            }
-            return result;
-        }
         public static void Main()
         {
-            Client c = new Client(&quot;localhost&quot;, 9090);
-            KiftService.Client client = c.Connect();
+            string host = &quot;localhost&quot;;
+            int port = 9090;
+
+            TTransport transport = new TFramedTransport(new TSocket(host, port));
+            TProtocol protocol = new TCompactProtocol(transport);
+            KiftService.Client client = new KiftService.Client(protocol);
+            transport.Open();
             Console.WriteLine(&quot;Server is connected!&quot;);
-            Console.WriteLine(&quot;Launch in&quot;);
 
-            for (int i = 5; i &gt; 0; i--) // count down 5
-            {
-                Console.WriteLine(i);
-                Thread.Sleep(1000);
-            }
-
+            // Call Kift API
             Vessel v = client.currentVessel();
+            Console.WriteLine(&quot;Current vessel:&quot; + v);
 
-            while (true) // fire stage until launch clamps are released
-            {
-                List&lt;Part&gt; launchClamps = client.getVesselPartsByType(v.Id, PartType.LaunchClamp);
-                if (launchClamps.Count != 0)
-                {
-                    Console.WriteLine(&quot;Launch clamps are not released, stage!&quot;);
-                    client.stage();
-                }
-                else
-                {
-                    Console.WriteLine(&quot;Launch clamps are released!&quot;);
-                    break;
-                }
-                Thread.Sleep(2000);
-            }
-
-            Console.WriteLine(&quot;Start monitoring engines!&quot;);
-
-            VesselObservor vo = new VesselObservor(v.Id, &quot;localhost&quot;, 9090); // create a VesselObservor for current vessel
-            vo.WatchVessel(OVessel.Stage); // watch vessel's current stage
-            vo.SyncInterval = 500; // sync every 500ms
-            vo.StartStream(); // start syncing data
-            SnapshotResponse s = vo.Snapshot; // read data from &quot;s&quot;
-
-            while (true) // fire stage until vessel.stage == 0
-            {
-                Thread.Sleep(2000);
-                if (s.Vessel.Stage == 0) // check current stage, exit the loop if there're no more stages
-                {
-                    break;
-                }
-                List&lt;Part&gt; engines = client.getVesselPartsByType(v.Id, PartType.Engine);
-                List&lt;Part&gt; activeEngines = FindActiveEngines(engines);
-                if (activeEngines.Count == 0)
-                {
-                    Console.WriteLine(&quot;No active engines, stage!&quot;);
-                    client.stage();
-                    continue;
-                }
-
-                bool shouldStage = true;
-                foreach (Part p in activeEngines)
-                {
-                    if (p.Engine.HasFuel) // one of the active engines still has fuel, do not stage
-                    {
-                        shouldStage = false;
-                        break;
-                    }
-                }
-                if (shouldStage)
-                {
-                    Console.WriteLine(&quot;All active engines have ran out of fuel, stage!&quot;);
-                    client.stage();
-                }
-            }
-            Console.WriteLine(&quot;All stages activated! Program exit!&quot;);
-
-            vo.Close();
-            c.Close();
+            transport.Close();
         }
     }
 }
@@ -182,7 +107,7 @@ namespace Kift.Examples
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/vaporz/Kift/blob/master/server/examples/auto_stage.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/vaporz/Kift/blob/master/server/examples/connect_server.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>
