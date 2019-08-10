@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title> | KiftServer </title>
+    <title>Auto-stage helper | KiftServer </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content=" | KiftServer ">
+    <meta name="title" content="Auto-stage helper | KiftServer ">
     <meta name="generator" content="docfx 2.44.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
@@ -67,7 +67,14 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
+<h1 id="auto-stage-helper">Auto-stage helper</h1>
 
+<p>This script will first activate stages until launch clamps are releases(if any).</p>
+<p>Then it'll activate a stage in one of the following conditions:</p>
+<ol>
+<li>No engines are in &quot;active&quot; state.</li>
+<li>All the engines in &quot;active&quot; state have ran out of fuel.</li>
+</ol>
 <pre><code class="lang-csharp">using System;
 using System.Collections.Generic;
 using System.Threading;
