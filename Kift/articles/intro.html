@@ -73,6 +73,9 @@
 <p><a href="https://thrift.apache.org/">Thrift</a>(v0.12.0) plugin for <a href="https://store.steampowered.com/app/220200/Kerbal_Space_Program/">Kerbal Space Program</a>（v1.7.3+).</p>
 <p>Doc portal: <a href="https://vaporz.github.io/Kift/index.html">https://vaporz.github.io/Kift/index.html</a></p>
 <p>I tried to use GRPC at first, but it appears that GRPC requires .NET Framework 4.5+, and unfortunately, KSP is built on .NET Framework 3.5, which is quite old.</p>
+<h2 id="what-is-kift">What is Kift?</h2>
+<p>Kift is inpired by <a href="https://github.com/krpc/krpc">kRPC</a> -- a great Mod from <a href="https://github.com/djungelorm">@djungelorm</a>.</p>
+<p>Kift is a bridge between your code and the game, you can run your own codes to control the game from outside of the game.</p>
 <h2 id="architecture">Architecture</h2>
 <img src="../images/arch.png" width="670">
 <p>Kift starts a Thrift server inside of KSP process. The server receives requests, then send them to a Message Queue. A KSP addon will dequeue requests from the queue, and run the corresponding Executor. The server will wait until the response to a request is returned.</p>
@@ -80,10 +83,6 @@
 <p>Theoritically, any programming language supported by Thrift v0.12.0 is supported by Kift.</p>
 <p><a href="https://github.com/apache/thrift/blob/v0.12.0/LANGUAGES.md">Languages supported by Thrift v0.12.0</a>:</p>
 <p>C, C++, Go, Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C#, Cocoa, JavaScript, Node.js, Smalltalk, OCaml and Delphi, etc.</p>
-<h2 id="notes-for-developers">Notes for developers</h2>
-<ul>
-<li>Copy &quot;Kerbal Space Program&quot; folder into &quot;Kift&quot; folder.</li>
-</ul>
 <h2 id="getting-started">Getting Started</h2>
 <h3 id="1-install-kift">1, Install Kift</h3>
 <p>Download Kift.zip, copy the &quot;Kift&quot; folder in zip file into &quot;Kerbal Space Programe/GameData&quot; directory.</p>
@@ -158,6 +157,12 @@ APIs to control the game, such as time warp, change camera mode, set/remove mane
 </li>
 </ul>
 <p>See more about Kift APIs at the doc portal: <a href="https://vaporz.github.io/Kift/api/index.html">https://vaporz.github.io/Kift/api/index.html</a></p>
+<h2 id="some-notes">Some notes</h2>
+<ul>
+<li>To Kift developers: Copy &quot;Kerbal Space Program&quot; folder into &quot;Kift&quot; folder.</li>
+<li>Any feature which can be implemented with exsiting APIs is not likely to be added to Kift APIs, for example, autopilot.</li>
+<li>Advanced features are supposed to be implemented at client side, the code are under directory &quot;Kift/client/[Language]&quot;.</li>
+</ul>
 </article>
           </div>
           

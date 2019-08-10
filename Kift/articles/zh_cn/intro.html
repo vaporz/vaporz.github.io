@@ -73,6 +73,9 @@
 <p>坎巴拉太空计划(<a href="https://store.steampowered.com/app/220200/Kerbal_Space_Program/">Kerbal Space Program</a>, v1.7.3+)的<a href="https://thrift.apache.org/">Thrift</a>(v0.12.0)插件.</p>
 <p>在线文档: <a href="https://vaporz.github.io/Kift/index.html">https://vaporz.github.io/Kift/index.html</a></p>
 <p>一开始打算用GRPC，但GRPC要求.NET Framework的版本在4.5以上，而KSP是基于3.5版本的，很老的版本。</p>
+<h2 id="kift是什么">Kift是什么？</h2>
+<p>Kift受启发自 <a href="https://github.com/krpc/krpc">kRPC</a> —— 一个由<a href="https://github.com/djungelorm">@djungelorm</a>开发的很棒的Mod。</p>
+<p>Kift是位于你的程序和游戏程序之间的桥梁，让你能够在运行于游戏外的程序中，控制游戏内内容。</p>
 <h2 id="软件架构">软件架构</h2>
 <img src="../../images/arch.png" width="670">
 <p>Kift在KSP进程里启动一个Thrift Server线程。 这个Server接收请求，并发送到一个消息队列（MQ）。KSP中有一个Addon会从MQ中消费消息，并运行对应的Executor。
@@ -81,10 +84,6 @@
 <p>理论上，只要是Thrift v0.12.0支持的语言，Kift都支持。</p>
 <p><a href="https://github.com/apache/thrift/blob/v0.12.0/LANGUAGES.md">Thrift v0.12.0支持的语言有</a>:</p>
 <p>C, C++, Go, Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C#, Cocoa, JavaScript, Node.js, Smalltalk, OCaml 和 Delphi， 等等.</p>
-<h2 id="给开发者的说明">给开发者的说明</h2>
-<ul>
-<li>复制&quot;Kerbal Space Program&quot;文件夹，粘贴到&quot;Kift&quot;文件夹内.</li>
-</ul>
 <h2 id="入门指南">入门指南</h2>
 <h3 id="1-安装kift">1, 安装Kift</h3>
 <p>下载<a href="https://github.com/vaporz/Kift/releases">Kift.zip</a>，将压缩包中的Kift文件夹复制到&quot;Kerbal Space Programe/GameData&quot;内。</p>
@@ -159,6 +158,12 @@ C, C++, C#, Go, Java, JavaScript, Node.js, Lua, PHP, Ruby 和 Rust。</p>
 </li>
 </ul>
 <p>更多细节请查看在线文档: <a href="https://vaporz.github.io/Kift/api/index.html">https://vaporz.github.io/Kift/api/index.html</a></p>
+<h2 id="一些备注">一些备注</h2>
+<ul>
+<li>致Kift开发者：复制&quot;Kerbal Space Program&quot;文件夹，粘贴到&quot;Kift&quot;文件夹内。</li>
+<li>凡是通过现有API能够实现的功能，一般都不会考虑加入到Kift API列表中，比如，自动驾驶。</li>
+<li>高级功能应当在Client端实现，代码放在目录&quot;Kift/client/[Language]&quot;中。</li>
+</ul>
 </article>
           </div>
           
