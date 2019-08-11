@@ -104,7 +104,7 @@
  ...
 
  // 监听端口是可配置的，配置文件是&quot;Kerbal Space Program/GameData/Kift/server.cfg&quot;
- TTransport transport = new TSocket(&quot;localhost&quot;, 9090);
+ TTransport transport = new TFramedTransport(new TSocket(&quot;localhost&quot;, 9090));
  TProtocol protocol = new TCompactProtocol(transport);
  KiftService.Client client = new KiftService.Client(protocol);
  transport.Open(); // 连接Server
@@ -116,22 +116,6 @@
 
  transport.Close(); // 最后关闭连接
 
-</code></pre>
-<h3 id="3-为其他编程语言生成thrift桩代码">3, 为其他编程语言生成Thrift桩代码</h3>
-<p>在&quot;Kift/thrift-gen&quot;文件夹内有一些现成的Thrift生成代码，涵盖的语言有：<br>
-C, C++, C#, Go, Java, JavaScript, Node.js, Lua, PHP, Ruby 和 Rust。</p>
-<p>只需要向你的项目中导入这些代码，然后你就可以创建Client来连接Server，并请求Kift API了。</p>
-<p>如果你使用的语言不在列表中，你可以自己生成。</p>
-<p><a href="https://thrift.apache.org/">Thrift</a>是一个软件框架，用来开发可扩展，跨语言的程序。通过Thrift的帮助，你可以用任何语言写Client端代码，只要Thrift支持。</p>
-<p>Kift提供的API都定义在“Kift”文件夹内的IDL文件“service.thrift”中。</p>
-<p><a href="https://thrift.apache.org/download">下载 Thrift v0.12.0</a>，然后用下面的命令生成桩代码：</p>
-<pre><code class="lang-shell">thrift --gen &lt;language&gt; &lt;Thrift filename&gt;
-</code></pre>
-<p>例如，如果你用C#开发，那就运行：</p>
-<pre><code class="lang-shell">$thrift -r --gen csharp service.thrift
-</code></pre>
-<p>如果你用Golang，那就运行：</p>
-<pre><code class="lang-shell">$thrift -r --gen go service.thrift
 </code></pre>
 <h2 id="kift-apis">Kift APIs</h2>
 <p>Kift提供两大类API：“数据同步API”和“指令API”。</p>
@@ -158,6 +142,22 @@ C, C++, C#, Go, Java, JavaScript, Node.js, Lua, PHP, Ruby 和 Rust。</p>
 </li>
 </ul>
 <p>更多细节请查看在线文档: <a href="https://vaporz.github.io/Kift/api/index.html">https://vaporz.github.io/Kift/api/index.html</a></p>
+<h2 id="为其他编程语言生成thrift桩代码">为其他编程语言生成Thrift桩代码</h2>
+<p>在&quot;Kift/thrift-gen&quot;文件夹内有一些现成的Thrift生成代码，涵盖的语言有：<br>
+C, C++, C#, Go, Java, JavaScript, Node.js, Lua, PHP, Ruby 和 Rust。</p>
+<p>只需要向你的项目中导入这些代码，然后你就可以创建Client来连接Server，并请求Kift API了。</p>
+<p>如果你使用的语言不在列表中，你可以自己生成。</p>
+<p><a href="https://thrift.apache.org/">Thrift</a>是一个软件框架，用来开发可扩展，跨语言的程序。通过Thrift的帮助，你可以用任何语言写Client端代码，只要Thrift支持。</p>
+<p>Kift提供的API都定义在“Kift”文件夹内的IDL文件“service.thrift”中。</p>
+<p><a href="https://thrift.apache.org/download">下载 Thrift v0.12.0</a>，然后用下面的命令生成桩代码：</p>
+<pre><code class="lang-shell">thrift --gen &lt;language&gt; &lt;Thrift filename&gt;
+</code></pre>
+<p>例如，如果你用C#开发，那就运行：</p>
+<pre><code class="lang-shell">$thrift -r --gen csharp service.thrift
+</code></pre>
+<p>如果你用Golang，那就运行：</p>
+<pre><code class="lang-shell">$thrift -r --gen go service.thrift
+</code></pre>
 <h2 id="一些备注">一些备注</h2>
 <ul>
 <li>致Kift开发者：复制&quot;Kerbal Space Program&quot;文件夹，粘贴到&quot;Kift&quot;文件夹内。</li>

@@ -86,7 +86,7 @@
 <h2 id="getting-started">Getting Started</h2>
 <h3 id="1-install-kift">1, Install Kift</h3>
 <p>Download Kift.zip, copy the &quot;Kift&quot; folder in zip file into &quot;Kerbal Space Programe/GameData&quot; directory.</p>
-<p>Now the server side is ready. When your game is loaded and the main menu shows up, the Thift server is started and listening for Requests.</p>
+<p>Now the server side is ready. When your game is loaded and the main menu shows up, the Thift server is started and listening for requests.</p>
 <h3 id="2-connect-to-thrift-server-and-call-kift-apis">2, Connect to Thrift server, and call Kift APIs</h3>
 <p>To interact with the Thrift server within KSP process, you have to write your own client side codes.</p>
 <p>Following lines of code show how to call a Kift API to get current vessel's info, in C#:</p>
@@ -103,7 +103,7 @@
  ...
 
  // The port is configable in &quot;Kerbal Space Program/GameData/Kift/server.cfg&quot;
- TTransport transport = new TSocket(&quot;localhost&quot;, 9090);
+ TTransport transport = new TFramedTransport(new TSocket(&quot;localhost&quot;, 9090));
  TProtocol protocol = new TCompactProtocol(transport);
  KiftService.Client client = new KiftService.Client(protocol);
  transport.Open(); // Connect to server
@@ -114,23 +114,6 @@
  ...
 
  transport.Close(); // finally close the connection
-</code></pre>
-<h3 id="3-thrift-stub-code-for-other-languages">3, Thrift stub code for other languages</h3>
-<p>There're ready-to-use stub codes under &quot;Kift/thrift-gen&quot;, including:<br>
-C, C++, C#, Go, Java, JavaScript, Node.js, Lua, PHP, Ruby and Rust.</p>
-<p>Just import the stub code to your project, then you can create a client to connect to server, and eventually call Kift APIs.</p>
-<p>If the language you are using is not in the list, you can generate thrift stub codes by yourself.</p>
-<p><a href="https://thrift.apache.org/">Thrift</a> is a software framework, for scalable cross-language services development.
-With the help of Thrift, you can write client code in any programming language, as long as it's supported by Thrift.</p>
-<p>Kift APIs are defined in IDL file &quot;service.thrift&quot; in folder &quot;Kift/thrift-gen&quot;.</p>
-<p><a href="https://thrift.apache.org/download">Download a copy of Thrift v0.12.0</a>, then generate stub codes with following command:</p>
-<pre><code class="lang-shell">thrift --gen &lt;language&gt; &lt;Thrift filename&gt;
-</code></pre>
-<p>For example, if you're using C#, then generate C# stub codes with</p>
-<pre><code class="lang-shell">$thrift -r --gen csharp service.thrift
-</code></pre>
-<p>if you're using Golang, then run</p>
-<pre><code class="lang-shell">$thrift -r --gen go service.thrift
 </code></pre>
 <h2 id="kift-apis">Kift APIs</h2>
 <p>Kift provides two sets of APIs: &quot;InfoSync APIs&quot; and &quot;Command APIs&quot;.</p>
@@ -157,6 +140,23 @@ APIs to control the game, such as time warp, change camera mode, set/remove mane
 </li>
 </ul>
 <p>See more about Kift APIs at the doc portal: <a href="https://vaporz.github.io/Kift/api/index.html">https://vaporz.github.io/Kift/api/index.html</a></p>
+<h2 id="generate-thrift-stub-code-for-other-languages">Generate Thrift stub code for other languages</h2>
+<p>There're ready-to-use stub codes under &quot;Kift/thrift-gen&quot;, including:<br>
+C, C++, C#, Go, Java, JavaScript, Node.js, Lua, PHP, Ruby and Rust.</p>
+<p>Just import the stub code to your project, then you can create a client to connect to server, and eventually call Kift APIs.</p>
+<p>If the language you are using is not in the list, you can generate thrift stub codes by yourself.</p>
+<p><a href="https://thrift.apache.org/">Thrift</a> is a software framework, for scalable cross-language services development.
+With the help of Thrift, you can write client code in any programming language, as long as it's supported by Thrift.</p>
+<p>Kift APIs are defined in IDL file &quot;service.thrift&quot; in folder &quot;Kift/thrift-gen&quot;.</p>
+<p><a href="https://thrift.apache.org/download">Download a copy of Thrift v0.12.0</a>, then generate stub codes with following command:</p>
+<pre><code class="lang-shell">thrift --gen &lt;language&gt; &lt;Thrift filename&gt;
+</code></pre>
+<p>For example, if you're using C#, then generate C# stub codes with</p>
+<pre><code class="lang-shell">$thrift -r --gen csharp service.thrift
+</code></pre>
+<p>if you're using Golang, then run</p>
+<pre><code class="lang-shell">$thrift -r --gen go service.thrift
+</code></pre>
 <h2 id="some-notes">Some notes</h2>
 <ul>
 <li>To Kift developers: Copy &quot;Kerbal Space Program&quot; folder into &quot;Kift&quot; folder.</li>
