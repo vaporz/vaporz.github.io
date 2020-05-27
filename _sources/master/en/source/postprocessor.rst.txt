@@ -17,9 +17,9 @@ Edit "yourservice/grpcapi/component/components.go":
  +	 s.RegisterComponent("postEatApple", postEatApple)
  }
 
- +var postEatApple turbo.Postprocessor = func (resp http.ResponseWriter, req *http.Request, serviceResp interface{}) {
- +	sr := serviceResp.(*proto.EatAppleResponse)
- +	resp.Write([]byte("this is from postprocesser, message=" + sr.Message))
+ +var postEatApple turbo.Postprocessor = func (resp http.ResponseWriter, req *http.Request, serviceResp interface{}, err error) error {
+ +	resp.Write([]byte("[this is from postprocesser]"))
+ +  return nil
  +}
 
 Edit "yourservice/service.yaml":
@@ -32,5 +32,5 @@ Edit "yourservice/service.yaml":
 Restart HTTP server and test::
 
  $ curl -w "\n" "http://localhost:8081/eat_apple/5"
- this is from postprocesser, message=Good taste! Apple num=5
+ [this is from postprocesser]{"message":"Good taste! Apple num=5"}
 

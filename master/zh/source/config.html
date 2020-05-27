@@ -163,9 +163,13 @@
 <span class="c1"># 默认值: development</span>
 <span class="c1"># 合法值: production | development</span>
   <span class="l l-Scalar l-Scalar-Plain">environment</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">production</span>
-<span class="c1"># [可选] Turbo记录log的位置，可以是绝对路径，也可以是相对路径</span>
+<span class="c1"># [可选] Turbo记录log的位置，可以是绝对路径，也可以是相对路径，如果值为“”，则不打印log</span>
 <span class="c1"># 默认值: log</span>
   <span class="l l-Scalar l-Scalar-Plain">turbo_log_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">log</span>
+<span class="c1"># 项目根目录，不包括包路径</span>
+  <span class="l l-Scalar l-Scalar-Plain">file_root_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/a/b/c</span>
+<span class="c1"># 项目包路径</span>
+  <span class="l l-Scalar l-Scalar-Plain">package_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">com/myservice</span>
 <span class="c1"># http server监听的端口号</span>
   <span class="l l-Scalar l-Scalar-Plain">http_port</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">8081</span>
 

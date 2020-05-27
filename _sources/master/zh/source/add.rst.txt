@@ -39,7 +39,7 @@
 
 ::
 
- $ turbo generate package/path/to/yourservice -r grpc -I $GOPATH/src/package/path/to/yourservice
+ $ turbo generate package/path/to/yourservice -r grpc -I ~/yourservice
 
 4, 实现新的gRPC方法
 -------------------

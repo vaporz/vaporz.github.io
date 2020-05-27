@@ -1,0 +1,338 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Interceptor &mdash; Turbo Doc 0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Turbo Doc 0.2 documentation" href="index.html"/>
+        <link rel="up" title="Turbo组件" href="components.html"/>
+        <link rel="next" title="Preprocessor" href="preprocessor.html"/>
+        <link rel="prev" title="HTTP接口与后端接口映射" href="map.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="contents.html" class="icon icon-home"> Turbo Doc
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="contents.html">目录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">首页</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create.html">快速创建一个服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command.html">命令行工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add.html">如何添加新API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rules.html">规则和约定</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="components.html">Turbo提供的组件</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="map.html">HTTP接口与后端接口映射</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Interceptor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessor.html">Preprocessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postprocessor.html">Postprocessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hijacker.html">Hijacker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="convertor.html">Message类型转换器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errorhandler.html">ErrorHandler</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="shared.html">如何使用公共IDL文件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json.html">支持RESTFUL JSON API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thrift.html">支持Thrift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">配置文件说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multiplexing.html">启动多个service</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">Turbo Doc</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+          <li><a href="components.html">Turbo组件</a> &raquo;</li>
+        
+      <li>Interceptor</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/interceptor.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="interceptor">
+<span id="id1"></span><h1>Interceptor<a class="headerlink" href="#interceptor" title="Permalink to this headline">¶</a></h1>
+<p>拦截器提供了在发送request之前和之后做一些事情的机会。</p>
+<p>拦截器可以被设置给</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>所有URL</li>
+<li>某个URL根路径 (也就是一组URL)</li>
+<li>单个URL</li>
+<li>单个URL，并且指定 HTTP 谓语</li>
+</ol>
+</div></blockquote>
+<p>设置的粒度越精确，拦截器的优先级就越高</p>
+<p>比如，拦截器 A 设置在 ‘GET /abc’，拦截器 B 设置给了所有URL，那么，当请求”GET /abc”时，拦截器A会被执行，B不会被执行，但请求”POST /abc”时，只有B会被执行。</p>
+<p>下面，让我们来创建一个拦截器，设置给”/hello”，用来记录一些log。</p>
+<p>编辑 “yourservice/interceptor/log.go”:</p>
+<div class="highlight-go"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">interceptor</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+       <span class="s">&quot;github.com/vaporz/turbo&quot;</span>
+       <span class="s">&quot;fmt&quot;</span>
+       <span class="s">&quot;net/http&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">type</span> <span class="nx">LogInterceptor</span> <span class="kd">struct</span> <span class="p">{</span>
+       <span class="c1">// optional, BaseInterceptor allows you to create an interceptor which implements</span>
+       <span class="c1">// Before() or After() only, or none of them.</span>
+       <span class="c1">// If you were to implement both, you can remove this line.</span>
+       <span class="nx">turbo</span><span class="p">.</span><span class="nx">BaseInterceptor</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="nx">LogInterceptor</span><span class="p">)</span> <span class="nx">Before</span><span class="p">(</span><span class="nx">resp</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">req</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+       <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;[Before] Request URL:&quot;</span><span class="o">+</span><span class="nx">req</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">Path</span><span class="p">)</span>
+       <span class="k">return</span> <span class="nx">req</span><span class="p">,</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="nx">LogInterceptor</span><span class="p">)</span> <span class="nx">After</span><span class="p">(</span><span class="nx">resp</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">req</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+       <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;[After] Request URL:&quot;</span><span class="o">+</span><span class="nx">req</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">Path</span><span class="p">)</span>
+       <span class="k">return</span> <span class="nx">req</span><span class="p">,</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>然后把它设置给 URL “/hello”。</p>
+<p>编辑 “yourservice/grpcapi/component/components.go”:</p>
+<div class="highlight-diff"><div class="highlight"><pre><span></span>package component
+
+import (
+       &quot;github.com/vaporz/turbo-example/yourservice/gen/proto&quot;
+       &quot;google.golang.org/grpc&quot;
+<span class="gi">+      &quot;github.com/vaporz/turbo-example/yourservice/interceptor&quot;</span>
+)
+
+func (i *ServiceInitializer) InitService(s turbo.Servable) error {
+<span class="gi">+       s.RegisterComponent(&quot;LogInterceptor&quot;, interceptor.LogInterceptor{})</span>
+    return nil
+}
+</pre></div>
+</div>
+<p>编辑 “yourservice/service.yaml”:</p>
+<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gi">+interceptor:</span>
+<span class="gi">+  - GET /hello LogInterceptor</span>
+</pre></div>
+</div>
+<p>最后，重启服务并测试:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; -X GET &quot;http://localhost:8081/hello?your_name=Alice&quot;
+{&quot;message&quot;:&quot;[grpc server]Hello, Alice&quot;}
+</pre></div>
+</div>
+<p>查看HTTP server的控制台:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ go run yourservice/yourserviceapi.go
+[Before] Request URL:/hello
+[After] Request URL:/hello
+</pre></div>
+</div>
+<p>拦截器经常被用来做一些校验工作，当校验失败时，请求会被中止，并返回一个错误。</p>
+<p>很简单，你只需要这样:</p>
+<div class="highlight-diff"><div class="highlight"><pre><span></span>func (l LogInterceptor) Before(resp http.ResponseWriter, req *http.Request) (*http.Request, error) {
+       fmt.Println(&quot;[Before] Request URL:&quot;+req.URL.Path)
+<span class="gi">+      resp.Write([]byte(&quot;Encounter an error from LogInterceptor!\n&quot;))</span>
+<span class="gd">-      return req, nil</span>
+<span class="gi">+      return req, errors.New(&quot;error!&quot;)</span>
+}
+</pre></div>
+</div>
+<p>测试:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; &quot;http://localhost:8081/hello&quot;
+Encounter an error from LogInterceptor!
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="preprocessor.html" class="btn btn-neutral float-right" title="Preprocessor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="map.html" class="btn btn-neutral" title="HTTP接口与后端接口映射" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Xiao Zhang.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.2',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

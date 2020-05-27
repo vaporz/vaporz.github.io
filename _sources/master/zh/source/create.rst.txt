@@ -3,60 +3,54 @@
 快速创建一个新的服务
 ====================
 
-0, 开始之前
------------
+1, 编译和安装命令行工具
+-------------------------
 
-显然，你得先安装 `Golang <https://golang.org>`_ 和 `Protocol buffers <https://developers.google.com/protocol-buffers/>`_ 。
+在 `release页面 <https://github.com/vaporz/turbo/releases>`_ 下载并安装可执行程序“turbo”和“protoc-gen-buildfields”。
 
-然后下载Turbo代码：
+如果你想自己编译，请继续阅读，否则跳到下一步。
+
+先安装 `go <https://golang.org>`_ 和 `protoc <https://developers.google.com/protocol-buffers/>`_ ，
+然后下载 `Turbo代码 <https://github.com/vaporz/turbo>`_ ：
 
 .. code-block:: shell
 
-    go get github.com/vaporz/turbo
+    git clone https://github.com/vaporz/turbo.git
 
-Turbo依赖的package::
+turbo通过“go modules”管理依赖::
 
-    go get google.golang.org/grpc
-    go get git.apache.org/thrift.git/lib/go/thrift
-    go get github.com/golang/protobuf
-    go get github.com/sirupsen/logrus
-    go get github.com/gorilla/mux
-    go get github.com/spf13/cobra
-    go get github.com/spf13/viper
-    go get github.com/bitly/go-simplejson
-
-对于 **开发者**，推荐通过 `glide <https://github.com/Masterminds/glide>`_ 管理依赖::
-
-    cd github.com/vaporz/turbo
-    glide install // 如果出错，可以尝试运行"rm -rf ~/.glide && glide install"，还不行？那就网上搜一下吧。。。
-
-1, 安装命令行工具
------------------
-
-::
-
-    cd github.com/vaporz/turbo
-    make
+ $ cd turbo
+ $ go mod tidy
+ $ make install
+ ...
+ $ turbo -v
+ turbo version v0.4.0
 
 2, 创建你的服务
 ----------------
 
 ::
 
- $ turbo create package/path/to/yourservice YourService -r grpc
+ $ turbo create package/path/to/yourservice YourService -r grpc -p ~/
 
-文件夹 "$GOPATH/src/package/path/to/yourservice" 会被创建。
+其中，“package/path/to/yourservice”是package名称，“YourService”是gRPC服务的名称，“-r grpc”表示生成一个后端为gRPC服务的项目，
+使用“-r thrift”可以生成以thrift服务为后端的项目，“-p ~/”是生成文件存放的位置。
 
-里面有一些生成的代码。
+执行成功后，文件夹 "~/package/path/to/yourservice" 会被创建，里面有一些生成的代码。
 
 3, 运行
 -------
+
+首先通过“go mod”安装依赖包::
+
+ cd ~/package/path/to/yourservice
+ go mod init
 
 好了！运行一个看看！
 
 同时启动 gRPC server 和 HTTP server::
 
- cd $GOPATH/src/package/path/to/yourservice
+ cd ~/package/path/to/yourservice
  go run main.go
 
 发送请求::
@@ -66,7 +60,7 @@ Turbo依赖的package::
 
 或者，你也可以分别启动 gRPC server 和 HTTP server::
 
-    $ cd $GOPATH/src/package/path/to/yourservice
+    $ cd ~/package/path/to/yourservice
     # start grpc service
     $ go run grpcservice/yourservice.go
     # start http server

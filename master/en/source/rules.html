@@ -152,22 +152,11 @@
 <ul class="simple">
 <li>When defining a gRPC service, if the name of a gRPC method is “methodName”, then the name of request message and response message <strong>MUST</strong> be “MethodNameRequest” and “MethodNameResponse”.</li>
 <li>When defining a thrift service, the response message’s name <strong>MUST</strong> be “MethodNameResponse”.</li>
-<li>If multiple paths are assigned to $GOPATH(divided by ‘:’), then the first path is used by turbo as GOPATH.</li>
 <li>If the value to a param in a request presents a list, it <strong>MUST</strong> be seperated by “,”.</li>
-<li>When parsing request parameters, values from URL path has a higher priority than those from query string, body or context.Context.</li>
+<li>When parsing request parameters, values from URL path has a higher priority than those from query string, body or context.Context, e.g. In a request like “GET /book/1234?id=5678”, both “1234” and “5678” are values to “id”, but “1234” is picked as value to key “id”.</li>
+<li>The value of a key with all lower case characters has a higher priority to the value of a key with upper case characters, e.g. In a request like “GET /book?id=1234&amp;ID=5678”, “1234” is used for key “id”.</li>
+<li>A parameter’s key is case-insensitive to turbo, in fact, internally turbo will cast keys to lower case characters before further use, e.g. In a request like “GET /book?ID=1234”, turbo will see this query string as “id=1234”.</li>
 </ul>
-<blockquote>
-<div>e.g. In a request like “GET /book/1234?id=5678”, both “1234” and “5678” are values to “id”, but “1234” is picked as value to key “id”.</div></blockquote>
-<ul class="simple">
-<li>The value of a key with all lower case characters has a higher priority to the value of a key with upper case characters.</li>
-</ul>
-<blockquote>
-<div>e.g. In a request like “GET /book?id=1234&amp;ID=5678”, “1234” is used for key “id”.</div></blockquote>
-<ul class="simple">
-<li>A parameter’s key is case-insensitive to turbo, in fact, internally turbo will cast keys to lower case characters before further use.</li>
-</ul>
-<blockquote>
-<div>e.g. In a request like “GET /book?ID=1234”, turbo will see this query string as “id=1234”.</div></blockquote>
 </div>
 
 

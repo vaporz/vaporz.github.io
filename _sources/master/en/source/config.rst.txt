@@ -19,9 +19,13 @@ Contents under following nodes, can be modified and reloaded at runtime, without
  # Default: development
  # Values: production | development
    environment: production
- # [Optional]The Path to which turbo logs, can be absolute or relative,
+ # [Optional]The Path to which turbo logs, can be absolute or relative, if not set, no log is logged.
  # Default: log
    turbo_log_path: log
+ # project root directory, without package path
+  file_root_path: /a/b/c
+ # package path
+  package_path: com/myservice
  # The port http server listens
    http_port: 8081
  

@@ -3,60 +3,55 @@
 Create a service on the fly
 ===========================
 
-0, Before the start
--------------------
+1, Compile and install Turbo Command tools
+------------------------------------------
 
-Obviously, you have to install `Golang <https://golang.org>`_ and `Protocol buffers <https://developers.google.com/protocol-buffers/>`_ first.
+Download executable binary files "turbo" and "protoc-gen-buildfields" at  `release page <https://github.com/vaporz/turbo/releases>`_ .
 
-Then download turbo repo with:
+Continue reading if you want to compile by yourself, or else jump to next step.
+
+First, install `go <https://golang.org>`_ 和 `protoc <https://developers.google.com/protocol-buffers/>`_ ,
+then download `Turbo repo <https://github.com/vaporz/turbo>`_ ：
 
 .. code-block:: shell
 
-    go get github.com/vaporz/turbo
+    git clone https://github.com/vaporz/turbo.git
 
-Packages turbo used::
+Turbo manages dependencies with "go modules"::
 
-    go get google.golang.org/grpc
-    go get git.apache.org/thrift.git/lib/go/thrift
-    go get github.com/golang/protobuf
-    go get github.com/sirupsen/logrus
-    go get github.com/gorilla/mux
-    go get github.com/spf13/cobra
-    go get github.com/spf13/viper
-    go get github.com/bitly/go-simplejson
-
-For **CONTRIBUTORs**, it's recommended to use `glide <https://github.com/Masterminds/glide>`_ for dependency management::
-
-    cd github.com/vaporz/turbo
-    glide install // if you've met any problem, try "rm -rf ~/.glide && glide install", still not work? ask Google.
-
-1, Install Turbo command line tools
------------------------------------
-
-::
-
-    cd github.com/vaporz/turbo
-    make
+ $ cd turbo
+ $ go mod tidy
+ $ make install
+ ...
+ $ turbo -v
+ turbo version v0.4.0
 
 2, Create your service
 ----------------------
 
 ::
 
- $ turbo create package/path/to/yourservice YourService -r grpc
+ $ turbo create package/path/to/yourservice YourService -r grpc -p ~/
 
-Directory "$GOPATH/src/package/path/to/yourservice" should appear.
+"package/path/to/yourservice" is package name, "YourService" is backend service's name, "-r grpc" means to create
+a gRPC service as backend service, or you can create a Thrift service as backend service using "-r thrift",
+"-p ~/" shows the directory in which new project will be created.
 
-There're also some generated files in this folder.
+Once succeed, directory "~/package/path/to/yourservice" is created, along with some generated codes.
 
 3, Run
 ------
+
+Install dependencies with "go mod"::
+
+ cd ~/package/path/to/yourservice
+ go mod init
 
 That's it! Now let's Play!
 
 Start both gRPC server and HTTP server::
 
- cd $GOPATH/src/package/path/to/yourservice
+ cd ~/package/path/to/yourservice
  go run main.go
 
 Send a request::
@@ -66,7 +61,7 @@ Send a request::
 
 Or you can start gRPC server and HTTP server separately::
 
-    $ cd $GOPATH/src/package/path/to/yourservice
+    $ cd ~/package/path/to/yourservice
     # start grpc service
     $ go run grpcservice/yourservice.go
     # start http server

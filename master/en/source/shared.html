@@ -155,7 +155,7 @@ Then we add this new message to other message as a struct field.</p>
 <div class="section" id="create-shared-proto-and-define-a-new-message">
 <h2>1, Create “shared.proto” and define a new message<a class="headerlink" href="#create-shared-proto-and-define-a-new-message" title="Permalink to this headline">¶</a></h2>
 <p>Create folder “common”(or any other name):</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ mkdir -p $GOPATH/src/package/path/to/common
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ mkdir -p ~/package/path/to/common
 </pre></div>
 </div>
 <p>Create file “shared.proto” in folder “common”:</p>
@@ -185,8 +185,8 @@ message SayHelloRequest {
 </div>
 <div class="section" id="generate-codes">
 <h2>3, Generate codes<a class="headerlink" href="#generate-codes" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ turbo generate package/path/to/yourservice -r grpc -I $GOPATH/src/package/path/to/yourservice
- -I $GOPATH/src/package/path/to/common
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ turbo generate package/path/to/yourservice -r grpc -I ~/package/path/to/yourservice
+ -I ~/package/path/to/yourservice/common
 </pre></div>
 </div>
 <p>Done!</p>

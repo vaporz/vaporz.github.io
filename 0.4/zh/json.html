@@ -1,0 +1,321 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>RESTFULL JSON API &mdash; Turbo Doc 0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Turbo Doc 0.2 documentation" href="index.html"/>
+        <link rel="next" title="支持Thrift" href="thrift.html"/>
+        <link rel="prev" title="如何使用公共IDL文件" href="shared.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="contents.html" class="icon icon-home"> Turbo Doc
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="contents.html">目录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">首页</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create.html">快速创建一个服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command.html">命令行工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add.html">如何添加新API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rules.html">规则和约定</a></li>
+<li class="toctree-l1"><a class="reference internal" href="components.html">Turbo提供的组件</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="map.html">HTTP接口与后端接口映射</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interceptor.html">Interceptor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessor.html">Preprocessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postprocessor.html">Postprocessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hijacker.html">Hijacker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="convertor.html">Message类型转换器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errorhandler.html">ErrorHandler</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="shared.html">如何使用公共IDL文件</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">支持RESTFUL JSON API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thrift.html">支持Thrift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">配置文件说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multiplexing.html">启动多个service</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">Turbo Doc</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+      <li>RESTFULL JSON API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/json.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="restfull-json-api">
+<span id="json"></span><h1>RESTFULL JSON API<a class="headerlink" href="#restfull-json-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="grpc">
+<h2>GRPC<a class="headerlink" href="#grpc" title="Permalink to this headline">¶</a></h2>
+<p>举一个例子，接口定义如下：</p>
+<div class="highlight-proto"><div class="highlight"><pre><span></span><span class="kd">message</span> <span class="nc">SayHelloRequest</span> <span class="p">{</span>
+    <span class="kt">string</span> <span class="na">stringValue</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="kt">int64</span> <span class="na">int64Value</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">message</span> <span class="nc">SayHelloResponse</span> <span class="p">{</span>
+    <span class="kt">string</span> <span class="kd">message</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">service</span> <span class="n">TestService</span> <span class="p">{</span>
+    <span class="k">rpc</span> <span class="n">sayHello</span> <span class="p">(</span><span class="n">SayHelloRequest</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">SayHelloResponse</span><span class="p">)</span> <span class="p">{}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>protobuf生成的struct代码为：</p>
+<div class="highlight-go"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="nx">SayHelloRequest</span> <span class="kd">struct</span> <span class="p">{</span>
+       <span class="nx">StringValue</span>  <span class="kt">string</span>        <span class="s">`protobuf:&quot;bytes,2,opt,name=stringValue&quot; json:&quot;stringValue,omitempty&quot;`</span>
+       <span class="nx">Int64Value</span>   <span class="kt">int64</span>         <span class="s">`protobuf:&quot;varint,3,opt,name=int64Value&quot; json:&quot;int64Value,omitempty&quot;`</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>参考 <a class="reference internal" href="add.html#add"><span class="std std-ref">如何添加新API</span></a>，实现该接口。</p>
+<p>接下来启动服务，发起POST请求（Content-Type=application／json），body数据为：</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+       <span class="nt">&quot;stringValue&quot;</span><span class="p">:</span><span class="s2">&quot;a string value&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;int64Value&quot;</span><span class="p">:</span><span class="mi">1234</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>注意</strong>： json中的key的名字， <strong>必须</strong> 与protobuf生成struct中对应变量的 tag “protobuf”里的name参数的值相同，比如”stringValue”。</p>
+<p>在你实现的grpc server端接口中，应该能够读取到body中的数据。</p>
+</div>
+<div class="section" id="thrift">
+<h2>Thrift<a class="headerlink" href="#thrift" title="Permalink to this headline">¶</a></h2>
+<p>举相同的例子：</p>
+<div class="highlight-thrift"><div class="highlight"><pre><span></span><span class="kd">struct</span><span class="w"> </span><span class="nc">SayHelloRequest</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="mi">1</span><span class="p">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">stringValue</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="mi">2</span><span class="p">:</span><span class="w"> </span><span class="kt">i32</span><span class="w"> </span><span class="n">int32Value</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="mi">3</span><span class="p">:</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">boolValue</span><span class="p">,</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">SayHelloResponse</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="mi">1</span><span class="p">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kd">service</span><span class="w"> </span><span class="nc">TestService</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">SayHelloResponse</span><span class="w"> </span><span class="nf">testJson</span> <span class="o">(</span><span class="mi">1</span><span class="p">:</span><span class="n">SayHelloRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>thrift生成的struct代码：</p>
+<div class="highlight-go"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="nx">TestJsonRequest</span> <span class="kd">struct</span> <span class="p">{</span>
+  <span class="nx">StringValue</span> <span class="kt">string</span> <span class="s">`thrift:&quot;stringValue,1&quot; db:&quot;stringValue&quot; json:&quot;stringValue&quot;`</span>
+  <span class="nx">Int32Value</span> <span class="kt">int32</span> <span class="s">`thrift:&quot;int32Value,2&quot; db:&quot;int32Value&quot; json:&quot;int32Value&quot;`</span>
+  <span class="nx">BoolValue</span> <span class="kt">bool</span> <span class="s">`thrift:&quot;boolValue,3&quot; db:&quot;boolValue&quot; json:&quot;boolValue&quot;`</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>参考 <a class="reference internal" href="add.html#add"><span class="std std-ref">如何添加新API</span></a>，实现该接口。</p>
+<p>接下来启动服务，发起POST请求（Content-Type=application／json），body数据为：</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+       <span class="nt">&quot;StringValue&quot;</span><span class="p">:</span><span class="s2">&quot;a string value&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;int32Value&quot;</span><span class="p">:</span><span class="mi">1234</span><span class="p">,</span>
+       <span class="nt">&quot;boolvalue&quot;</span><span class="p">:</span><span class="kc">true</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>注意</strong>： 与grpc不同，通过thrift发出的json请求数据的key是大小写不敏感的。</p>
+<p>在你实现的thrift server端接口中，应该能够读取到body中的数据。</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="thrift.html" class="btn btn-neutral float-right" title="支持Thrift" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="shared.html" class="btn btn-neutral" title="如何使用公共IDL文件" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Xiao Zhang.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.2',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

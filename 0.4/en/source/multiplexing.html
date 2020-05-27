@@ -1,0 +1,342 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Service Multiplexing &mdash; Turbo Doc 0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="Turbo Doc 0.2 documentation" href="../../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../contents.html" class="icon icon-home"> Turbo Doc
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contents.html">Welcome</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../contents.html">Turbo Doc</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../contents.html">Docs</a> &raquo;</li>
+        
+      <li>Service Multiplexing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/0.4/en/source/multiplexing.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="service-multiplexing">
+<span id="multiplexing"></span><h1>Service Multiplexing<a class="headerlink" href="#service-multiplexing" title="Permalink to this headline">¶</a></h1>
+<p>Sometimes we need to start a server running multiple services in the same process, sharing the same port.</p>
+<div class="section" id="grpc">
+<h2>gRPC<a class="headerlink" href="#grpc" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Define new service in .proto file</li>
+</ol>
+<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gi">+message MeowRequest {</span>
+<span class="gi">+}</span>
+
+<span class="gi">+message MeowResponse {</span>
+<span class="gi">+  string message = 1;</span>
+<span class="gi">+}</span>
+
+<span class="gi">+service CatService {</span>
+<span class="gi">+  rpc meow (MeowRequest) returns (MeowResponse) {}</span>
+<span class="gi">+}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Modify service.yaml, add new APIs</li>
+</ol>
+<div class="highlight-diff"><div class="highlight"><pre><span></span>config:
+<span class="gd">-  grpc_service_name: TestService</span>
+<span class="gi">+  grpc_service_name: TestService,CatService</span>
+urlmapping:
+<span class="gi">+ - GET /cat/meow CatService Meow</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Generate new code</li>
+</ol>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>$ turbo generate package/path/to/yourservice -r grpc -I ~/package/path/to/yourservice
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>On gRPC server side, implement the new service</li>
+</ol>
+<div class="highlight-diff"><div class="highlight"><pre><span></span>func RegisterServer(s *grpc.Server) {
+       proto.RegisterTestServiceServer(s, &amp;TestService{})
+<span class="gi">+      proto.RegisterCatServiceServer(s, &amp;CatService{})</span>
+}
+
+<span class="gi">+type CatService struct {</span>
+<span class="gi">+}</span>
+
+<span class="gi">+func (c *CatService) Meow(ctx context.Context, req *proto.MeowRequest) (*proto.MeowResponse, error) {</span>
+<span class="gi">+      return &amp;proto.MeowResponse{Message: &quot;Meow!&quot;}, nil</span>
+<span class="gi">+}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li>On HTTP server side, register the new service</li>
+</ol>
+<div class="highlight-diff"><div class="highlight"><pre><span></span>func GrpcClient(conn *grpc.ClientConn) map[string]interface{} {
+       return map[string]interface{}{
+               &quot;TestService&quot;: proto.NewTestServiceClient(conn),
+<span class="gi">+              &quot;CatService&quot;: proto.NewCatServiceClient(conn),</span>
+       }
+}
+</pre></div>
+</div>
+<p>DONE!</p>
+</div>
+<div class="section" id="thrift">
+<h2>Thrift<a class="headerlink" href="#thrift" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Define new service in .thrift file</li>
+</ol>
+<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gi">+struct MeowResponse {</span>
+<span class="gi">+ 1: string message,</span>
+<span class="gi">+}</span>
+
+<span class="gi">+service CatService {</span>
+<span class="gi">+  MeowResponse Meow (1:string msg)</span>
+<span class="gi">+}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Modify service.yaml, add new APIs</li>
+</ol>
+<div class="highlight-diff"><div class="highlight"><pre><span></span>config:
+<span class="gd">-  thrift_service_name: TestService</span>
+<span class="gi">+  thrift_service_name: TestService,CatService</span>
+urlmapping:
+<span class="gi">+ - GET /cat/meow CatService Meow</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Generate new code</li>
+</ol>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>$ turbo generate package/path/to/yourservice -r thrift -I ~/package/path/to/yourservice
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>On server side, implement the new service</li>
+</ol>
+<div class="highlight-diff"><div class="highlight"><pre><span></span>func TProcessor() map[string]thrift.TProcessor {
+       return map[string]thrift.TProcessor{
+               &quot;TestService&quot;: gen.NewTestServiceProcessor(TestService{}),
+<span class="gi">+              &quot;CatService&quot;: gen.NewCatServiceProcessor(CatService{}),</span>
+       }
+}
+
+<span class="gi">+type CatService struct {</span>
+<span class="gi">+}</span>
+
+<span class="gi">+func (c CatService) Meow(msg string) (r *gen.MeowResponse, err error) {</span>
+<span class="gi">+      return &amp;gen.MeowResponse{Message: msg}, nil</span>
+<span class="gi">+}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li>On HTTP server side, register the new service</li>
+</ol>
+<div class="highlight-diff"><div class="highlight"><pre><span></span>func ThriftClient(trans thrift.TTransport, f thrift.TProtocolFactory) map[string]interface{} {
+       iprot := f.GetProtocol(trans)
+       return map[string]interface{}{
+               &quot;TestService&quot;: t.NewTestServiceClientProtocol(trans, iprot, thrift.NewTMultiplexedProtocol(iprot, &quot;TestService&quot;)),
+<span class="gi">+              &quot;CatService&quot;: t.NewCatServiceClientProtocol(trans, iprot, thrift.NewTMultiplexedProtocol(iprot, &quot;CatService&quot;)),</span>
+       }
+}
+</pre></div>
+</div>
+<p>完成！</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Xiao Zhang.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.2',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

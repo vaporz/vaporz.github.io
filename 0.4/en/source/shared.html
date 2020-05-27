@@ -1,0 +1,275 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Use a shared struct &mdash; Turbo Doc 0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="Turbo Doc 0.2 documentation" href="../../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../contents.html" class="icon icon-home"> Turbo Doc
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contents.html">Welcome</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../contents.html">Turbo Doc</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../contents.html">Docs</a> &raquo;</li>
+        
+      <li>Use a shared struct</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/0.4/en/source/shared.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="use-a-shared-struct">
+<span id="shared"></span><h1>Use a shared struct<a class="headerlink" href="#use-a-shared-struct" title="Permalink to this headline">¶</a></h1>
+<p>Sometimes we want to add some info to all requests from frontend server to backend server.
+So we define a new message in a file like “shared.proto” in a separate path.
+Then we add this new message to other message as a struct field.</p>
+<p>Let me show you how to do this in grpc with Turbo.</p>
+<div class="section" id="create-shared-proto-and-define-a-new-message">
+<h2>1, Create “shared.proto” and define a new message<a class="headerlink" href="#create-shared-proto-and-define-a-new-message" title="Permalink to this headline">¶</a></h2>
+<p>Create folder “common”(or any other name):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ mkdir -p ~/package/path/to/common
+</pre></div>
+</div>
+<p>Create file “shared.proto” in folder “common”:</p>
+<div class="highlight-proto"><div class="highlight"><pre><span></span><span class="na">syntax</span> <span class="o">=</span> <span class="s">&quot;proto3&quot;</span><span class="p">;</span>
+<span class="kn">package</span> <span class="nn">proto</span><span class="p">;</span>
+
+<span class="kd">message</span> <span class="nc">CommonValues</span> <span class="p">{</span>
+    <span class="kt">int64</span> <span class="na">someId</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-new-field-to-a-request-message">
+<h2>2, Add new field to a request message<a class="headerlink" href="#add-new-field-to-a-request-message" title="Permalink to this headline">¶</a></h2>
+<p>Edit “yourservice.proto”:</p>
+<div class="highlight-diff"><div class="highlight"><pre><span></span>syntax = &quot;proto3&quot;;
+package proto;
+<span class="gi">+</span>
+<span class="gi">+import &quot;shared.proto&quot;;</span>
+
+message SayHelloRequest {
+    string yourName = 1;
+<span class="gi">+    CommonValues values = 2;</span>
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="generate-codes">
+<h2>3, Generate codes<a class="headerlink" href="#generate-codes" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ turbo generate package/path/to/yourservice -r grpc -I ~/package/path/to/yourservice
+ -I ~/package/path/to/yourservice/common
+</pre></div>
+</div>
+<p>Done!</p>
+<p>Before test, edit youserviceimpl.go to return “someId”:</p>
+<div class="highlight-diff"><div class="highlight"><pre><span></span>func (s *YourService) SayHello(ctx context.Context, req *proto.SayHelloRequest) (*proto.SayHelloResponse, error) {
+<span class="gi">+      someId := strconv.FormatInt(req.Values.SomeId, 10)</span>
+<span class="gd">-      return &amp;proto.SayHelloResponse{Message: &quot;[grpc server]Hello, &quot; + req.YourName}, nil</span>
+<span class="gi">+      return &amp;proto.SayHelloResponse{Message: &quot;[grpc server]Hello, &quot; + req.YourName + &quot;, someId=&quot; + someId}, nil</span>
+}
+</pre></div>
+</div>
+<p>Restart grpc server and test:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; -X GET &quot;http://localhost:8081/hello?your_name=Alice&amp;some_id=12345&quot;
+{&quot;message&quot;:&quot;[grpc server]Hello, Alice, someId=12345&quot;}
+</pre></div>
+</div>
+<p>Turbo is smart, query string param “some_id” is mapped into SayHelloRequest.CommonValues.SomeId automatically.</p>
+<p>Besides query string, You can also map “SomeId” from URL route params, or context.Context which is set from interceptors.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Xiao Zhang.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.2',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

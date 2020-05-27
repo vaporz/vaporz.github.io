@@ -36,7 +36,7 @@ gRPC
 
 .. code-block:: shell
 
- $ turbo generate package/path/to/yourservice -r grpc -I $GOPATH/src/package/path/to/yourservice
+ $ turbo generate package/path/to/yourservice -r grpc -I ~/package/path/to/yourservice
 
 4. On gRPC server side, implement the new service
 
@@ -95,7 +95,7 @@ Thrift
 
 .. code-block:: shell
 
- $ turbo generate package/path/to/yourservice -r thrift -I $GOPATH/src/package/path/to/yourservice
+ $ turbo generate package/path/to/yourservice -r thrift -I ~/package/path/to/yourservice
 
 4. On server side, implement the new service
 

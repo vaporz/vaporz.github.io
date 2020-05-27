@@ -14,7 +14,7 @@ Let me show you how to do this in grpc with Turbo.
 
 Create folder "common"(or any other name)::
 
- $ mkdir -p $GOPATH/src/package/path/to/common
+ $ mkdir -p ~/package/path/to/common
 
 Create file "shared.proto" in folder "common":
 
@@ -49,8 +49,8 @@ Edit "yourservice.proto":
 
 ::
 
- $ turbo generate package/path/to/yourservice -r grpc -I $GOPATH/src/package/path/to/yourservice
-  -I $GOPATH/src/package/path/to/common
+ $ turbo generate package/path/to/yourservice -r grpc -I ~/package/path/to/yourservice
+  -I ~/package/path/to/yourservice/common
 
 Done!
 

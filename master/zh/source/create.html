@@ -149,50 +149,44 @@
   <div class="section" id="create">
 <span id="id1"></span><h1>快速创建一个新的服务<a class="headerlink" href="#create" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id2">
-<h2>0, 开始之前<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<p>显然，你得先安装 <a class="reference external" href="https://golang.org">Golang</a> 和 <a class="reference external" href="https://developers.google.com/protocol-buffers/">Protocol buffers</a> 。</p>
-<p>然后下载Turbo代码：</p>
-<div class="highlight-shell"><div class="highlight"><pre><span></span>go get github.com/vaporz/turbo
+<h2>1, 编译和安装命令行工具<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>在 <a class="reference external" href="https://github.com/vaporz/turbo/releases">release页面</a> 下载并安装可执行程序“turbo”和“protoc-gen-buildfields”。</p>
+<p>如果你想自己编译，请继续阅读，否则跳到下一步。</p>
+<p>先安装 <a class="reference external" href="https://golang.org">go</a> 和 <a class="reference external" href="https://developers.google.com/protocol-buffers/">protoc</a> ，
+然后下载 <a class="reference external" href="https://github.com/vaporz/turbo">Turbo代码</a> ：</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>git clone https://github.com/vaporz/turbo.git
 </pre></div>
 </div>
-<p>Turbo依赖的package:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">go</span> <span class="n">get</span> <span class="n">google</span><span class="o">.</span><span class="n">golang</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">grpc</span>
-<span class="n">go</span> <span class="n">get</span> <span class="n">git</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">thrift</span><span class="o">.</span><span class="n">git</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">go</span><span class="o">/</span><span class="n">thrift</span>
-<span class="n">go</span> <span class="n">get</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">golang</span><span class="o">/</span><span class="n">protobuf</span>
-<span class="n">go</span> <span class="n">get</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">sirupsen</span><span class="o">/</span><span class="n">logrus</span>
-<span class="n">go</span> <span class="n">get</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">gorilla</span><span class="o">/</span><span class="n">mux</span>
-<span class="n">go</span> <span class="n">get</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">spf13</span><span class="o">/</span><span class="n">cobra</span>
-<span class="n">go</span> <span class="n">get</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">spf13</span><span class="o">/</span><span class="n">viper</span>
-<span class="n">go</span> <span class="n">get</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bitly</span><span class="o">/</span><span class="n">go</span><span class="o">-</span><span class="n">simplejson</span>
-</pre></div>
-</div>
-<p>对于 <strong>开发者</strong>，推荐通过 <a class="reference external" href="https://github.com/Masterminds/glide">glide</a> 管理依赖:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>cd github.com/vaporz/turbo
-glide install // 如果出错，可以尝试运行&quot;rm -rf ~/.glide &amp;&amp; glide install&quot;，还不行？那就网上搜一下吧。。。
+<p>turbo通过“go modules”管理依赖:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ cd turbo
+$ go mod tidy
+$ make install
+...
+$ turbo -v
+turbo version v0.4.0
 </pre></div>
 </div>
 </div>
 <div class="section" id="id3">
-<h2>1, 安装命令行工具<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">vaporz</span><span class="o">/</span><span class="n">turbo</span>
-<span class="n">make</span>
+<h2>2, 创建你的服务<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ turbo create package/path/to/yourservice YourService -r grpc -p ~/
 </pre></div>
 </div>
+<p>其中，“package/path/to/yourservice”是package名称，“YourService”是gRPC服务的名称，“-r grpc”表示生成一个后端为gRPC服务的项目，
+使用“-r thrift”可以生成以thrift服务为后端的项目，“-p ~/”是生成文件存放的位置。</p>
+<p>执行成功后，文件夹 “~/package/path/to/yourservice” 会被创建，里面有一些生成的代码。</p>
 </div>
 <div class="section" id="id4">
-<h2>2, 创建你的服务<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ turbo create package/path/to/yourservice YourService -r grpc
+<h2>3, 运行<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>首先通过“go mod”安装依赖包:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">package</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">yourservice</span>
+<span class="n">go</span> <span class="n">mod</span> <span class="n">init</span>
 </pre></div>
 </div>
-<p>文件夹 “$GOPATH/src/package/path/to/yourservice” 会被创建。</p>
-<p>里面有一些生成的代码。</p>
-</div>
-<div class="section" id="id5">
-<h2>3, 运行<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>好了！运行一个看看！</p>
 <p>同时启动 gRPC server 和 HTTP server:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>cd $GOPATH/src/package/path/to/yourservice
-go run main.go
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">package</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">yourservice</span>
+<span class="n">go</span> <span class="n">run</span> <span class="n">main</span><span class="o">.</span><span class="n">go</span>
 </pre></div>
 </div>
 <p>发送请求:</p>
@@ -201,7 +195,7 @@ message:&quot;Hello, Alice&quot;
 </pre></div>
 </div>
 <p>或者，你也可以分别启动 gRPC server 和 HTTP server:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ cd $GOPATH/src/package/path/to/yourservice
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ cd ~/package/path/to/yourservice
 # start grpc service
 $ go run grpcservice/yourservice.go
 # start http server

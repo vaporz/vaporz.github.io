@@ -155,7 +155,7 @@
 <div class="section" id="shared-proto-message">
 <h2>1, 新建 “shared.proto”，并且定义一个新Message<a class="headerlink" href="#shared-proto-message" title="Permalink to this headline">¶</a></h2>
 <p>创建文件夹”common”（或者其他名字）:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ mkdir -p $GOPATH/src/package/path/to/common
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ mkdir -p ~/package/path/to/yourservice/common
 </pre></div>
 </div>
 <p>在里面创建文件 “shared.proto”:</p>
@@ -185,8 +185,8 @@ message SayHelloRequest {
 </div>
 <div class="section" id="id1">
 <h2>3, 生成代码<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ turbo generate package/path/to/yourservice -r grpc -I $GOPATH/src/package/path/to/yourservice
- -I $GOPATH/src/package/path/to/common
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ turbo generate package/path/to/yourservice -r grpc -I ~/package/path/to/yourservice
+ -I ~/package/path/to/yourservice/common
 </pre></div>
 </div>
 <p>完成！</p>

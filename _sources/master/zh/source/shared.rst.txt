@@ -14,7 +14,7 @@
 
 创建文件夹"common"（或者其他名字）::
 
- $ mkdir -p $GOPATH/src/package/path/to/common
+ $ mkdir -p ~/package/path/to/yourservice/common
 
 在里面创建文件 "shared.proto":
 
@@ -49,8 +49,8 @@
 
 ::
 
- $ turbo generate package/path/to/yourservice -r grpc -I $GOPATH/src/package/path/to/yourservice
-  -I $GOPATH/src/package/path/to/common
+ $ turbo generate package/path/to/yourservice -r grpc -I ~/package/path/to/yourservice
+  -I ~/package/path/to/yourservice/common
 
 完成！
 

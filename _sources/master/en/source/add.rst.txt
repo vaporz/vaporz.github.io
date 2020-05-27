@@ -39,7 +39,7 @@ Modify "service.yaml":
 
 ::
 
- $ turbo generate package/path/to/yourservice -r grpc -I $GOPATH/src/package/path/to/yourservice
+ $ turbo generate package/path/to/yourservice -r grpc -I ~/yourservice
 
 4, Implement new gRPC method
 ----------------------------

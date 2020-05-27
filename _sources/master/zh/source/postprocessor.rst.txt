@@ -18,9 +18,9 @@ Postprocessor用来处理后端返回的对象（当然你也可以顺便干点�
      return nil
  }
 
- +var postEatApple turbo.Postprocessor = func (resp http.ResponseWriter, req *http.Request, serviceResp interface{}) {
- +	sr := serviceResp.(*proto.EatAppleResponse)
- +	resp.Write([]byte("this is from postprocesser, message=" + sr.Message))
+ +var postEatApple turbo.Postprocessor = func (resp http.ResponseWriter, req *http.Request, serviceResp interface{}, err error) error {
+ +	resp.Write([]byte("[this is from postprocesser]"))
+ +  return nil
  +}
 
 编辑 "yourservice/service.yaml":
@@ -33,5 +33,5 @@ Postprocessor用来处理后端返回的对象（当然你也可以顺便干点�
 重启服务并测试::
 
  $ curl -w "\n" "http://localhost:8081/eat_apple/5"
- this is from postprocesser, message=Good taste! Apple num=5
+ [this is from postprocesser]{"message":"Good taste! Apple num=5"}
 
