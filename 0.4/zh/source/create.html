@@ -154,11 +154,11 @@
 <p>如果你想自己编译，请继续阅读，否则跳到下一步。</p>
 <p>先安装 <a class="reference external" href="https://golang.org">go</a> 和 <a class="reference external" href="https://developers.google.com/protocol-buffers/">protoc</a> ，
 然后下载 <a class="reference external" href="https://github.com/vaporz/turbo">Turbo代码</a> ：</p>
-<div class="highlight-shell"><div class="highlight"><pre><span></span>git clone https://github.com/vaporz/turbo.git
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/vaporz/turbo.git
 </pre></div>
 </div>
 <p>turbo通过“go modules”管理依赖:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ cd turbo
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd turbo
 $ go mod tidy
 $ make install
 ...
@@ -169,7 +169,7 @@ turbo version v0.4.0
 </div>
 <div class="section" id="id3">
 <h2>2, 创建你的服务<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ turbo create package/path/to/yourservice YourService -r grpc -p ~/
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ turbo create package/path/to/yourservice YourService -r grpc -p ~/
 </pre></div>
 </div>
 <p>其中，“package/path/to/yourservice”是package名称，“YourService”是gRPC服务的名称，“-r grpc”表示生成一个后端为gRPC服务的项目，
@@ -179,23 +179,23 @@ turbo version v0.4.0
 <div class="section" id="id4">
 <h2>3, 运行<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <p>首先通过“go mod”安装依赖包:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">package</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">yourservice</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">package</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">yourservice</span>
 <span class="n">go</span> <span class="n">mod</span> <span class="n">init</span>
 </pre></div>
 </div>
 <p>好了！运行一个看看！</p>
 <p>同时启动 gRPC server 和 HTTP server:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">package</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">yourservice</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">package</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">yourservice</span>
 <span class="n">go</span> <span class="n">run</span> <span class="n">main</span><span class="o">.</span><span class="n">go</span>
 </pre></div>
 </div>
 <p>发送请求:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; &quot;http://localhost:8081/hello?your_name=Alice&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; &quot;http://localhost:8081/hello?your_name=Alice&quot;
 message:&quot;Hello, Alice&quot;
 </pre></div>
 </div>
 <p>或者，你也可以分别启动 gRPC server 和 HTTP server:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ cd ~/package/path/to/yourservice
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd ~/package/path/to/yourservice
 # start grpc service
 $ go run grpcservice/yourservice.go
 # start http server
@@ -251,6 +251,7 @@ $ go run grpcapi/yourserviceapi.go
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../_static/language_data.js"></script>
 
   
 

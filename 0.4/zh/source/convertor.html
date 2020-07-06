@@ -151,7 +151,7 @@
 <p>Turbo 会自动在URL，queryString和context.Context中查询参数，然后根据struct中的字段名设置到request对象中。</p>
 <p>Turbo 也允许你”手动”组装一个struct对象，举个例子：</p>
 <p>编辑 “yourservice/grpcapi/component/components.go”:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>func (i *ServiceInitializer) InitService(s turbo.Servable) error {
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>func (i *ServiceInitializer) InitService(s turbo.Servable) error {
 <span class="gi">+       s.RegisterComponent(&quot;CommonValues&quot;, convertCommonValues)</span>
     return nil
 }
@@ -164,13 +164,13 @@
 </pre></div>
 </div>
 <p>编辑 “yourservice/service.yaml”:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gi">+convertor:</span>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gi">+convertor:</span>
 <span class="gi">+  - CommonValues convertCommonValues</span>
 </pre></div>
 </div>
 <p>OK了, 方法 “convertCommonValues” 被注册给了类型 “proto.CommonValues”，在方法里面，”SomeId”被修改为”123456789”，不管之前是什么值。</p>
 <p>重启服务然后测试:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; -X GET &quot;http://localhost:8081/hello?your_name=Alice&amp;some_id=123&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; -X GET &quot;http://localhost:8081/hello?your_name=Alice&amp;some_id=123&quot;
 {&quot;message&quot;:&quot;[grpc server]Hello, Alice, someId=123456789&quot;}
 </pre></div>
 </div>
@@ -222,6 +222,7 @@
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../_static/language_data.js"></script>
 
   
 

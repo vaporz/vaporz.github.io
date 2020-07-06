@@ -156,7 +156,7 @@
 <p>Preprocessors are executed just after all Before() functions from interceptors, and before sending requests to gRPC server.</p>
 <p>Preprocessors can be used to do something particularly for an API. For example, parameter value validations, setting default values, parsing values, logging, etc.</p>
 <p>Let’s check the value of ‘num’ with a preprocessor:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>func InitComponents() {
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>func InitComponents() {
 <span class="gi">+      turbo.SetPreprocessor(&quot;/eat_apple/{num:[0-9]+}&quot;, preEatApple)</span>
 }
 
@@ -175,7 +175,7 @@
 </pre></div>
 </div>
 <p>As usual, restart HTTP server, and test:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; &quot;http://localhost:8081/eat_apple/5&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; &quot;http://localhost:8081/eat_apple/5&quot;
 message:&quot;Good taste! Apple num=5&quot;
 $ curl -w &quot;\n&quot; &quot;http://localhost:8081/eat_apple/6&quot;
 Too many apples!
@@ -230,6 +230,7 @@ Too many apples!
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../_static/language_data.js"></script>
 
   
 

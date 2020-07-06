@@ -152,17 +152,17 @@
 <h2>0, Before the start<a class="headerlink" href="#before-the-start" title="Permalink to this headline">¶</a></h2>
 <p>Obviously, you have to install <span class="xref std std-ref">Golang</span> and <span class="xref std std-ref">Protocol buffers(v3)</span> first.</p>
 <p>Download turbo repo with:</p>
-<div class="highlight-shell"><div class="highlight"><pre><span></span>go get github.com/vaporz/turbo
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>go get github.com/vaporz/turbo
 </pre></div>
 </div>
 <p>For dependency management, we provide 2 ways:</p>
 <p>(Recommended) Install <span class="xref std std-ref">glide</span> for dependency management:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">vaporz</span><span class="o">/</span><span class="n">turbo</span><span class="o">/</span><span class="n">turbo</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">vaporz</span><span class="o">/</span><span class="n">turbo</span><span class="o">/</span><span class="n">turbo</span>
 <span class="n">glide</span> <span class="n">install</span>
 </pre></div>
 </div>
 <p>(Not Recommended) Or install required packages manually:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">go</span> <span class="n">get</span> <span class="n">google</span><span class="o">.</span><span class="n">golang</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">grpc</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">go</span> <span class="n">get</span> <span class="n">google</span><span class="o">.</span><span class="n">golang</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">grpc</span>
 <span class="n">go</span> <span class="n">get</span> <span class="n">git</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">thrift</span><span class="o">.</span><span class="n">git</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">go</span><span class="o">/</span><span class="n">thrift</span>
 <span class="n">go</span> <span class="n">get</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">kylelemons</span><span class="o">/</span><span class="n">go</span><span class="o">-</span><span class="n">gypsy</span><span class="o">/</span><span class="n">yaml</span>
 <span class="n">go</span> <span class="n">get</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">gorilla</span><span class="o">/</span><span class="n">mux</span>
@@ -174,7 +174,7 @@
 </div>
 <div class="section" id="install-turbo-command-line-tools">
 <h2>1, Install Turbo command line tools<a class="headerlink" href="#install-turbo-command-line-tools" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">vaporz</span><span class="o">/</span><span class="n">turbo</span><span class="o">/</span><span class="n">protoc</span><span class="o">-</span><span class="n">gen</span><span class="o">-</span><span class="n">buildfields</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">vaporz</span><span class="o">/</span><span class="n">turbo</span><span class="o">/</span><span class="n">protoc</span><span class="o">-</span><span class="n">gen</span><span class="o">-</span><span class="n">buildfields</span>
 <span class="n">go</span> <span class="n">install</span>
 <span class="n">cd</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">vaporz</span><span class="o">/</span><span class="n">turbo</span><span class="o">/</span><span class="n">turbo</span>
 <span class="n">go</span> <span class="n">install</span>
@@ -183,7 +183,7 @@
 </div>
 <div class="section" id="create-your-service">
 <h2>2, Create your service<a class="headerlink" href="#create-your-service" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ turbo create package/path/to/yourservice YourService -r grpc
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ turbo create package/path/to/yourservice YourService -r grpc
 </pre></div>
 </div>
 <p>Directory “$GOPATH/src/package/path/to/yourservice” should appear.</p>
@@ -194,17 +194,17 @@
 <h2>3, Run<a class="headerlink" href="#run" title="Permalink to this headline">¶</a></h2>
 <p>That’s it! Now let’s Play!</p>
 <p>Start both gRPC server and HTTP server:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>cd $GOPATH/src/package/path/to/yourservice
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cd $GOPATH/src/package/path/to/yourservice
 go run main.go
 </pre></div>
 </div>
 <p>Send a request:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; &quot;http://localhost:8081/hello?your_name=Alice&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; &quot;http://localhost:8081/hello?your_name=Alice&quot;
 message:&quot;Hello, Alice&quot;
 </pre></div>
 </div>
 <p>Or you can start gRPC server and HTTP server separately:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ cd $GOPATH/src/package/path/to/yourservice
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd $GOPATH/src/package/path/to/yourservice
 # start grpc service
 $ go run grpcservice/yourservice.go
 # start http server
@@ -260,6 +260,7 @@ $ go run grpcapi/yourserviceapi.go
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../_static/language_data.js"></script>
 
   
 

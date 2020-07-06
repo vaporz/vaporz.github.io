@@ -148,28 +148,28 @@
             
   <div class="section" id="configs-in-service-yaml">
 <span id="config"></span><h1>Configs in service.yaml<a class="headerlink" href="#configs-in-service-yaml" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">config</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">config</span><span class="p">:</span>
 <span class="c1"># [Optional] The runtime environment,</span>
 <span class="c1"># Default: development</span>
 <span class="c1"># Values: production | development</span>
-  <span class="l l-Scalar l-Scalar-Plain">environment</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">production</span>
+  <span class="nt">environment</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">production</span>
 <span class="c1"># [Optional]The Path to which turbo logs, can be absolute or relative,</span>
 <span class="c1"># Default: log</span>
-  <span class="l l-Scalar l-Scalar-Plain">turbo_log_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">log</span>
+  <span class="nt">turbo_log_path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">log</span>
 <span class="c1"># The port http server listens</span>
-  <span class="l l-Scalar l-Scalar-Plain">http_port</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">8081</span>
+  <span class="nt">http_port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">8081</span>
 
 <span class="c1"># The grpc service name, MUST be a CamelCase name, usually end with &quot;Service&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">grpc_service_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">YourService</span>
+  <span class="nt">grpc_service_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">YourService</span>
 
 <span class="c1"># The grpc server entry point</span>
-  <span class="l l-Scalar l-Scalar-Plain">grpc_service_address</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:50051</span>
+  <span class="nt">grpc_service_address</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:50051</span>
 
 <span class="c1"># The thrift service name, MUST be a CamelCase name, usually end with &quot;Service&quot;</span>
-  <span class="l l-Scalar l-Scalar-Plain">thrift_service_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">YourService</span>
+  <span class="nt">thrift_service_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">YourService</span>
 
 <span class="c1"># The thrift server entry point</span>
-  <span class="l l-Scalar l-Scalar-Plain">thrift_service_address</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:50052</span>
+  <span class="nt">thrift_service_address</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:50052</span>
 
 <span class="c1"># Only valid for grpc service.</span>
 <span class="c1"># By default, the Response message is marshaled by jsonpb.Marshaler, and returned directly.</span>
@@ -181,7 +181,7 @@
 <span class="c1"># 2, if field type is &#39;Ptr&#39;, and field value is &#39;nil&#39;, then set &quot;[key_name]&quot;:null in Json</span>
 <span class="c1"># 3, if any key in json is missing, set zero value to that key</span>
 <span class="c1"># Notice: &#39;map&#39; is not filtered (yet).</span>
-  <span class="l l-Scalar l-Scalar-Plain">filter_proto_json</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="nt">filter_proto_json</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
 
 <span class="c1"># Valid only if &quot;filter_proto_json: true&quot;,</span>
 <span class="c1"># Default value: true</span>
@@ -189,18 +189,18 @@
 <span class="c1"># As [Golang spec](https://golang.org/ref/spec#The_zero_value) says, zero values are</span>
 <span class="c1"># &quot;false for booleans, 0 for integers, 0.0 for floats, &quot;&quot; for strings,</span>
 <span class="c1"># and nil for pointers, functions, interfaces, slices, channels, and maps&quot;.</span>
-  <span class="l l-Scalar l-Scalar-Plain">filter_proto_json_emit_zerovalues</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="nt">filter_proto_json_emit_zerovalues</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
 
 <span class="c1"># Valid only if &quot;filter_proto_json: true&quot;,</span>
 <span class="c1"># Default value: true</span>
 <span class="c1"># If this option is set to &quot;true&quot;, int64 values will be shown as number in Json, instead of string</span>
-  <span class="l l-Scalar l-Scalar-Plain">filter_proto_json_int64_as_number</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="nt">filter_proto_json_int64_as_number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
 
 <span class="c1"># This mapping is the core function of Turbo.</span>
 <span class="c1"># This mapping tells Turbo how to proxy a HTTP request to a grpc/thrift entry point.</span>
 <span class="c1"># The format is &quot;HTTP_METHOD URL SERVICE_METHOD_NAME&quot;.</span>
 <span class="c1"># Trubo use that awsome [gorilla mux](github.com/gorilla/mux) as router, it also support variables in URL.</span>
-<span class="l l-Scalar l-Scalar-Plain">urlmapping</span><span class="p p-Indicator">:</span>
+<span class="nt">urlmapping</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET,POST /hello SayHello</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /eat_apple/{num:[0-9]+} EatApple</span>
 </pre></div>
@@ -253,6 +253,7 @@
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../_static/language_data.js"></script>
 
   
 

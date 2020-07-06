@@ -171,7 +171,7 @@
   <div class="section" id="service-yaml">
 <span id="config"></span><h1>配置文件service.yaml<a class="headerlink" href="#service-yaml" title="Permalink to this headline">¶</a></h1>
 <p>位于以下节点内的配置内容，可在运行时修改，并在运行时直接生效，不需要重启服务:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">urlmapping</span><span class="p">:</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">urlmapping</span><span class="p">:</span>
 <span class="n">interceptor</span><span class="p">:</span>
 <span class="n">preprocessor</span><span class="p">:</span>
 <span class="n">postprocessor</span><span class="p">:</span>
@@ -180,32 +180,32 @@
 <span class="n">errorhandler</span><span class="p">:</span>
 </pre></div>
 </div>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">config</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">config</span><span class="p">:</span>
 <span class="c1"># [可选] 运行环境类型,</span>
 <span class="c1"># 默认值: development</span>
 <span class="c1"># 合法值: production | development</span>
-  <span class="l l-Scalar l-Scalar-Plain">environment</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">production</span>
+  <span class="nt">environment</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">production</span>
 <span class="c1"># [可选] Turbo记录log的位置，可以是绝对路径，也可以是相对路径，如果值为“”，则不打印log</span>
 <span class="c1"># 默认值: log</span>
-  <span class="l l-Scalar l-Scalar-Plain">turbo_log_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">log</span>
+  <span class="nt">turbo_log_path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">log</span>
 <span class="c1"># 项目根目录，不包括包路径</span>
-  <span class="l l-Scalar l-Scalar-Plain">file_root_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/a/b/c</span>
+  <span class="nt">file_root_path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/a/b/c</span>
 <span class="c1"># 项目包路径</span>
-  <span class="l l-Scalar l-Scalar-Plain">package_path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">com/myservice</span>
+  <span class="nt">package_path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">com/myservice</span>
 <span class="c1"># http server监听的端口号</span>
-  <span class="l l-Scalar l-Scalar-Plain">http_port</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">8081</span>
+  <span class="nt">http_port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">8081</span>
 
 <span class="c1"># grpc服务名字，必须是驼峰格式（CamelCase），通常用&quot;Service&quot;结尾</span>
-  <span class="l l-Scalar l-Scalar-Plain">grpc_service_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">YourService</span>
+  <span class="nt">grpc_service_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">YourService</span>
 
 <span class="c1"># grpc server使用的地址和端口</span>
-  <span class="l l-Scalar l-Scalar-Plain">grpc_service_address</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:50051</span>
+  <span class="nt">grpc_service_address</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:50051</span>
 
 <span class="c1"># thrift服务名字，必须是驼峰格式（CamelCase），通常用&quot;Service&quot;结尾</span>
-  <span class="l l-Scalar l-Scalar-Plain">thrift_service_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">YourService</span>
+  <span class="nt">thrift_service_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">YourService</span>
 
 <span class="c1"># thrift server使用的地址和端口</span>
-  <span class="l l-Scalar l-Scalar-Plain">thrift_service_address</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:50052</span>
+  <span class="nt">thrift_service_address</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1:50052</span>
 
 <span class="c1"># 只对grpc服务生效。</span>
 <span class="c1"># 默认配置下，service端返回的Message对象是用jsonpb.Marshaler反序列化并返回的。</span>
@@ -217,7 +217,7 @@
 <span class="c1"># 2, 如果字段类型是指针（&#39;Ptr&#39;），并且值为nil，那就在json里加上 &quot;[key_name]&quot;:null，</span>
 <span class="c1"># 3, 如果某个字段在json中不存在，那就用零值（zero value）赋值并加入到json中。</span>
 <span class="c1"># 注意：map类型没有被Turbo处理.</span>
-  <span class="l l-Scalar l-Scalar-Plain">filter_proto_json</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="nt">filter_proto_json</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
 
 <span class="c1"># 只有在&quot;filter_proto_json: true&quot;时才起作用，</span>
 <span class="c1"># 默认值: true</span>
@@ -225,18 +225,18 @@
 <span class="c1"># [Golang语言规范](https://golang.org/ref/spec#The_zero_value) 中对&quot;零值&quot;的定义是</span>
 <span class="c1"># &quot;false for booleans, 0 for integers, 0.0 for floats, &quot;&quot; for strings,</span>
 <span class="c1"># and nil for pointers, functions, interfaces, slices, channels, and maps&quot;.</span>
-  <span class="l l-Scalar l-Scalar-Plain">filter_proto_json_emit_zerovalues</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="nt">filter_proto_json_emit_zerovalues</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
 
 <span class="c1"># 只有在&quot;filter_proto_json: true&quot;时才起作用，</span>
 <span class="c1"># 默认值: true</span>
 <span class="c1"># 如果被设为true，int64类型的值会作为数字类型在json中输出，而不是字符串类型</span>
-  <span class="l l-Scalar l-Scalar-Plain">filter_proto_json_int64_as_number</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="nt">filter_proto_json_int64_as_number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
 
 <span class="c1"># 这个映射是Turbo最核心的配置！</span>
 <span class="c1"># 这项配置告诉Turbo怎么把一个HTTP请求代理到后端的service方法上。</span>
 <span class="c1"># 配置的格式是 &quot;HTTP_METHOD URL SERVICE_NAME SERVICE_METHOD_NAME&quot;.</span>
 <span class="c1"># Turbo是借助于好用的 [gorilla mux](github.com/gorilla/mux) 来实现这个功能的，它还支持获取URL里的参数。</span>
-<span class="l l-Scalar l-Scalar-Plain">urlmapping</span><span class="p p-Indicator">:</span>
+<span class="nt">urlmapping</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET,POST /hello YourService SayHello</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /eat_apple/{num:[0-9]+} YourService EatApple</span>
 
@@ -244,22 +244,22 @@
 <span class="c1"># 习惯上，&quot;name&quot; 是被注册的组件struct的名字 (比如 &quot;LogInterceptor&quot;)。</span>
 
 <span class="c1"># 注册拦截器</span>
-<span class="l l-Scalar l-Scalar-Plain">interceptor</span><span class="p p-Indicator">:</span>
+<span class="nt">interceptor</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET,POST /hello TestInterceptor,LogInterceptor</span>
 <span class="c1"># 注册预处理器</span>
-<span class="l l-Scalar l-Scalar-Plain">preprocessor</span><span class="p p-Indicator">:</span>
+<span class="nt">preprocessor</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /hello registeredPreProcessor</span>
 <span class="c1"># 注册后处理器</span>
-<span class="l l-Scalar l-Scalar-Plain">postprocessor</span><span class="p p-Indicator">:</span>
+<span class="nt">postprocessor</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /hello registeredPostProcessor</span>
 <span class="c1"># 注册Hijacker</span>
-<span class="l l-Scalar l-Scalar-Plain">hijacker</span><span class="p p-Indicator">:</span>
+<span class="nt">hijacker</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /hello registeredHijacker</span>
 <span class="c1"># 注册Message转换器</span>
-<span class="l l-Scalar l-Scalar-Plain">convertor</span><span class="p p-Indicator">:</span>
+<span class="nt">convertor</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">CommonValues registeredConvertor</span>
 <span class="c1"># 注册 Error Handler</span>
-<span class="l l-Scalar l-Scalar-Plain">errorhandler</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">registeredErrorHandler</span>
+<span class="nt">errorhandler</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">registeredErrorHandler</span>
 </pre></div>
 </div>
 </div>
@@ -319,6 +319,7 @@
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
 
   
 

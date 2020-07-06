@@ -152,17 +152,17 @@
 <h2>0, 开始之前<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>显然，你得先安装 <span class="xref std std-ref">Golang</span> and <span class="xref std std-ref">Protocol buffers(v3)</span>
 然后下载Turbo代码：</p>
-<div class="highlight-shell"><div class="highlight"><pre><span></span>go get github.com/vaporz/turbo
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>go get github.com/vaporz/turbo
 </pre></div>
 </div>
 <p>至于依赖管理，有两种方式：</p>
 <p>(推荐) 安装 <span class="xref std std-ref">glide</span></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">vaporz</span><span class="o">/</span><span class="n">turbo</span><span class="o">/</span><span class="n">turbo</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">vaporz</span><span class="o">/</span><span class="n">turbo</span><span class="o">/</span><span class="n">turbo</span>
 <span class="n">glide</span> <span class="n">install</span>
 </pre></div>
 </div>
 <p>(不推荐) 手动安装这些包:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">go</span> <span class="n">get</span> <span class="n">google</span><span class="o">.</span><span class="n">golang</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">grpc</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">go</span> <span class="n">get</span> <span class="n">google</span><span class="o">.</span><span class="n">golang</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">grpc</span>
 <span class="n">go</span> <span class="n">get</span> <span class="n">git</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">thrift</span><span class="o">.</span><span class="n">git</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">go</span><span class="o">/</span><span class="n">thrift</span>
 <span class="n">go</span> <span class="n">get</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">kylelemons</span><span class="o">/</span><span class="n">go</span><span class="o">-</span><span class="n">gypsy</span><span class="o">/</span><span class="n">yaml</span>
 <span class="n">go</span> <span class="n">get</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">gorilla</span><span class="o">/</span><span class="n">mux</span>
@@ -174,7 +174,7 @@
 </div>
 <div class="section" id="id3">
 <h2>1, 安装命令行工具<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">vaporz</span><span class="o">/</span><span class="n">turbo</span><span class="o">/</span><span class="n">protoc</span><span class="o">-</span><span class="n">gen</span><span class="o">-</span><span class="n">buildfields</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">vaporz</span><span class="o">/</span><span class="n">turbo</span><span class="o">/</span><span class="n">protoc</span><span class="o">-</span><span class="n">gen</span><span class="o">-</span><span class="n">buildfields</span>
 <span class="n">go</span> <span class="n">install</span>
 <span class="n">cd</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">vaporz</span><span class="o">/</span><span class="n">turbo</span><span class="o">/</span><span class="n">turbo</span>
 <span class="n">go</span> <span class="n">install</span>
@@ -183,7 +183,7 @@
 </div>
 <div class="section" id="id4">
 <h2>2, 创建你的服务<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ turbo create package/path/to/yourservice YourService -r grpc
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ turbo create package/path/to/yourservice YourService -r grpc
 </pre></div>
 </div>
 <p>文件夹 “$GOPATH/src/package/path/to/yourservice” 会被创建.</p>
@@ -194,17 +194,17 @@
 <h2>3, 运行<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>好了！运行一个看看！</p>
 <p>同时启动 gRPC server 和 HTTP server:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>cd $GOPATH/src/package/path/to/yourservice
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cd $GOPATH/src/package/path/to/yourservice
 go run main.go
 </pre></div>
 </div>
 <p>发送请求:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; &quot;http://localhost:8081/hello?your_name=Alice&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; &quot;http://localhost:8081/hello?your_name=Alice&quot;
 message:&quot;Hello, Alice&quot;
 </pre></div>
 </div>
 <p>或者，你也可以分别启动 gRPC server 和 HTTP server:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ cd $GOPATH/src/package/path/to/yourservice
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd $GOPATH/src/package/path/to/yourservice
 # start grpc service
 $ go run grpcservice/yourservice.go
 # start http server
@@ -260,6 +260,7 @@ $ go run grpcapi/yourserviceapi.go
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../_static/language_data.js"></script>
 
   
 

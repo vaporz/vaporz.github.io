@@ -154,7 +154,7 @@
 <ol class="arabic simple">
 <li>Define new service in .proto file</li>
 </ol>
-<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gi">+message MeowRequest {</span>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gi">+message MeowRequest {</span>
 <span class="gi">+}</span>
 
 <span class="gi">+message MeowResponse {</span>
@@ -169,7 +169,7 @@
 <ol class="arabic simple" start="2">
 <li>Modify service.yaml, add new APIs</li>
 </ol>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>config:
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>config:
 <span class="gd">-  grpc_service_name: TestService</span>
 <span class="gi">+  grpc_service_name: TestService,CatService</span>
 urlmapping:
@@ -179,13 +179,13 @@ urlmapping:
 <ol class="arabic simple" start="3">
 <li>Generate new code</li>
 </ol>
-<div class="highlight-shell"><div class="highlight"><pre><span></span>$ turbo generate package/path/to/yourservice -r grpc -I ~/package/path/to/yourservice
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ turbo generate package/path/to/yourservice -r grpc -I ~/package/path/to/yourservice
 </pre></div>
 </div>
 <ol class="arabic simple" start="4">
 <li>On gRPC server side, implement the new service</li>
 </ol>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>func RegisterServer(s *grpc.Server) {
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>func RegisterServer(s *grpc.Server) {
        proto.RegisterTestServiceServer(s, &amp;TestService{})
 <span class="gi">+      proto.RegisterCatServiceServer(s, &amp;CatService{})</span>
 }
@@ -201,7 +201,7 @@ urlmapping:
 <ol class="arabic simple" start="5">
 <li>On HTTP server side, register the new service</li>
 </ol>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>func GrpcClient(conn *grpc.ClientConn) map[string]interface{} {
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>func GrpcClient(conn *grpc.ClientConn) map[string]interface{} {
        return map[string]interface{}{
                &quot;TestService&quot;: proto.NewTestServiceClient(conn),
 <span class="gi">+              &quot;CatService&quot;: proto.NewCatServiceClient(conn),</span>
@@ -216,7 +216,7 @@ urlmapping:
 <ol class="arabic simple">
 <li>Define new service in .thrift file</li>
 </ol>
-<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gi">+struct MeowResponse {</span>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gi">+struct MeowResponse {</span>
 <span class="gi">+ 1: string message,</span>
 <span class="gi">+}</span>
 
@@ -228,7 +228,7 @@ urlmapping:
 <ol class="arabic simple" start="2">
 <li>Modify service.yaml, add new APIs</li>
 </ol>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>config:
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>config:
 <span class="gd">-  thrift_service_name: TestService</span>
 <span class="gi">+  thrift_service_name: TestService,CatService</span>
 urlmapping:
@@ -238,13 +238,13 @@ urlmapping:
 <ol class="arabic simple" start="3">
 <li>Generate new code</li>
 </ol>
-<div class="highlight-shell"><div class="highlight"><pre><span></span>$ turbo generate package/path/to/yourservice -r thrift -I ~/package/path/to/yourservice
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ turbo generate package/path/to/yourservice -r thrift -I ~/package/path/to/yourservice
 </pre></div>
 </div>
 <ol class="arabic simple" start="4">
 <li>On server side, implement the new service</li>
 </ol>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>func TProcessor() map[string]thrift.TProcessor {
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>func TProcessor() map[string]thrift.TProcessor {
        return map[string]thrift.TProcessor{
                &quot;TestService&quot;: gen.NewTestServiceProcessor(TestService{}),
 <span class="gi">+              &quot;CatService&quot;: gen.NewCatServiceProcessor(CatService{}),</span>
@@ -262,7 +262,7 @@ urlmapping:
 <ol class="arabic simple" start="5">
 <li>On HTTP server side, register the new service</li>
 </ol>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>func ThriftClient(trans thrift.TTransport, f thrift.TProtocolFactory) map[string]interface{} {
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>func ThriftClient(trans thrift.TTransport, f thrift.TProtocolFactory) map[string]interface{} {
        iprot := f.GetProtocol(trans)
        return map[string]interface{}{
                &quot;TestService&quot;: t.NewTestServiceClientProtocol(trans, iprot, thrift.NewTMultiplexedProtocol(iprot, &quot;TestService&quot;)),
@@ -321,6 +321,7 @@ urlmapping:
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../_static/language_data.js"></script>
 
   
 

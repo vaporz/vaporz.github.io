@@ -153,7 +153,7 @@
 <p>‘turbo create’ creates a project with runnable HTTP server and gRPC/Thrift server.</p>
 <p>‘ServiceName’ <strong>MUST</strong> be a CamelCase string.</p>
 <p>Project structure:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ turbo create package/path/to/yourservice YourService -r grpc
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ turbo create package/path/to/yourservice YourService -r grpc
 $ cd $GOPATH/src/package/path/to/yourservice
 $ tree
 .
@@ -181,7 +181,7 @@ $ tree
 <p>This command is useful when either service.yaml or [service_name].proto|.thrift is changed.
 For example, add a new API, change an existing API, change url-grpc mapping, etc.
 Example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ turbo generate package/path/to/yourservice -r grpc
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ turbo generate package/path/to/yourservice -r grpc
  -I $GOPATH/src/package/path/to/yourservice -I $GOPATH/src/shared
 </pre></div>
 </div>
@@ -235,6 +235,7 @@ Example:</p>
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../_static/language_data.js"></script>
 
   
 

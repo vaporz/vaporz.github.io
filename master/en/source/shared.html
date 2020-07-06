@@ -155,11 +155,11 @@ Then we add this new message to other message as a struct field.</p>
 <div class="section" id="create-shared-proto-and-define-a-new-message">
 <h2>1, Create “shared.proto” and define a new message<a class="headerlink" href="#create-shared-proto-and-define-a-new-message" title="Permalink to this headline">¶</a></h2>
 <p>Create folder “common”(or any other name):</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ mkdir -p ~/package/path/to/common
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir -p ~/package/path/to/common
 </pre></div>
 </div>
 <p>Create file “shared.proto” in folder “common”:</p>
-<div class="highlight-proto"><div class="highlight"><pre><span></span><span class="na">syntax</span> <span class="o">=</span> <span class="s">&quot;proto3&quot;</span><span class="p">;</span>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="na">syntax</span> <span class="o">=</span> <span class="s">&quot;proto3&quot;</span><span class="p">;</span>
 <span class="kn">package</span> <span class="nn">proto</span><span class="p">;</span>
 
 <span class="kd">message</span> <span class="nc">CommonValues</span> <span class="p">{</span>
@@ -171,7 +171,7 @@ Then we add this new message to other message as a struct field.</p>
 <div class="section" id="add-new-field-to-a-request-message">
 <h2>2, Add new field to a request message<a class="headerlink" href="#add-new-field-to-a-request-message" title="Permalink to this headline">¶</a></h2>
 <p>Edit “yourservice.proto”:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>syntax = &quot;proto3&quot;;
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>syntax = &quot;proto3&quot;;
 package proto;
 <span class="gi">+</span>
 <span class="gi">+import &quot;shared.proto&quot;;</span>
@@ -185,13 +185,13 @@ message SayHelloRequest {
 </div>
 <div class="section" id="generate-codes">
 <h2>3, Generate codes<a class="headerlink" href="#generate-codes" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ turbo generate package/path/to/yourservice -r grpc -I ~/package/path/to/yourservice
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ turbo generate package/path/to/yourservice -r grpc -I ~/package/path/to/yourservice
  -I ~/package/path/to/yourservice/common
 </pre></div>
 </div>
 <p>Done!</p>
 <p>Before test, edit youserviceimpl.go to return “someId”:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>func (s *YourService) SayHello(ctx context.Context, req *proto.SayHelloRequest) (*proto.SayHelloResponse, error) {
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>func (s *YourService) SayHello(ctx context.Context, req *proto.SayHelloRequest) (*proto.SayHelloResponse, error) {
 <span class="gi">+      someId := strconv.FormatInt(req.Values.SomeId, 10)</span>
 <span class="gd">-      return &amp;proto.SayHelloResponse{Message: &quot;[grpc server]Hello, &quot; + req.YourName}, nil</span>
 <span class="gi">+      return &amp;proto.SayHelloResponse{Message: &quot;[grpc server]Hello, &quot; + req.YourName + &quot;, someId=&quot; + someId}, nil</span>
@@ -199,7 +199,7 @@ message SayHelloRequest {
 </pre></div>
 </div>
 <p>Restart grpc server and test:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; -X GET &quot;http://localhost:8081/hello?your_name=Alice&amp;some_id=12345&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; -X GET &quot;http://localhost:8081/hello?your_name=Alice&amp;some_id=12345&quot;
 {&quot;message&quot;:&quot;[grpc server]Hello, Alice, someId=12345&quot;}
 </pre></div>
 </div>
@@ -254,6 +254,7 @@ message SayHelloRequest {
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../_static/language_data.js"></script>
 
   
 

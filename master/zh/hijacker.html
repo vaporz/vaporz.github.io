@@ -178,7 +178,7 @@
 <p>你想干什么都行，这意味这，向service发送请求和错误处理这类事情，你也得自己来。</p>
 <p>如果一个URL上同时设置了Hijacker和preprocessor，那么preprocessor会被忽略。</p>
 <p>下面的例子中，URL “/eat_apple/{num:[0-9]+}” 被”接管”了，不管queryString里是什么值，参数”num”都被设置成了”999”。</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>func (i *ServiceInitializer) InitService(s turbo.Servable) error {
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>func (i *ServiceInitializer) InitService(s turbo.Servable) error {
 <span class="gi">+       s.RegisterComponent(&quot;hijackEatApple&quot;, hijackEatApple)</span>
     return nil
 }
@@ -197,12 +197,12 @@
 </pre></div>
 </div>
 <p>编辑 “yourservice/service.yaml”:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gi">+hijacker:</span>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gi">+hijacker:</span>
 <span class="gi">+  - GET /eat_apple/{num:[0-9]+} hijackEatApple</span>
 </pre></div>
 </div>
 <p>重启服务并测试:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; &quot;http://localhost:8081/eat_apple/6&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; &quot;http://localhost:8081/eat_apple/6&quot;
 message:&quot;Good taste! Apple num=999&quot;
 </pre></div>
 </div>
@@ -263,6 +263,7 @@ message:&quot;Good taste! Apple num=999&quot;
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
 
   
 

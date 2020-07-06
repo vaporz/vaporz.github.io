@@ -150,7 +150,7 @@
 <span id="map"></span><h1>HTTP API Mapping<a class="headerlink" href="#http-api-mapping" title="Permalink to this headline">¶</a></h1>
 <p>Mapping between HTTP API and backend API is stored under node “urlmapping” in config file.</p>
 <p>From <a class="reference external" href="add">previous example</a> , we have a config like this:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">urlmapping</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">urlmapping</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /hello YourService SayHello</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /eat_apple/{num:[0-9]+} YourService EatApple</span>
 </pre></div>
@@ -161,7 +161,7 @@ along with a parameter “num” defined in URL, the format to “num” is “[
 <p>Inside Turbo, URL routing functionality and regex support is provided by easy-to-use and powerful package “github.com/gorilla/mux”.
 Please refer to <a class="reference external" href="https://github.com/gorilla/mux">mux’s documentation</a> for more details.</p>
 <p>Mapping between HTTP API and backend API can be N:1, for example:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">urlmapping</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">urlmapping</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /hello YourService SayHello</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">POST /hello YourService SayHello</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /new/hello YourService SayHello</span>
@@ -171,7 +171,7 @@ Please refer to <a class="reference external" href="https://github.com/gorilla/m
 <p>So, new HTTP API “POST /hello” and “GET /new/hello” are both mapped to “SayHello”.</p>
 <p>If the difference between multiple HTTP APIs is the request method only (GET,POST, etc), the URL are same,
 then you can also write like this:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">urlmapping</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">urlmapping</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET,POST,UPDATE /hello YourService SayHello</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /new/hello YourService SayHello</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GET /eat_apple/{num:[0-9]+} YourService EatApple</span>
@@ -227,6 +227,7 @@ are all mapped to backend API “SayHello”.</p>
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../_static/language_data.js"></script>
 
   
 

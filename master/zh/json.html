@@ -173,7 +173,7 @@
 <div class="section" id="grpc">
 <h2>GRPC<a class="headerlink" href="#grpc" title="Permalink to this headline">¶</a></h2>
 <p>举一个例子，接口定义如下：</p>
-<div class="highlight-proto"><div class="highlight"><pre><span></span><span class="kd">message</span> <span class="nc">SayHelloRequest</span> <span class="p">{</span>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="kd">message</span> <span class="nc">SayHelloRequest</span> <span class="p">{</span>
     <span class="kt">string</span> <span class="na">stringValue</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
     <span class="kt">int64</span> <span class="na">int64Value</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 <span class="p">}</span>
@@ -188,7 +188,7 @@
 </pre></div>
 </div>
 <p>protobuf生成的struct代码为：</p>
-<div class="highlight-go"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="nx">SayHelloRequest</span> <span class="kd">struct</span> <span class="p">{</span>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="nx">SayHelloRequest</span> <span class="kd">struct</span> <span class="p">{</span>
        <span class="nx">StringValue</span>  <span class="kt">string</span>        <span class="s">`protobuf:&quot;bytes,2,opt,name=stringValue&quot; json:&quot;stringValue,omitempty&quot;`</span>
        <span class="nx">Int64Value</span>   <span class="kt">int64</span>         <span class="s">`protobuf:&quot;varint,3,opt,name=int64Value&quot; json:&quot;int64Value,omitempty&quot;`</span>
 <span class="p">}</span>
@@ -196,7 +196,7 @@
 </div>
 <p>参考 <a class="reference internal" href="add.html#add"><span class="std std-ref">如何添加新API</span></a>，实现该接口。</p>
 <p>接下来启动服务，发起POST请求（Content-Type=application／json），body数据为：</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
        <span class="nt">&quot;stringValue&quot;</span><span class="p">:</span><span class="s2">&quot;a string value&quot;</span><span class="p">,</span>
        <span class="nt">&quot;int64Value&quot;</span><span class="p">:</span><span class="mi">1234</span>
 <span class="p">}</span>
@@ -208,7 +208,7 @@
 <div class="section" id="thrift">
 <h2>Thrift<a class="headerlink" href="#thrift" title="Permalink to this headline">¶</a></h2>
 <p>举相同的例子：</p>
-<div class="highlight-thrift"><div class="highlight"><pre><span></span><span class="kd">struct</span><span class="w"> </span><span class="nc">SayHelloRequest</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<div class="highlight-thrift notranslate"><div class="highlight"><pre><span></span><span class="kd">struct</span><span class="w"> </span><span class="nc">SayHelloRequest</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="mi">1</span><span class="p">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">stringValue</span><span class="p">,</span><span class="w"></span>
 <span class="w">  </span><span class="mi">2</span><span class="p">:</span><span class="w"> </span><span class="kt">i32</span><span class="w"> </span><span class="n">int32Value</span><span class="p">,</span><span class="w"></span>
 <span class="w">  </span><span class="mi">3</span><span class="p">:</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">boolValue</span><span class="p">,</span><span class="w"></span>
@@ -224,7 +224,7 @@
 </pre></div>
 </div>
 <p>thrift生成的struct代码：</p>
-<div class="highlight-go"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="nx">TestJsonRequest</span> <span class="kd">struct</span> <span class="p">{</span>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="nx">TestJsonRequest</span> <span class="kd">struct</span> <span class="p">{</span>
   <span class="nx">StringValue</span> <span class="kt">string</span> <span class="s">`thrift:&quot;stringValue,1&quot; db:&quot;stringValue&quot; json:&quot;stringValue&quot;`</span>
   <span class="nx">Int32Value</span> <span class="kt">int32</span> <span class="s">`thrift:&quot;int32Value,2&quot; db:&quot;int32Value&quot; json:&quot;int32Value&quot;`</span>
   <span class="nx">BoolValue</span> <span class="kt">bool</span> <span class="s">`thrift:&quot;boolValue,3&quot; db:&quot;boolValue&quot; json:&quot;boolValue&quot;`</span>
@@ -233,7 +233,7 @@
 </div>
 <p>参考 <a class="reference internal" href="add.html#add"><span class="std std-ref">如何添加新API</span></a>，实现该接口。</p>
 <p>接下来启动服务，发起POST请求（Content-Type=application／json），body数据为：</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
        <span class="nt">&quot;StringValue&quot;</span><span class="p">:</span><span class="s2">&quot;a string value&quot;</span><span class="p">,</span>
        <span class="nt">&quot;int32Value&quot;</span><span class="p">:</span><span class="mi">1234</span><span class="p">,</span>
        <span class="nt">&quot;boolvalue&quot;</span><span class="p">:</span><span class="kc">true</span>
@@ -300,6 +300,7 @@
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
 
   
 

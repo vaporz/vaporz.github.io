@@ -162,7 +162,7 @@
 <p>比如，拦截器 A 设置在 ‘GET /abc’，拦截器 B 设置给了所有URL，那么，当请求”GET /abc”时，拦截器A会被执行，B不会被执行，但请求”POST /abc”时，只有B会被执行。</p>
 <p>下面，让我们来创建一个拦截器，设置给”/hello”，用来记录一些log。</p>
 <p>编辑 “yourservice/interceptor/log.go”:</p>
-<div class="highlight-go"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">interceptor</span>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">interceptor</span>
 
 <span class="kn">import</span> <span class="p">(</span>
        <span class="s">&quot;github.com/vaporz/turbo&quot;</span>
@@ -190,7 +190,7 @@
 </div>
 <p>然后把它设置给 URL “/hello”。</p>
 <p>编辑 “yourservice/grpcapi/component/components.go”:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>package component
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>package component
 
 import (
        &quot;github.com/vaporz/turbo-example/yourservice/gen/proto&quot;
@@ -208,24 +208,24 @@ func RegisterComponents(s *turbo.GrpcServer) {
 </pre></div>
 </div>
 <p>编辑 “yourservice/service.yaml”:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span><span class="gi">+interceptor:</span>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gi">+interceptor:</span>
 <span class="gi">+  - GET /hello LogInterceptor</span>
 </pre></div>
 </div>
 <p>最后，重启服务并测试:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; -X GET &quot;http://localhost:8081/hello?your_name=Alice&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; -X GET &quot;http://localhost:8081/hello?your_name=Alice&quot;
 {&quot;message&quot;:&quot;[grpc server]Hello, Alice&quot;}
 </pre></div>
 </div>
 <p>查看HTTP server的控制台:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ go run yourservice/yourserviceapi.go
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ go run yourservice/yourserviceapi.go
 [Before] Request URL:/hello
 [After] Request URL:/hello
 </pre></div>
 </div>
 <p>拦截器经常被用来做一些校验工作，当校验失败时，请求会被中止，并返回一个错误。</p>
 <p>很简单，你只需要这样:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>func (l LogInterceptor) Before(resp http.ResponseWriter, req *http.Request) (*http.Request, error) {
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>func (l LogInterceptor) Before(resp http.ResponseWriter, req *http.Request) (*http.Request, error) {
        fmt.Println(&quot;[Before] Request URL:&quot;+req.URL.Path)
 <span class="gi">+      resp.Write([]byte(&quot;Encounter an error from LogInterceptor!\n&quot;))</span>
 <span class="gd">-      return req, nil</span>
@@ -234,7 +234,7 @@ func RegisterComponents(s *turbo.GrpcServer) {
 </pre></div>
 </div>
 <p>测试:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; &quot;http://localhost:8081/hello&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; &quot;http://localhost:8081/hello&quot;
 Encounter an error from LogInterceptor!
 </pre></div>
 </div>
@@ -286,6 +286,7 @@ Encounter an error from LogInterceptor!
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../_static/language_data.js"></script>
 
   
 

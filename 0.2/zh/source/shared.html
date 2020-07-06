@@ -155,11 +155,11 @@
 <div class="section" id="shared-proto-message">
 <h2>1, 新建 “shared.proto”，并且定义一个新Message<a class="headerlink" href="#shared-proto-message" title="Permalink to this headline">¶</a></h2>
 <p>创建文件夹”common”（或者其他名字）:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ mkdir -p $GOPATH/src/package/path/to/common
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir -p $GOPATH/src/package/path/to/common
 </pre></div>
 </div>
 <p>在里面创建文件 “shared.proto”:</p>
-<div class="highlight-proto"><div class="highlight"><pre><span></span><span class="na">syntax</span> <span class="o">=</span> <span class="s">&quot;proto3&quot;</span><span class="p">;</span>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="na">syntax</span> <span class="o">=</span> <span class="s">&quot;proto3&quot;</span><span class="p">;</span>
 <span class="kn">package</span> <span class="nn">proto</span><span class="p">;</span>
 
 <span class="kd">message</span> <span class="nc">CommonValues</span> <span class="p">{</span>
@@ -171,7 +171,7 @@
 <div class="section" id="request">
 <h2>2, 给request对象添加新参数<a class="headerlink" href="#request" title="Permalink to this headline">¶</a></h2>
 <p>编辑 “yourservice.proto”:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>syntax = &quot;proto3&quot;;
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>syntax = &quot;proto3&quot;;
 package proto;
 <span class="gi">+</span>
 <span class="gi">+import &quot;shared.proto&quot;;</span>
@@ -185,13 +185,13 @@ message SayHelloRequest {
 </div>
 <div class="section" id="id1">
 <h2>3, 生成代码<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ turbo generate package/path/to/yourservice -r grpc -I $GOPATH/src/package/path/to/yourservice
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ turbo generate package/path/to/yourservice -r grpc -I $GOPATH/src/package/path/to/yourservice
  -I $GOPATH/src/package/path/to/common
 </pre></div>
 </div>
 <p>完成！</p>
 <p>测试前，编辑 “youserviceimpl.go”，返回 “someId”:</p>
-<div class="highlight-diff"><div class="highlight"><pre><span></span>func (s *YourService) SayHello(ctx context.Context, req *proto.SayHelloRequest) (*proto.SayHelloResponse, error) {
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>func (s *YourService) SayHello(ctx context.Context, req *proto.SayHelloRequest) (*proto.SayHelloResponse, error) {
 <span class="gi">+      someId := strconv.FormatInt(req.Values.SomeId, 10)</span>
 <span class="gd">-      return &amp;proto.SayHelloResponse{Message: &quot;[grpc server]Hello, &quot; + req.YourName}, nil</span>
 <span class="gi">+      return &amp;proto.SayHelloResponse{Message: &quot;[grpc server]Hello, &quot; + req.YourName + &quot;, someId=&quot; + someId}, nil</span>
@@ -199,7 +199,7 @@ message SayHelloRequest {
 </pre></div>
 </div>
 <p>重启服务并测试:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; -X GET &quot;http://localhost:8081/hello?your_name=Alice&amp;some_id=12345&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; -X GET &quot;http://localhost:8081/hello?your_name=Alice&amp;some_id=12345&quot;
 {&quot;message&quot;:&quot;[grpc server]Hello, Alice, someId=12345&quot;}
 </pre></div>
 </div>
@@ -254,6 +254,7 @@ message SayHelloRequest {
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../_static/language_data.js"></script>
 
   
 

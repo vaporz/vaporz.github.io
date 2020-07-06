@@ -153,7 +153,7 @@
 <p>‘turbo create’ 用来创建一个新项目，包含了可直接运行的HTTP server和gRPC／Thrfit server。
 ‘ServiceName’<a href="#id2"><span class="problematic" id="id3">**</span></a>必须**是一个驼峰（CamelCase）字符串。
 项目目录结构:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ turbo create package/path/to/yourservice YourService -r grpc
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ turbo create package/path/to/yourservice YourService -r grpc
 $ cd $GOPATH/src/package/path/to/yourservice
 $ tree
 .
@@ -181,7 +181,7 @@ $ tree
 <p>当 service.yaml 或者 [service_name].proto|.thrift有改动时，这个命令很有用，
 比如添加了新的API，修改了已有的API定义，修改了url到service接口的映射关系等。
 例子:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ turbo generate package/path/to/yourservice -r grpc
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ turbo generate package/path/to/yourservice -r grpc
  -I $GOPATH/src/package/path/to/yourservice -I $GOPATH/src/shared
 </pre></div>
 </div>
@@ -235,6 +235,7 @@ $ tree
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../_static/language_data.js"></script>
 
   
 

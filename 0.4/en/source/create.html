@@ -154,11 +154,11 @@
 <p>Continue reading if you want to compile by yourself, or else jump to next step.</p>
 <p>First, install <a class="reference external" href="https://golang.org">go</a> 和 <a class="reference external" href="https://developers.google.com/protocol-buffers/">protoc</a> ,
 then download <a class="reference external" href="https://github.com/vaporz/turbo">Turbo repo</a> ：</p>
-<div class="highlight-shell"><div class="highlight"><pre><span></span>git clone https://github.com/vaporz/turbo.git
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/vaporz/turbo.git
 </pre></div>
 </div>
 <p>Turbo manages dependencies with “go modules”:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ cd turbo
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd turbo
 $ go mod tidy
 $ make install
 ...
@@ -169,7 +169,7 @@ turbo version v0.4.0
 </div>
 <div class="section" id="create-your-service">
 <h2>2, Create your service<a class="headerlink" href="#create-your-service" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ turbo create package/path/to/yourservice YourService -r grpc -p ~/
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ turbo create package/path/to/yourservice YourService -r grpc -p ~/
 </pre></div>
 </div>
 <p>“package/path/to/yourservice” is package name, “YourService” is backend service’s name, “-r grpc” means to create
@@ -180,23 +180,23 @@ a gRPC service as backend service, or you can create a Thrift service as backend
 <div class="section" id="run">
 <h2>3, Run<a class="headerlink" href="#run" title="Permalink to this headline">¶</a></h2>
 <p>Install dependencies with “go mod”:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">package</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">yourservice</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">package</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">yourservice</span>
 <span class="n">go</span> <span class="n">mod</span> <span class="n">init</span>
 </pre></div>
 </div>
 <p>That’s it! Now let’s Play!</p>
 <p>Start both gRPC server and HTTP server:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">package</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">yourservice</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">package</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">yourservice</span>
 <span class="n">go</span> <span class="n">run</span> <span class="n">main</span><span class="o">.</span><span class="n">go</span>
 </pre></div>
 </div>
 <p>Send a request:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; &quot;http://localhost:8081/hello?your_name=Alice&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ curl -w &quot;\n&quot; &quot;http://localhost:8081/hello?your_name=Alice&quot;
 message:&quot;Hello, Alice&quot;
 </pre></div>
 </div>
 <p>Or you can start gRPC server and HTTP server separately:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ cd ~/package/path/to/yourservice
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd ~/package/path/to/yourservice
 # start grpc service
 $ go run grpcservice/yourservice.go
 # start http server
@@ -252,6 +252,7 @@ $ go run grpcapi/yourserviceapi.go
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../_static/language_data.js"></script>
 
   
 
