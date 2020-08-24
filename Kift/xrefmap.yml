@@ -195,6 +195,19 @@ references:
   isSpec: "True"
   fullName: Kift.Server.KiftServiceHandler.currentVessel
   nameWithType: KiftServiceHandler.currentVessel
+- uid: Kift.Server.KiftServiceHandler.currentVesselFullInfo
+  name: currentVesselFullInfo()
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_currentVesselFullInfo
+  commentId: M:Kift.Server.KiftServiceHandler.currentVesselFullInfo
+  fullName: Kift.Server.KiftServiceHandler.currentVesselFullInfo()
+  nameWithType: KiftServiceHandler.currentVesselFullInfo()
+- uid: Kift.Server.KiftServiceHandler.currentVesselFullInfo*
+  name: currentVesselFullInfo
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_currentVesselFullInfo_
+  commentId: Overload:Kift.Server.KiftServiceHandler.currentVesselFullInfo
+  isSpec: "True"
+  fullName: Kift.Server.KiftServiceHandler.currentVesselFullInfo
+  nameWithType: KiftServiceHandler.currentVesselFullInfo
 - uid: Kift.Server.KiftServiceHandler.decouplerActivate(System.Int64)
   name: decouplerActivate(Int64)
   href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_decouplerActivate_System_Int64_
@@ -208,6 +221,19 @@ references:
   isSpec: "True"
   fullName: Kift.Server.KiftServiceHandler.decouplerActivate
   nameWithType: KiftServiceHandler.decouplerActivate
+- uid: Kift.Server.KiftServiceHandler.decreaseTimeWarpRate
+  name: decreaseTimeWarpRate()
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_decreaseTimeWarpRate
+  commentId: M:Kift.Server.KiftServiceHandler.decreaseTimeWarpRate
+  fullName: Kift.Server.KiftServiceHandler.decreaseTimeWarpRate()
+  nameWithType: KiftServiceHandler.decreaseTimeWarpRate()
+- uid: Kift.Server.KiftServiceHandler.decreaseTimeWarpRate*
+  name: decreaseTimeWarpRate
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_decreaseTimeWarpRate_
+  commentId: Overload:Kift.Server.KiftServiceHandler.decreaseTimeWarpRate
+  isSpec: "True"
+  fullName: Kift.Server.KiftServiceHandler.decreaseTimeWarpRate
+  nameWithType: KiftServiceHandler.decreaseTimeWarpRate
 - uid: Kift.Server.KiftServiceHandler.dockingPortShieldClose(System.Int64)
   name: dockingPortShieldClose(Int64)
   href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_dockingPortShieldClose_System_Int64_
@@ -299,6 +325,19 @@ references:
   isSpec: "True"
   fullName: Kift.Server.KiftServiceHandler.engineGimbalLock
   nameWithType: KiftServiceHandler.engineGimbalLock
+- uid: Kift.Server.KiftServiceHandler.engineReverseThrust(System.Int64,System.Boolean)
+  name: engineReverseThrust(Int64, Boolean)
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_engineReverseThrust_System_Int64_System_Boolean_
+  commentId: M:Kift.Server.KiftServiceHandler.engineReverseThrust(System.Int64,System.Boolean)
+  fullName: Kift.Server.KiftServiceHandler.engineReverseThrust(System.Int64, System.Boolean)
+  nameWithType: KiftServiceHandler.engineReverseThrust(Int64, Boolean)
+- uid: Kift.Server.KiftServiceHandler.engineReverseThrust*
+  name: engineReverseThrust
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_engineReverseThrust_
+  commentId: Overload:Kift.Server.KiftServiceHandler.engineReverseThrust
+  isSpec: "True"
+  fullName: Kift.Server.KiftServiceHandler.engineReverseThrust
+  nameWithType: KiftServiceHandler.engineReverseThrust
 - uid: Kift.Server.KiftServiceHandler.engineShutDown(System.Int64)
   name: engineShutDown(Int64)
   href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_engineShutDown_System_Int64_
@@ -377,58 +416,6 @@ references:
   isSpec: "True"
   fullName: Kift.Server.KiftServiceHandler.forward
   nameWithType: KiftServiceHandler.forward
-- uid: Kift.Server.KiftServiceHandler.getCameraFocussedBody
-  name: getCameraFocussedBody()
-  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getCameraFocussedBody
-  commentId: M:Kift.Server.KiftServiceHandler.getCameraFocussedBody
-  fullName: Kift.Server.KiftServiceHandler.getCameraFocussedBody()
-  nameWithType: KiftServiceHandler.getCameraFocussedBody()
-- uid: Kift.Server.KiftServiceHandler.getCameraFocussedBody*
-  name: getCameraFocussedBody
-  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getCameraFocussedBody_
-  commentId: Overload:Kift.Server.KiftServiceHandler.getCameraFocussedBody
-  isSpec: "True"
-  fullName: Kift.Server.KiftServiceHandler.getCameraFocussedBody
-  nameWithType: KiftServiceHandler.getCameraFocussedBody
-- uid: Kift.Server.KiftServiceHandler.getCameraFocussedNode
-  name: getCameraFocussedNode()
-  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getCameraFocussedNode
-  commentId: M:Kift.Server.KiftServiceHandler.getCameraFocussedNode
-  fullName: Kift.Server.KiftServiceHandler.getCameraFocussedNode()
-  nameWithType: KiftServiceHandler.getCameraFocussedNode()
-- uid: Kift.Server.KiftServiceHandler.getCameraFocussedNode*
-  name: getCameraFocussedNode
-  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getCameraFocussedNode_
-  commentId: Overload:Kift.Server.KiftServiceHandler.getCameraFocussedNode
-  isSpec: "True"
-  fullName: Kift.Server.KiftServiceHandler.getCameraFocussedNode
-  nameWithType: KiftServiceHandler.getCameraFocussedNode
-- uid: Kift.Server.KiftServiceHandler.getCameraFocussedVessel
-  name: getCameraFocussedVessel()
-  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getCameraFocussedVessel
-  commentId: M:Kift.Server.KiftServiceHandler.getCameraFocussedVessel
-  fullName: Kift.Server.KiftServiceHandler.getCameraFocussedVessel()
-  nameWithType: KiftServiceHandler.getCameraFocussedVessel()
-- uid: Kift.Server.KiftServiceHandler.getCameraFocussedVessel*
-  name: getCameraFocussedVessel
-  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getCameraFocussedVessel_
-  commentId: Overload:Kift.Server.KiftServiceHandler.getCameraFocussedVessel
-  isSpec: "True"
-  fullName: Kift.Server.KiftServiceHandler.getCameraFocussedVessel
-  nameWithType: KiftServiceHandler.getCameraFocussedVessel
-- uid: Kift.Server.KiftServiceHandler.getCameraState
-  name: getCameraState()
-  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getCameraState
-  commentId: M:Kift.Server.KiftServiceHandler.getCameraState
-  fullName: Kift.Server.KiftServiceHandler.getCameraState()
-  nameWithType: KiftServiceHandler.getCameraState()
-- uid: Kift.Server.KiftServiceHandler.getCameraState*
-  name: getCameraState
-  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getCameraState_
-  commentId: Overload:Kift.Server.KiftServiceHandler.getCameraState
-  isSpec: "True"
-  fullName: Kift.Server.KiftServiceHandler.getCameraState
-  nameWithType: KiftServiceHandler.getCameraState
 - uid: Kift.Server.KiftServiceHandler.getCelestialBody(System.String)
   name: getCelestialBody(String)
   href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getCelestialBody_System_String_
@@ -442,6 +429,19 @@ references:
   isSpec: "True"
   fullName: Kift.Server.KiftServiceHandler.getCelestialBody
   nameWithType: KiftServiceHandler.getCelestialBody
+- uid: Kift.Server.KiftServiceHandler.getFlightSceneStartTime
+  name: getFlightSceneStartTime()
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getFlightSceneStartTime
+  commentId: M:Kift.Server.KiftServiceHandler.getFlightSceneStartTime
+  fullName: Kift.Server.KiftServiceHandler.getFlightSceneStartTime()
+  nameWithType: KiftServiceHandler.getFlightSceneStartTime()
+- uid: Kift.Server.KiftServiceHandler.getFlightSceneStartTime*
+  name: getFlightSceneStartTime
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getFlightSceneStartTime_
+  commentId: Overload:Kift.Server.KiftServiceHandler.getFlightSceneStartTime
+  isSpec: "True"
+  fullName: Kift.Server.KiftServiceHandler.getFlightSceneStartTime
+  nameWithType: KiftServiceHandler.getFlightSceneStartTime
 - uid: Kift.Server.KiftServiceHandler.getManeuverNode(System.String,System.Double)
   name: getManeuverNode(String, Double)
   href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getManeuverNode_System_String_System_Double_
@@ -455,6 +455,19 @@ references:
   isSpec: "True"
   fullName: Kift.Server.KiftServiceHandler.getManeuverNode
   nameWithType: KiftServiceHandler.getManeuverNode
+- uid: Kift.Server.KiftServiceHandler.getManeuverNodeInfo
+  name: getManeuverNodeInfo()
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getManeuverNodeInfo
+  commentId: M:Kift.Server.KiftServiceHandler.getManeuverNodeInfo
+  fullName: Kift.Server.KiftServiceHandler.getManeuverNodeInfo()
+  nameWithType: KiftServiceHandler.getManeuverNodeInfo()
+- uid: Kift.Server.KiftServiceHandler.getManeuverNodeInfo*
+  name: getManeuverNodeInfo
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getManeuverNodeInfo_
+  commentId: Overload:Kift.Server.KiftServiceHandler.getManeuverNodeInfo
+  isSpec: "True"
+  fullName: Kift.Server.KiftServiceHandler.getManeuverNodeInfo
+  nameWithType: KiftServiceHandler.getManeuverNodeInfo
 - uid: Kift.Server.KiftServiceHandler.getPartAttitudeInfo(System.Int64)
   name: getPartAttitudeInfo(Int64)
   href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getPartAttitudeInfo_System_Int64_
@@ -484,6 +497,32 @@ references:
   isSpec: "True"
   fullName: Kift.Server.KiftServiceHandler.getPartsById
   nameWithType: KiftServiceHandler.getPartsById
+- uid: Kift.Server.KiftServiceHandler.getReentryInfo
+  name: getReentryInfo()
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getReentryInfo
+  commentId: M:Kift.Server.KiftServiceHandler.getReentryInfo
+  fullName: Kift.Server.KiftServiceHandler.getReentryInfo()
+  nameWithType: KiftServiceHandler.getReentryInfo()
+- uid: Kift.Server.KiftServiceHandler.getReentryInfo*
+  name: getReentryInfo
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getReentryInfo_
+  commentId: Overload:Kift.Server.KiftServiceHandler.getReentryInfo
+  isSpec: "True"
+  fullName: Kift.Server.KiftServiceHandler.getReentryInfo
+  nameWithType: KiftServiceHandler.getReentryInfo
+- uid: Kift.Server.KiftServiceHandler.getRunwayLandingInfo(System.Double,System.Double,System.Double,System.Double,System.Double)
+  name: getRunwayLandingInfo(Double, Double, Double, Double, Double)
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getRunwayLandingInfo_System_Double_System_Double_System_Double_System_Double_System_Double_
+  commentId: M:Kift.Server.KiftServiceHandler.getRunwayLandingInfo(System.Double,System.Double,System.Double,System.Double,System.Double)
+  fullName: Kift.Server.KiftServiceHandler.getRunwayLandingInfo(System.Double, System.Double, System.Double, System.Double, System.Double)
+  nameWithType: KiftServiceHandler.getRunwayLandingInfo(Double, Double, Double, Double, Double)
+- uid: Kift.Server.KiftServiceHandler.getRunwayLandingInfo*
+  name: getRunwayLandingInfo
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getRunwayLandingInfo_
+  commentId: Overload:Kift.Server.KiftServiceHandler.getRunwayLandingInfo
+  isSpec: "True"
+  fullName: Kift.Server.KiftServiceHandler.getRunwayLandingInfo
+  nameWithType: KiftServiceHandler.getRunwayLandingInfo
 - uid: Kift.Server.KiftServiceHandler.getTargetBodyOrbitInfo(System.String,System.String)
   name: getTargetBodyOrbitInfo(String, String)
   href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getTargetBodyOrbitInfo_System_String_System_String_
@@ -510,6 +549,19 @@ references:
   isSpec: "True"
   fullName: Kift.Server.KiftServiceHandler.getTargetBodyOrbitInfoFromManeuverNode
   nameWithType: KiftServiceHandler.getTargetBodyOrbitInfoFromManeuverNode
+- uid: Kift.Server.KiftServiceHandler.getTargetDockingPortInfo
+  name: getTargetDockingPortInfo()
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getTargetDockingPortInfo
+  commentId: M:Kift.Server.KiftServiceHandler.getTargetDockingPortInfo
+  fullName: Kift.Server.KiftServiceHandler.getTargetDockingPortInfo()
+  nameWithType: KiftServiceHandler.getTargetDockingPortInfo()
+- uid: Kift.Server.KiftServiceHandler.getTargetDockingPortInfo*
+  name: getTargetDockingPortInfo
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getTargetDockingPortInfo_
+  commentId: Overload:Kift.Server.KiftServiceHandler.getTargetDockingPortInfo
+  isSpec: "True"
+  fullName: Kift.Server.KiftServiceHandler.getTargetDockingPortInfo
+  nameWithType: KiftServiceHandler.getTargetDockingPortInfo
 - uid: Kift.Server.KiftServiceHandler.getTargetVesselOrbitInfo(System.String,System.String)
   name: getTargetVesselOrbitInfo(String, String)
   href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getTargetVesselOrbitInfo_System_String_System_String_
@@ -549,6 +601,19 @@ references:
   isSpec: "True"
   fullName: Kift.Server.KiftServiceHandler.getTimeWarpRate
   nameWithType: KiftServiceHandler.getTimeWarpRate
+- uid: Kift.Server.KiftServiceHandler.getVerticalLandingInfo
+  name: getVerticalLandingInfo()
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getVerticalLandingInfo
+  commentId: M:Kift.Server.KiftServiceHandler.getVerticalLandingInfo
+  fullName: Kift.Server.KiftServiceHandler.getVerticalLandingInfo()
+  nameWithType: KiftServiceHandler.getVerticalLandingInfo()
+- uid: Kift.Server.KiftServiceHandler.getVerticalLandingInfo*
+  name: getVerticalLandingInfo
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getVerticalLandingInfo_
+  commentId: Overload:Kift.Server.KiftServiceHandler.getVerticalLandingInfo
+  isSpec: "True"
+  fullName: Kift.Server.KiftServiceHandler.getVerticalLandingInfo
+  nameWithType: KiftServiceHandler.getVerticalLandingInfo
 - uid: Kift.Server.KiftServiceHandler.getVessel(System.String)
   name: getVessel(String)
   href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getVessel_System_String_
@@ -617,6 +682,35 @@ references:
   isSpec: "True"
   fullName: Kift.Server.KiftServiceHandler.getVesselPartsByType
   nameWithType: KiftServiceHandler.getVesselPartsByType
+- uid: Kift.Server.KiftServiceHandler.getVesselPartsByTypes(System.String,System.Collections.Generic.List{Kift.PartType})
+  name: getVesselPartsByTypes(String, List<PartType>)
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getVesselPartsByTypes_System_String_System_Collections_Generic_List_Kift_PartType__
+  commentId: M:Kift.Server.KiftServiceHandler.getVesselPartsByTypes(System.String,System.Collections.Generic.List{Kift.PartType})
+  name.vb: getVesselPartsByTypes(String, List(Of PartType))
+  fullName: Kift.Server.KiftServiceHandler.getVesselPartsByTypes(System.String, System.Collections.Generic.List<Kift.PartType>)
+  fullName.vb: Kift.Server.KiftServiceHandler.getVesselPartsByTypes(System.String, System.Collections.Generic.List(Of Kift.PartType))
+  nameWithType: KiftServiceHandler.getVesselPartsByTypes(String, List<PartType>)
+  nameWithType.vb: KiftServiceHandler.getVesselPartsByTypes(String, List(Of PartType))
+- uid: Kift.Server.KiftServiceHandler.getVesselPartsByTypes*
+  name: getVesselPartsByTypes
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_getVesselPartsByTypes_
+  commentId: Overload:Kift.Server.KiftServiceHandler.getVesselPartsByTypes
+  isSpec: "True"
+  fullName: Kift.Server.KiftServiceHandler.getVesselPartsByTypes
+  nameWithType: KiftServiceHandler.getVesselPartsByTypes
+- uid: Kift.Server.KiftServiceHandler.increaseTimeWarpRate
+  name: increaseTimeWarpRate()
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_increaseTimeWarpRate
+  commentId: M:Kift.Server.KiftServiceHandler.increaseTimeWarpRate
+  fullName: Kift.Server.KiftServiceHandler.increaseTimeWarpRate()
+  nameWithType: KiftServiceHandler.increaseTimeWarpRate()
+- uid: Kift.Server.KiftServiceHandler.increaseTimeWarpRate*
+  name: increaseTimeWarpRate
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_increaseTimeWarpRate_
+  commentId: Overload:Kift.Server.KiftServiceHandler.increaseTimeWarpRate
+  isSpec: "True"
+  fullName: Kift.Server.KiftServiceHandler.increaseTimeWarpRate
+  nameWithType: KiftServiceHandler.increaseTimeWarpRate
 - uid: Kift.Server.KiftServiceHandler.intakeClose(System.Int64)
   name: intakeClose(Int64)
   href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_intakeClose_System_Int64_
@@ -721,6 +815,19 @@ references:
   isSpec: "True"
   fullName: Kift.Server.KiftServiceHandler.listCelestialBody
   nameWithType: KiftServiceHandler.listCelestialBody
+- uid: Kift.Server.KiftServiceHandler.listLoadedVessel
+  name: listLoadedVessel()
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_listLoadedVessel
+  commentId: M:Kift.Server.KiftServiceHandler.listLoadedVessel
+  fullName: Kift.Server.KiftServiceHandler.listLoadedVessel()
+  nameWithType: KiftServiceHandler.listLoadedVessel()
+- uid: Kift.Server.KiftServiceHandler.listLoadedVessel*
+  name: listLoadedVessel
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_listLoadedVessel_
+  commentId: Overload:Kift.Server.KiftServiceHandler.listLoadedVessel
+  isSpec: "True"
+  fullName: Kift.Server.KiftServiceHandler.listLoadedVessel
+  nameWithType: KiftServiceHandler.listLoadedVessel
 - uid: Kift.Server.KiftServiceHandler.listManeuverNodes(System.String)
   name: listManeuverNodes(String)
   href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_listManeuverNodes_System_String_
@@ -747,6 +854,19 @@ references:
   isSpec: "True"
   fullName: Kift.Server.KiftServiceHandler.listVessel
   nameWithType: KiftServiceHandler.listVessel
+- uid: Kift.Server.KiftServiceHandler.parachuteCut(System.Int64)
+  name: parachuteCut(Int64)
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_parachuteCut_System_Int64_
+  commentId: M:Kift.Server.KiftServiceHandler.parachuteCut(System.Int64)
+  fullName: Kift.Server.KiftServiceHandler.parachuteCut(System.Int64)
+  nameWithType: KiftServiceHandler.parachuteCut(Int64)
+- uid: Kift.Server.KiftServiceHandler.parachuteCut*
+  name: parachuteCut
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_parachuteCut_
+  commentId: Overload:Kift.Server.KiftServiceHandler.parachuteCut
+  isSpec: "True"
+  fullName: Kift.Server.KiftServiceHandler.parachuteCut
+  nameWithType: KiftServiceHandler.parachuteCut
 - uid: Kift.Server.KiftServiceHandler.parachuteDeploy(System.Int64)
   name: parachuteDeploy(Int64)
   href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_parachuteDeploy_System_Int64_
@@ -825,6 +945,32 @@ references:
   isSpec: "True"
   fullName: Kift.Server.KiftServiceHandler.pitch
   nameWithType: KiftServiceHandler.pitch
+- uid: Kift.Server.KiftServiceHandler.radiatorActivate(System.Int64)
+  name: radiatorActivate(Int64)
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_radiatorActivate_System_Int64_
+  commentId: M:Kift.Server.KiftServiceHandler.radiatorActivate(System.Int64)
+  fullName: Kift.Server.KiftServiceHandler.radiatorActivate(System.Int64)
+  nameWithType: KiftServiceHandler.radiatorActivate(Int64)
+- uid: Kift.Server.KiftServiceHandler.radiatorActivate*
+  name: radiatorActivate
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_radiatorActivate_
+  commentId: Overload:Kift.Server.KiftServiceHandler.radiatorActivate
+  isSpec: "True"
+  fullName: Kift.Server.KiftServiceHandler.radiatorActivate
+  nameWithType: KiftServiceHandler.radiatorActivate
+- uid: Kift.Server.KiftServiceHandler.radiatorDeactivate(System.Int64)
+  name: radiatorDeactivate(Int64)
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_radiatorDeactivate_System_Int64_
+  commentId: M:Kift.Server.KiftServiceHandler.radiatorDeactivate(System.Int64)
+  fullName: Kift.Server.KiftServiceHandler.radiatorDeactivate(System.Int64)
+  nameWithType: KiftServiceHandler.radiatorDeactivate(Int64)
+- uid: Kift.Server.KiftServiceHandler.radiatorDeactivate*
+  name: radiatorDeactivate
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_radiatorDeactivate_
+  commentId: Overload:Kift.Server.KiftServiceHandler.radiatorDeactivate
+  isSpec: "True"
+  fullName: Kift.Server.KiftServiceHandler.radiatorDeactivate
+  nameWithType: KiftServiceHandler.radiatorDeactivate
 - uid: Kift.Server.KiftServiceHandler.radiatorExtend(System.Int64)
   name: radiatorExtend(Int64)
   href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_radiatorExtend_System_Int64_
@@ -968,6 +1114,19 @@ references:
   isSpec: "True"
   fullName: Kift.Server.KiftServiceHandler.reactionWheelEnabled
   nameWithType: KiftServiceHandler.reactionWheelEnabled
+- uid: Kift.Server.KiftServiceHandler.releaseControl(System.String)
+  name: releaseControl(String)
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_releaseControl_System_String_
+  commentId: M:Kift.Server.KiftServiceHandler.releaseControl(System.String)
+  fullName: Kift.Server.KiftServiceHandler.releaseControl(System.String)
+  nameWithType: KiftServiceHandler.releaseControl(String)
+- uid: Kift.Server.KiftServiceHandler.releaseControl*
+  name: releaseControl
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_releaseControl_
+  commentId: Overload:Kift.Server.KiftServiceHandler.releaseControl
+  isSpec: "True"
+  fullName: Kift.Server.KiftServiceHandler.releaseControl
+  nameWithType: KiftServiceHandler.releaseControl
 - uid: Kift.Server.KiftServiceHandler.removeManeuverNode(System.String,System.Double)
   name: removeManeuverNode(String, Double)
   href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_removeManeuverNode_System_String_System_Double_
@@ -1163,38 +1322,12 @@ references:
   isSpec: "True"
   fullName: Kift.Server.KiftServiceHandler.setBrakes
   nameWithType: KiftServiceHandler.setBrakes
-- uid: Kift.Server.KiftServiceHandler.setCameraFocussedBody(Kift.SetCameraFocussedBodyRequest)
-  name: setCameraFocussedBody(SetCameraFocussedBodyRequest)
-  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_setCameraFocussedBody_Kift_SetCameraFocussedBodyRequest_
-  commentId: M:Kift.Server.KiftServiceHandler.setCameraFocussedBody(Kift.SetCameraFocussedBodyRequest)
-  fullName: Kift.Server.KiftServiceHandler.setCameraFocussedBody(Kift.SetCameraFocussedBodyRequest)
-  nameWithType: KiftServiceHandler.setCameraFocussedBody(SetCameraFocussedBodyRequest)
-- uid: Kift.Server.KiftServiceHandler.setCameraFocussedBody*
-  name: setCameraFocussedBody
-  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_setCameraFocussedBody_
-  commentId: Overload:Kift.Server.KiftServiceHandler.setCameraFocussedBody
-  isSpec: "True"
-  fullName: Kift.Server.KiftServiceHandler.setCameraFocussedBody
-  nameWithType: KiftServiceHandler.setCameraFocussedBody
-- uid: Kift.Server.KiftServiceHandler.setCameraFocussedNode(Kift.SetCameraFocussedNodeRequest)
-  name: setCameraFocussedNode(SetCameraFocussedNodeRequest)
-  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_setCameraFocussedNode_Kift_SetCameraFocussedNodeRequest_
-  commentId: M:Kift.Server.KiftServiceHandler.setCameraFocussedNode(Kift.SetCameraFocussedNodeRequest)
-  fullName: Kift.Server.KiftServiceHandler.setCameraFocussedNode(Kift.SetCameraFocussedNodeRequest)
-  nameWithType: KiftServiceHandler.setCameraFocussedNode(SetCameraFocussedNodeRequest)
-- uid: Kift.Server.KiftServiceHandler.setCameraFocussedNode*
-  name: setCameraFocussedNode
-  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_setCameraFocussedNode_
-  commentId: Overload:Kift.Server.KiftServiceHandler.setCameraFocussedNode
-  isSpec: "True"
-  fullName: Kift.Server.KiftServiceHandler.setCameraFocussedNode
-  nameWithType: KiftServiceHandler.setCameraFocussedNode
-- uid: Kift.Server.KiftServiceHandler.setCameraFocussedVessel(Kift.SetCameraFocussedVesselRequest)
-  name: setCameraFocussedVessel(SetCameraFocussedVesselRequest)
-  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_setCameraFocussedVessel_Kift_SetCameraFocussedVesselRequest_
-  commentId: M:Kift.Server.KiftServiceHandler.setCameraFocussedVessel(Kift.SetCameraFocussedVesselRequest)
-  fullName: Kift.Server.KiftServiceHandler.setCameraFocussedVessel(Kift.SetCameraFocussedVesselRequest)
-  nameWithType: KiftServiceHandler.setCameraFocussedVessel(SetCameraFocussedVesselRequest)
+- uid: Kift.Server.KiftServiceHandler.setCameraFocussedVessel(System.String)
+  name: setCameraFocussedVessel(String)
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_setCameraFocussedVessel_System_String_
+  commentId: M:Kift.Server.KiftServiceHandler.setCameraFocussedVessel(System.String)
+  fullName: Kift.Server.KiftServiceHandler.setCameraFocussedVessel(System.String)
+  nameWithType: KiftServiceHandler.setCameraFocussedVessel(String)
 - uid: Kift.Server.KiftServiceHandler.setCameraFocussedVessel*
   name: setCameraFocussedVessel
   href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_setCameraFocussedVessel_
@@ -1202,19 +1335,19 @@ references:
   isSpec: "True"
   fullName: Kift.Server.KiftServiceHandler.setCameraFocussedVessel
   nameWithType: KiftServiceHandler.setCameraFocussedVessel
-- uid: Kift.Server.KiftServiceHandler.setCameraState(Kift.SetCameraStateRequest)
-  name: setCameraState(SetCameraStateRequest)
-  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_setCameraState_Kift_SetCameraStateRequest_
-  commentId: M:Kift.Server.KiftServiceHandler.setCameraState(Kift.SetCameraStateRequest)
-  fullName: Kift.Server.KiftServiceHandler.setCameraState(Kift.SetCameraStateRequest)
-  nameWithType: KiftServiceHandler.setCameraState(SetCameraStateRequest)
-- uid: Kift.Server.KiftServiceHandler.setCameraState*
-  name: setCameraState
-  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_setCameraState_
-  commentId: Overload:Kift.Server.KiftServiceHandler.setCameraState
+- uid: Kift.Server.KiftServiceHandler.setCameraMode(Kift.CameraMode)
+  name: setCameraMode(CameraMode)
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_setCameraMode_Kift_CameraMode_
+  commentId: M:Kift.Server.KiftServiceHandler.setCameraMode(Kift.CameraMode)
+  fullName: Kift.Server.KiftServiceHandler.setCameraMode(Kift.CameraMode)
+  nameWithType: KiftServiceHandler.setCameraMode(CameraMode)
+- uid: Kift.Server.KiftServiceHandler.setCameraMode*
+  name: setCameraMode
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_setCameraMode_
+  commentId: Overload:Kift.Server.KiftServiceHandler.setCameraMode
   isSpec: "True"
-  fullName: Kift.Server.KiftServiceHandler.setCameraState
-  nameWithType: KiftServiceHandler.setCameraState
+  fullName: Kift.Server.KiftServiceHandler.setCameraMode
+  nameWithType: KiftServiceHandler.setCameraMode
 - uid: Kift.Server.KiftServiceHandler.setCargoBays(System.String,System.Boolean)
   name: setCargoBays(String, Boolean)
   href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_setCargoBays_System_String_System_Boolean_
@@ -1228,6 +1361,19 @@ references:
   isSpec: "True"
   fullName: Kift.Server.KiftServiceHandler.setCargoBays
   nameWithType: KiftServiceHandler.setCargoBays
+- uid: Kift.Server.KiftServiceHandler.setControlFrom(System.String,System.Int64)
+  name: setControlFrom(String, Int64)
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_setControlFrom_System_String_System_Int64_
+  commentId: M:Kift.Server.KiftServiceHandler.setControlFrom(System.String,System.Int64)
+  fullName: Kift.Server.KiftServiceHandler.setControlFrom(System.String, System.Int64)
+  nameWithType: KiftServiceHandler.setControlFrom(String, Int64)
+- uid: Kift.Server.KiftServiceHandler.setControlFrom*
+  name: setControlFrom
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_setControlFrom_
+  commentId: Overload:Kift.Server.KiftServiceHandler.setControlFrom
+  isSpec: "True"
+  fullName: Kift.Server.KiftServiceHandler.setControlFrom
+  nameWithType: KiftServiceHandler.setControlFrom
 - uid: Kift.Server.KiftServiceHandler.setGear(System.String,System.Boolean)
   name: setGear(String, Boolean)
   href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_setGear_System_String_System_Boolean_
@@ -1475,6 +1621,19 @@ references:
   isSpec: "True"
   fullName: Kift.Server.KiftServiceHandler.stage
   nameWithType: KiftServiceHandler.stage
+- uid: Kift.Server.KiftServiceHandler.switchActiveVessel(System.String)
+  name: switchActiveVessel(String)
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_switchActiveVessel_System_String_
+  commentId: M:Kift.Server.KiftServiceHandler.switchActiveVessel(System.String)
+  fullName: Kift.Server.KiftServiceHandler.switchActiveVessel(System.String)
+  nameWithType: KiftServiceHandler.switchActiveVessel(String)
+- uid: Kift.Server.KiftServiceHandler.switchActiveVessel*
+  name: switchActiveVessel
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_switchActiveVessel_
+  commentId: Overload:Kift.Server.KiftServiceHandler.switchActiveVessel
+  isSpec: "True"
+  fullName: Kift.Server.KiftServiceHandler.switchActiveVessel
+  nameWithType: KiftServiceHandler.switchActiveVessel
 - uid: Kift.Server.KiftServiceHandler.targetCelestialBody(System.String,System.String)
   name: targetCelestialBody(String, String)
   href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_targetCelestialBody_System_String_System_String_
@@ -1488,12 +1647,12 @@ references:
   isSpec: "True"
   fullName: Kift.Server.KiftServiceHandler.targetCelestialBody
   nameWithType: KiftServiceHandler.targetCelestialBody
-- uid: Kift.Server.KiftServiceHandler.targetDockingPort(System.String,System.Double)
-  name: targetDockingPort(String, Double)
-  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_targetDockingPort_System_String_System_Double_
-  commentId: M:Kift.Server.KiftServiceHandler.targetDockingPort(System.String,System.Double)
-  fullName: Kift.Server.KiftServiceHandler.targetDockingPort(System.String, System.Double)
-  nameWithType: KiftServiceHandler.targetDockingPort(String, Double)
+- uid: Kift.Server.KiftServiceHandler.targetDockingPort(System.String,System.Int64)
+  name: targetDockingPort(String, Int64)
+  href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_targetDockingPort_System_String_System_Int64_
+  commentId: M:Kift.Server.KiftServiceHandler.targetDockingPort(System.String,System.Int64)
+  fullName: Kift.Server.KiftServiceHandler.targetDockingPort(System.String, System.Int64)
+  nameWithType: KiftServiceHandler.targetDockingPort(String, Int64)
 - uid: Kift.Server.KiftServiceHandler.targetDockingPort*
   name: targetDockingPort
   href: api/Kift.Server.KiftServiceHandler.html#Kift_Server_KiftServiceHandler_targetDockingPort_
